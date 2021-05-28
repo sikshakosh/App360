@@ -1,0 +1,3 @@
+[submodule "libraries/appcompose"]
+	path = libraries/appcompose
+	url = https://github.com/wideclassrooms/appcompose.git

@@ -1,2 +1,4 @@
+include ':appcompose'
 include ':app'
+project(':appcompose').projectDir = new File(rootDir, 'libraries/appcompose/')
 rootProject.name = "App360"
