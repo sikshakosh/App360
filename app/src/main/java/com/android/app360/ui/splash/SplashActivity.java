@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.android.app360.R;
 import com.android.appcompose.composable.utility.ImagePageFragment;
+import com.android.appcompose.composable.utility.ImagePagerView;
 import com.android.appcompose.composable.utility.ImageZoomOutPageTransformer;
 
 public class SplashActivity extends FragmentActivity {
@@ -34,47 +35,8 @@ public class SplashActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_show);
 
-        // Instantiate a ViewPager2 and a PagerAdapter.
-        viewPager = findViewById(R.id.pager);
-        viewPager.setPageTransformer(new ImageZoomOutPageTransformer());
-        pagerAdapter = new SplashActivity.ScreenSlidePagerAdapter(this,drawables);
-        viewPager.setAdapter(pagerAdapter);
 
     }
 
-    @Override
-    public void onBackPressed() {
-        if (viewPager.getCurrentItem() == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
-            super.onBackPressed();
-        } else {
-            // Otherwise, select the previous step.
-            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
-        }
-    }
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
-    private class ScreenSlidePagerAdapter extends FragmentStateAdapter {
-        //private ArrayList<Integer> IMAGES = {R.drawable.background,R.drawable.background,R.drawable.background,R.drawable.background};
-
-        private int[] listDrawables;
-        public ScreenSlidePagerAdapter(FragmentActivity fa, int[] drawables) {
-            super(fa);
-            listDrawables = drawables;
-        }
-
-        @Override
-        public ImagePageFragment createFragment(int position) {
-            return  ImagePageFragment.newInstance(position, listDrawables[position]);
-        }
-
-        @Override
-        public int getItemCount() {
-            return listDrawables.length;
-        }
-    }
 }
