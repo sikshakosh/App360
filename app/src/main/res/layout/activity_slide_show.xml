@@ -13,9 +13,8 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        libProj:splash_1 = "@drawable/splash_1"
-        libProj:splash_2 = "@drawable/splash_2"
-        libProj:splash_3 = "@drawable/splash_3"
+        libProj:images = "@array/tutorial_images"
+
         >
 
     </com.android.appcompose.composable.utility.ImagePagerView>
