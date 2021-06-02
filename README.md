@@ -1,19 +1,12 @@
 # App360
 
+## Steps to clone the project
 
-## Task List 
+Execute the following command to clone the project
 
-### https://github.com/wideclassrooms/App360/projects/1#card-59418157
+    `git clone --recurse-submodules -j8 https://github.com/wideclassrooms/App360.git`
 
+Go to main branch
 
-# Steps to clone the project
-
-Execute the following command to clone thhe project
-
-## git clone --recurse-submodules -j8 https://github.com/wideclassrooms/App360.git
-
-Go to working branch
-## git checkout develop 
-
+     `git checkout main` 
 And run the project.
-
