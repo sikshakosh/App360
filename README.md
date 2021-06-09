@@ -24,4 +24,4 @@ Here we work with android beginners to develop common modules used in almost all
 1. ImageSlider
 
 ## Under Development
-1. ImageSlider with DotIndicator
+1. Image Slider with DotIndicator
