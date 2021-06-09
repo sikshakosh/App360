@@ -7,9 +7,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 
 import com.android.app360.R;
-import com.android.appcompose.composable.utility.ImagePageFragment;
-import com.android.appcompose.composable.utility.ImagePagerView;
-import com.android.appcompose.composable.utility.ImageZoomOutPageTransformer;
 
 public class SplashActivity extends FragmentActivity {
     /**
@@ -33,7 +30,7 @@ public class SplashActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_slide_show);
+        setContentView(R.layout.activity_splash);
 
 
     }
