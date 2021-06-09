@@ -9,7 +9,7 @@
     xmlns:libProj="http://schemas.android.com/apk/res-auto"
     >
 
-    <com.android.appcompose.composable.utility.Slider.Pager.ImageSliderView
+    <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

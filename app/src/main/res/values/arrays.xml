@@ -4,8 +4,6 @@
         <item>@drawable/splash_1</item>
         <item>@drawable/splash_2</item>
         <item>@drawable/splash_3</item>
-        <item>@drawable/splash_3</item>
-        <item>@drawable/splash_3</item>
 
     </integer-array>
 </resources>
