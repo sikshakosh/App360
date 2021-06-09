@@ -24,4 +24,9 @@ Here we work with android beginners to develop common modules used in almost all
 1. ImageSlider
 
 ## Under Development
-1. Image Slider with DotIndicator
+1. Image Slider with Dot Indicator
+
+
+## Enroll in Android Classroom and be part of the development team
+
+Enroll here - [Click here](https://wideclassrooms.com/in/classrooms/App360-nKJdSs0w)
