@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.android.app360.R;
 
+
 public class SplashActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.

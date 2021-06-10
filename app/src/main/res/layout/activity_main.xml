@@ -9,7 +9,9 @@
     tools:openDrawer="start">
 
     <TextView
+
         android:text="@string/hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></TextView>
+
 </androidx.drawerlayout.widget.DrawerLayout>
