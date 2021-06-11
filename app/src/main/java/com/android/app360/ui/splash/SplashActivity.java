@@ -1,38 +1,43 @@
 package com.android.app360.ui.splash;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import com.android.app360.R;
+import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
+import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
+
+import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class SplashActivity extends FragmentActivity {
-    /**
-     * The number of pages (wizard steps) to show in this demo.
-     */
-    private static final int NUM_PAGES = 5;
-
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
-    private ViewPager2 viewPager;
-
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
-    private FragmentStateAdapter pagerAdapter;
-
-    private int[] drawables = {R.drawable.splash_1,R.drawable.splash_2,R.drawable.splash_3};
-
+    DotIndicator dotIndicator;
+    ImageSliderView imageSliderView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        imageSliderView = findViewById(R.id.slider);
+        dotIndicator = new DotIndicator(this,imageSliderView.viewPager);
+        dotIndicator.setBackgroundColor(Color.TRANSPARENT);
+        dotIndicator.setId(View.generateViewId());
+        ConstraintLayout parentLayout = (ConstraintLayout)findViewById(R.id.mainConstraint);
+        ConstraintLayout.LayoutParams serviceNameParams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+        dotIndicator.setLayoutParams(serviceNameParams);
+        parentLayout.addView(dotIndicator);
 
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.clone(parentLayout);
+        constraintSet.connect(dotIndicator.getId(), ConstraintSet.BOTTOM, parentLayout.getId(), ConstraintSet.BOTTOM, 18);
+        constraintSet.connect(dotIndicator.getId(), ConstraintSet.LEFT, parentLayout.getId(), ConstraintSet.LEFT, 18);
+        constraintSet.connect(dotIndicator.getId(), ConstraintSet.RIGHT, parentLayout.getId(), ConstraintSet.RIGHT, 18);
+        constraintSet.applyTo(parentLayout);
 
     }
 

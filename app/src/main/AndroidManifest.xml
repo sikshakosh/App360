@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App360">
+        <activity android:name=".ui.imageslider.ImageSliderActivity"></activity>
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +20,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.App360.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.App360.NoActionBar" />
     </application>
 
 </manifest>
