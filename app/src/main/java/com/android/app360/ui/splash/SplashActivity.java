@@ -23,22 +23,28 @@ public class SplashActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         imageSliderView = findViewById(R.id.slider);
-        dotIndicator = new DotIndicator(this,imageSliderView.viewPager);
-        dotIndicator.setBackgroundColor(Color.TRANSPARENT);
+
+        // Instantiate DotIndicator
+        addDotIndicator(Color.TRANSPARENT);
+
+    }
+
+    void addDotIndicator(int bgColor){
+        dotIndicator = new DotIndicator(this,imageSliderView.viewPager,bgColor);
         dotIndicator.setId(View.generateViewId());
+
         ConstraintLayout parentLayout = (ConstraintLayout)findViewById(R.id.mainConstraint);
         ConstraintLayout.LayoutParams serviceNameParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+                ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
         dotIndicator.setLayoutParams(serviceNameParams);
         parentLayout.addView(dotIndicator);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.clone(parentLayout);
-        constraintSet.connect(dotIndicator.getId(), ConstraintSet.BOTTOM, parentLayout.getId(), ConstraintSet.BOTTOM, 18);
-        constraintSet.connect(dotIndicator.getId(), ConstraintSet.LEFT, parentLayout.getId(), ConstraintSet.LEFT, 18);
-        constraintSet.connect(dotIndicator.getId(), ConstraintSet.RIGHT, parentLayout.getId(), ConstraintSet.RIGHT, 18);
+        constraintSet.connect(dotIndicator.getId(), ConstraintSet.BOTTOM, parentLayout.getId(), ConstraintSet.BOTTOM, 0);
+        constraintSet.connect(dotIndicator.getId(), ConstraintSet.LEFT, parentLayout.getId(), ConstraintSet.LEFT, 0);
+        constraintSet.connect(dotIndicator.getId(), ConstraintSet.RIGHT, parentLayout.getId(), ConstraintSet.RIGHT, 0);
         constraintSet.applyTo(parentLayout);
-
     }
 
 

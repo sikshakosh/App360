@@ -8,24 +8,10 @@
     android:layout_height="match_parent"
     xmlns:libProj="http://schemas.android.com/apk/res-auto"
     >
-
     <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
         android:id="@+id/slider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         libProj:images = "@array/tutorial_images"
         libProj:transformer = "zoomout" />
-
-<!--    <com.android.appcompose.composable.utility.slider.indicator.DotIndicator-->
-<!--        android:id="@+id/tab_layout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        libProj:slider = "@id/slider"-->
-<!--        android:layout_height="60dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:tabBackground="@drawable/tab_selector"-->
-<!--        app:tabGravity="center"-->
-<!--        app:tabIndicatorHeight="0dp"-->
-<!--        />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
