@@ -19,10 +19,11 @@ Here we work with android beginners to develop common modules used in almost all
 ## Developed Modules
 1. ImageSlider
 2. Image Slider with Dot Indicator
+3. Add Skip Button in Pager
+4. Designed Upper Tab Views
 
 ## Under Development
-1. Add Skip Button in Pager
-2. Design Home Page
+1. . Design Home Page
 
 
 

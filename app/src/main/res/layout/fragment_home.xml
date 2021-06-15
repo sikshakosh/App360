@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainConstraint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.imageslider.ImageSliderActivity"
+    android:layout_height="wrap_content"
     xmlns:libProj="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.HomeFragment"
     >
     <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
-        android:id="@+id/pager"
+        android:id="@+id/slider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         libProj:images = "@array/tutorial_images"
         libProj:transformer = "zoomout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
