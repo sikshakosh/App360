@@ -28,13 +28,13 @@ import com.android.app360.R;
 public class HomeActivity extends AppCompatActivity {
 
     private AppTabLayout tabLayout;
-
+    Toolbar toolbar = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (AppTabLayout) findViewById(R.id.tab_host);
 
         setSupportActionBar(toolbar);
@@ -45,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupTabLayout(){
+        HomeActivity parent = this;
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
@@ -53,8 +54,21 @@ public class HomeActivity extends AppCompatActivity {
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(HomeActivity.this,
-                        "Selected page position: " + position, Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 0:
+                        getSupportActionBar().show();
+                        //parent.toolbar.animate().alpha(1.0f).setDuration(2000);;
+                        //parent.toolbar.setVisibility(View.VISIBLE);
+
+                    break;
+                    default:
+                        getSupportActionBar().hide();
+                        //parent.toolbar.animate().alpha(0.0f).setDuration(2000);;
+                        //parent.toolbar.setVisibility(View.GONE);
+
+
+
+                }
             }
 
             // This method will be invoked when the current page is scrolled
@@ -106,32 +120,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    public static class TabFragment extends Fragment {
-
-        public static final String POSITION = "position";
-
-        private View view;
-
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            this.view = inflater.inflate(R.layout.fragment_tab, container, false);
-            return view;
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            TextView positionText = (TextView) this.findViewById(R.id.FragmentTabText);
-
-            int position = getArguments().getInt(POSITION);
-            positionText.setText("Position " + position);
-        }
-
-        private View findViewById(int id) {
-            return view.findViewById(id);
-        }
-    }
 
     public static class TabAdapter extends AppFragmentPagerAdapter {
 
@@ -161,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle bundle = new Bundle();
-            bundle.putInt(TabFragment.POSITION, position + 1);
+            bundle.putInt("Pos", position + 1);
             Fragment selectedFragment = null;
             switch (position){
                 case 0:
