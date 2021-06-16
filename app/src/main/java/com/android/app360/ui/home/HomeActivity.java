@@ -120,11 +120,11 @@ public class HomeActivity extends AppCompatActivity {
         };
 
         private int[] icons = {
-                R.drawable.ic_home,
-                R.drawable.ic_classrooms,
-                R.drawable.ic_network,
-                R.drawable.ic_post,
-                R.drawable.ic_notifications
+                R.drawable.ic_action_home,
+                R.drawable.ic_action_classrooms,
+                R.drawable.ic_action_network,
+                R.drawable.ic_action_post,
+                R.drawable.ic_action_menu
         };
         private Context context;
 
