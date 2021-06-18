@@ -57,17 +57,11 @@ public class HomeActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         getSupportActionBar().show();
-                        //parent.toolbar.animate().alpha(1.0f).setDuration(2000);;
-                        //parent.toolbar.setVisibility(View.VISIBLE);
+
 
                     break;
                     default:
                         getSupportActionBar().hide();
-                        //parent.toolbar.animate().alpha(0.0f).setDuration(2000);;
-                        //parent.toolbar.setVisibility(View.GONE);
-
-
-
                 }
             }
 
@@ -107,12 +101,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.ShowNotification:
+            case R.id.search:
                 tabLayout.showIndicator(1);
-                return true;
-
-            case R.id.HideNotification:
-                tabLayout.hideIndicator(1);
                 return true;
 
             default:

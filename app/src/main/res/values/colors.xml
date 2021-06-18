@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#0182c8</color>
-    <color name="colorPrimary_200">#014265</color>
-    <color name="colorPrimary_500">#01a5fe</color>
-    <color name="colorPrimary_700">#67c9fe</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="primaryColor">#303f9f</color>
+    <color name="primaryLightColor">#666ad1</color>
+    <color name="primaryDarkColor">#001970</color>
+    <color name="secondaryColor">#c2c2c2</color>
+    <color name="secondaryLightColor">#f5f5f5</color>
+    <color name="secondaryDarkColor">#929292</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
+
+    <color name="indigo_50">#E8EAF6</color>
+    <color name="indigo_100">#C5CAE9</color>
+    <color name="indigo_200">#9FA8DA</color>
+    <color name="indigo_300">#7986CB</color>
+    <color name="indigo_400">#5C6BC0</color>
+    <color name="indigo_500">#3F51B5</color>
+    <color name="indigo_600">#3949AB</color>
+    <color name="indigo_700">#303F9F</color>
+    <color name="indigo_800">#283593</color>
+    <color name="indigo_900">#1A237E</color>
+    <color name="indigo_a100">#8C9EFF</color>
+    <color name="indigo_a200">#536DFE</color>
+    <color name="indigo_a400">#3D5AFE</color>
+    <color name="indigo_a700">#304FFE</color>
+
+    <color name="gray_50">#E8EAF6</color>
+    <color name="gray_100">#C5CAE9</color>
+    <color name="gray_200">#9FA8DA</color>
+    <color name="gray_300">#7986CB</color>
+    <color name="gray_400">#5C6BC0</color>
+    <color name="gray_500">#3F51B5</color>
+    <color name="gray_600">#3949AB</color>
+    <color name="gray_700">#303F9F</color>
+    <color name="gray_800">#283593</color>
+    <color name="gray_900">#1A237E</color>
+    <color name="gray_a100">#8C9EFF</color>
+    <color name="gray_a200">#536DFE</color>
+    <color name="gray_a400">#3D5AFE</color>
+    <color name="gray_a700">#304FFE</color>
+
+
+
+
     <color name="black">#FF000000</color>
     <color name="gray">#808080</color>
     <color name="dark_gray">#A9A9A9</color>
