@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainConstraint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:libProj="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.HomeFragment"
+    tools:context=".ui.home.fragments.HomeFragment"
+    android:background="@color/gray_50"
+
     >
-    <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
-        android:id="@+id/slider"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        libProj:images = "@array/tutorial_images"
-        libProj:transformer = "zoomout" />
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.example.android.materialme.MainActivity"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

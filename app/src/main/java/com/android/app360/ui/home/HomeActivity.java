@@ -3,16 +3,10 @@ package com.android.app360.ui.home;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
@@ -20,6 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.android.app360.ui.home.fragments.ClassroomFragment;
+import com.android.app360.ui.home.fragments.HomeFragment;
+import com.android.app360.ui.home.fragments.ConnectionFragment;
+import com.android.app360.ui.home.fragments.NotificationFragment;
+import com.android.app360.ui.home.fragments.PostFragment;
 import com.android.appcompose.layout.tabs.AppFragmentPagerAdapter;
 import com.android.appcompose.layout.tabs.AppTabLayout;
 import com.android.appcompose.layout.tabs.TabType;
@@ -147,10 +146,10 @@ public class HomeActivity extends AppCompatActivity {
                     selectedFragment =  HomeFragment.newInstance("0", "Home Page");
                     break;
                 case 1:
-                    selectedFragment =  ClassroomsFragment.newInstance("0", "Classrooms Page");
+                    selectedFragment =  ClassroomFragment.newInstance("0", "Classrooms Page");
                     break;
                 case 2:
-                    selectedFragment =  NetworkFragment.newInstance("0", "Network Page");
+                    selectedFragment =  ConnectionFragment.newInstance("0", "Network Page");
                     break;
                 case 3:
                     selectedFragment =  PostFragment.newInstance("0", "Post Page");

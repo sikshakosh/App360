@@ -12,7 +12,7 @@
         <activity android:name=".ui.home.HomeActivity"></activity>
 
         <activity android:name=".ui.splash.SplashActivity"
-            android:theme="@style/Theme.OneApp.NoActionBar">
+            android:theme="@style/Theme.App360.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

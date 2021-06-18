@@ -41,6 +41,11 @@
     <color name="gray_a700">#304FFE</color>
 
 
+    <color name="colorPrimaryTextDefaultMaterialLight">#DE000000</color>
+    <color name="colorSecondaryTextDefaultMaterialLight">#8A000000</color>
+
+    <color name="colorPrimaryTextDefaultMaterialDark">#FFFFFFFF</color>
+    <color name="colorSecondaryTextDefaultMaterialDark">#B3FFFFFF</color>
 
 
     <color name="black">#FF000000</color>
