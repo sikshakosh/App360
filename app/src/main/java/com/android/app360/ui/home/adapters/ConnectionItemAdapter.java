@@ -74,6 +74,12 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter  {
             case ConnectionModel.INVITATION_TYPE:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_invite_item,parent,false);
                 return new ConnectioinTypeViewHolder(view);
+            case ConnectionModel.INVITATION_HEADER:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_header,parent,false);
+                return new ConnectioinTypeViewHolder(view);
+            case ConnectionModel.INVITATION_SHOW_MORE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_more,parent,false);
+                return new ConnectioinTypeViewHolder(view);
 
         }
         return null;
@@ -87,6 +93,10 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter  {
                 return ConnectionModel.INVITATION_TYPE;
             case 1:
                 return ConnectionModel.CONNECTIOIN_TYPE;
+            case 2:
+                return ConnectionModel.INVITATION_HEADER;
+            case 3:
+                return ConnectionModel.INVITATION_SHOW_MORE;
             default:
                 return -1;
         }
@@ -107,6 +117,14 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter  {
                 case ConnectionModel.INVITATION_TYPE:
                     ((ConnectioinTypeViewHolder)holder).title.setText(currentClassroom.title);
                     ((ConnectioinTypeViewHolder)holder).subtitle.setText(currentClassroom.subtitle);
+                    break;
+                case ConnectionModel.INVITATION_HEADER:
+//                    ((ConnectioinTypeViewHolder)holder).title.setText(currentClassroom.title);
+//                    ((ConnectioinTypeViewHolder)holder).subtitle.setText(currentClassroom.subtitle);
+                    break;
+                case ConnectionModel.INVITATION_SHOW_MORE:
+//                    ((ConnectioinTypeViewHolder)holder).title.setText(currentClassroom.title);
+//                    ((ConnectioinTypeViewHolder)holder).subtitle.setText(currentClassroom.subtitle);
                     break;
             }
         }

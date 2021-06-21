@@ -113,10 +113,11 @@ public class ConnectionFragment extends Fragment {
         mConnectionData.clear();
 
         //Create the ArrayList of Sports objects with the titles and information about each sport
+        mConnectionData.add(new ConnectionModel(2,"Invitations","",""));
         for(int i=0;i<2;i++){
             mConnectionData.add(new ConnectionModel(0,nameList[i],classroomInfo[i],""));
         }
-
+        mConnectionData.add(new ConnectionModel(3,"Show More","",""));
 
         for(int i=0;i<nameList.length;i++){
             mConnectionData.add(new ConnectionModel(1,nameList[i],classroomInfo[i],""));

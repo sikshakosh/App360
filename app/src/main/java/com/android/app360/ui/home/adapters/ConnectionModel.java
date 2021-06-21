@@ -1,8 +1,11 @@
 package com.android.app360.ui.home.adapters;
 
 public class ConnectionModel {
+
     public static final int INVITATION_TYPE = 0;
     public static final int CONNECTIOIN_TYPE = 1;
+    public static final int INVITATION_HEADER = 2;
+    public static final int INVITATION_SHOW_MORE = 3;
 
     public int type;
     public String title;
