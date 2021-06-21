@@ -5,28 +5,56 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
 
 import java.util.ArrayList;
 
-public class ConnectionItemAdapter extends RecyclerView.Adapter<ConnectionItemAdapter.ViewHolder>  {
+public class ConnectionItemAdapter extends RecyclerView.Adapter  {
 
     //Member variables
-    private ArrayList<ConnectionItem> mConnectionData;
+    private ArrayList<ConnectionModel> mConnectionData;
     private Context mContext;
+    int total_types;
+
+    public static class InvitationTypeViewHolder extends RecyclerView.ViewHolder{
+        TextView title;
+        TextView subtitle;
+        ImageView image;
+
+        public InvitationTypeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = (TextView)itemView.findViewById(R.id.title);
+            subtitle = (TextView)itemView.findViewById(R.id.subtitle);
+        }
+    }
+
+    public static class ConnectioinTypeViewHolder extends RecyclerView.ViewHolder{
+        TextView title;
+        TextView subtitle;
+        ImageView image;
+
+        public ConnectioinTypeViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = (TextView)itemView.findViewById(R.id.title);
+            subtitle = (TextView)itemView.findViewById(R.id.subtitle);
+        }
+    }
 
     /**
      * Constructor that passes in the classroom data and the context
      * @param context Context of the application
      * @param classroomData ArrayList containing the classroom data
      */
-    public ConnectionItemAdapter(Context context, ArrayList<ConnectionItem> classroomData) {
+    public ConnectionItemAdapter(Context context, ArrayList<ConnectionModel> classroomData) {
         this.mConnectionData = classroomData;
         this.mContext = context;
+        total_types = classroomData.size();
     }
 
 
@@ -37,22 +65,55 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter<ConnectionItemAd
      * @return The newly create ViewHolder.
      */
     @Override
-    public ConnectionItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.list_connection_item, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType){
+            case ConnectionModel.CONNECTIOIN_TYPE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_item,parent,false);
+                return new ConnectioinTypeViewHolder(view);
+            case ConnectionModel.INVITATION_TYPE:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_item,parent,false);
+                return new ConnectioinTypeViewHolder(view);
+
+        }
+        return null;
+        //new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.list_connection_item, parent, false));
     }
 
-    /**
-     * Required method that binds the data to the viewholder.
-     * @param holder The viewholder into which the data should be put.
-     * @param position The adapter position.
-     */
     @Override
-    public void onBindViewHolder(ConnectionItemAdapter.ViewHolder holder, int position) {
-        //Get current classroom
-        ConnectionItem currentClassroom = mConnectionData.get(position);
-        //Populate the textviews with data
-        holder.bindTo(currentClassroom);
+    public int getItemViewType(int position) {
+        switch (mConnectionData.get(position).type){
+            case 0:
+                return ConnectionModel.INVITATION_TYPE;
+            case 1:
+                return ConnectionModel.CONNECTIOIN_TYPE;
+            default:
+                return -1;
+        }
+
+        // return super.getItemViewType(position);
     }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ConnectionModel currentClassroom = mConnectionData.get(position);
+        //Populate the textviews with data
+        if(currentClassroom != null){
+            switch (currentClassroom.type){
+                case ConnectionModel.CONNECTIOIN_TYPE:
+                    ((ConnectioinTypeViewHolder)holder).title.setText(currentClassroom.title);
+                    ((ConnectioinTypeViewHolder)holder).subtitle.setText(currentClassroom.subtitle);
+                    break;
+                case ConnectionModel.INVITATION_TYPE:
+                    ((ConnectioinTypeViewHolder)holder).title.setText(currentClassroom.title);
+                    ((ConnectioinTypeViewHolder)holder).subtitle.setText(currentClassroom.subtitle);
+                    break;
+            }
+        }
+
+    }
+
+
 
 
     /**
@@ -65,40 +126,5 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter<ConnectionItemAd
     }
 
 
-    /**
-     * ViewHolder class that represents each row of data in the RecyclerView
-     */
-    class ViewHolder extends RecyclerView.ViewHolder {
 
-        //Member Variables for the TextViews
-        private TextView mTitleText;
-        private TextView mInfoText;
-        private TextView mNewsText;
-        private Button mBtnAction1;
-        private Button mBtnAction2;
-
-        /**
-         * Constructor for the ViewHolder, used in onCreateViewHolder().
-         * @param itemView The rootview of the list_item.xml layout file
-         */
-        ViewHolder(View itemView) {
-            super(itemView);
-
-            //Initialize the views
-            mTitleText = (TextView)itemView.findViewById(R.id.title);
-            mInfoText = (TextView)itemView.findViewById(R.id.subtitle);
-           // mNewsText = (TextView)itemView.findViewById(R.id.supporting_text);
-            mBtnAction1 = (Button)itemView.findViewById(R.id.action_button_1);
-            mBtnAction2 = (Button)itemView.findViewById(R.id.action_button_2);
-        }
-
-        void bindTo(ConnectionItem currentClassroom){
-            //Populate the textviews with data
-            mTitleText.setText(currentClassroom.getTitle());
-            mInfoText.setText(currentClassroom.getInfo());
-           // mNewsText.setText("Added a new question in");
-            mBtnAction1.setText("View");
-            mBtnAction2.setText("Favourite");
-        }
-    }
 }

@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.app360.R;
-import com.android.app360.ui.home.adapters.ConnectionItem;
 import com.android.app360.ui.home.adapters.ConnectionItemAdapter;
+import com.android.app360.ui.home.adapters.ConnectionModel;
 
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class ConnectionFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView mRecyclerView;
-    private ArrayList<ConnectionItem> mConnectionData;
+    private ArrayList<ConnectionModel> mConnectionData;
     private ConnectionItemAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
@@ -114,9 +114,15 @@ public class ConnectionFragment extends Fragment {
         mConnectionData.clear();
 
         //Create the ArrayList of Sports objects with the titles and information about each sport
-        for(int i=0;i<nameList.length;i++){
-            mConnectionData.add(new ConnectionItem(nameList[i],classroomInfo[i]));
+        for(int i=0;i<2;i++){
+            mConnectionData.add(new ConnectionModel(0,nameList[i],classroomInfo[i],""));
         }
+
+
+        for(int i=0;i<nameList.length;i++){
+            mConnectionData.add(new ConnectionModel(1,nameList[i],classroomInfo[i],""));
+        }
+
 
         //Notify the adapter of the change
         mAdapter.notifyDataSetChanged();
