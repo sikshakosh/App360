@@ -90,15 +90,14 @@ public class ConnectionFragment extends Fragment {
         //Initialize the adapter and set it ot the RecyclerView
         mAdapter = new ConnectionItemAdapter(getActivity(), mConnectionData);
         mRecyclerView.setAdapter(mAdapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
-                1);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
+//                1);
+//        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
+//        mRecyclerView.addItemDecoration(dividerItemDecoration);
 
 
         //Get the data
         initializeData();
-
         return view;
     }
 

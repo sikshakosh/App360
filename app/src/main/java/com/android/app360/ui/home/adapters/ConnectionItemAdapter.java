@@ -72,7 +72,7 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter  {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_item,parent,false);
                 return new ConnectioinTypeViewHolder(view);
             case ConnectionModel.INVITATION_TYPE:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_item,parent,false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_connection_invite_item,parent,false);
                 return new ConnectioinTypeViewHolder(view);
 
         }
