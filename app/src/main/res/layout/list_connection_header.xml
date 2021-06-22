@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="1dp"
     android:layout_marginRight="1dp"
-    android:background="@color/gray_700"
+    android:background="@color/white"
+    android:layout_marginBottom="1px"
     app:cardCornerRadius="0dp"
     app:cardElevation="3dp"
     app:checkedIconTint="#FFFFFF">
@@ -14,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#321616">
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/title"
@@ -23,7 +24,7 @@
             android:layout_marginStart="8dp"
             android:text="Invitations"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/colorPrimaryTextDefaultMaterialDark"
+            android:textColor="?attr/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +38,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/ic_action_disclosure"
             android:minWidth="0dp"
-            app:icon="@drawable/ic_action_disclosure"
+            app:backgroundTint="?attr/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
