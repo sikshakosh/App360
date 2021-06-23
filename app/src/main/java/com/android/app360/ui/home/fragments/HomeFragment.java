@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.app360.R;
-import com.android.app360.ui.home.adapters.HomeItem;
+import com.android.app360.ui.home.adapters.HomeModel;
 import com.android.app360.ui.home.adapters.HomeItemAdapter;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView mRecyclerView;
-    private ArrayList<HomeItem> mHomeData;
+    private ArrayList<HomeModel> mHomeData;
     private HomeItemAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment {
 
         //Create the ArrayList of Sports objects with the titles and information about each sport
         for(int i=0;i<nameList.length;i++){
-            mHomeData.add(new HomeItem(nameList[i],classroomInfo[i]));
+            mHomeData.add(new HomeModel(nameList[i],classroomInfo[i]));
         }
 
         //Notify the adapter of the change

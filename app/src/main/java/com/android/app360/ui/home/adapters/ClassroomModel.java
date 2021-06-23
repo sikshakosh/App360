@@ -1,6 +1,6 @@
 package com.android.app360.ui.home.adapters;
 
-public class ClassroomItem {
+public class ClassroomModel {
     //Member variables representing the title and information about the sport
     private String title;
     private String info;
@@ -11,7 +11,7 @@ public class ClassroomItem {
      * @param title The name if the sport.
      * @param info  Information about the sport.
      */
-    public ClassroomItem(String title, String info) {
+    public ClassroomModel(String title, String info) {
         this.title = title;
         this.info = info;
     }

@@ -15,7 +15,7 @@ import com.android.app360.R;
 
 import java.util.ArrayList;
 
-public class ConnectionItemAdapter extends RecyclerView.Adapter  {
+public class ConnectionModelAdapter extends RecyclerView.Adapter  {
 
     //Member variables
     private ArrayList<ConnectionModel> mConnectionData;
@@ -51,7 +51,7 @@ public class ConnectionItemAdapter extends RecyclerView.Adapter  {
      * @param context Context of the application
      * @param classroomData ArrayList containing the classroom data
      */
-    public ConnectionItemAdapter(Context context, ArrayList<ConnectionModel> classroomData) {
+    public ConnectionModelAdapter(Context context, ArrayList<ConnectionModel> classroomData) {
         this.mConnectionData = classroomData;
         this.mContext = context;
         total_types = classroomData.size();

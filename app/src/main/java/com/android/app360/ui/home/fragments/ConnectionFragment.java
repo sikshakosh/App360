@@ -2,9 +2,7 @@ package com.android.app360.ui.home.fragments;
 
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.app360.R;
-import com.android.app360.ui.home.adapters.ConnectionItemAdapter;
+import com.android.app360.ui.home.adapters.ConnectionModelAdapter;
 import com.android.app360.ui.home.adapters.ConnectionModel;
 
 
@@ -33,7 +31,7 @@ public class ConnectionFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ArrayList<ConnectionModel> mConnectionData;
-    private ConnectionItemAdapter mAdapter;
+    private ConnectionModelAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -88,7 +86,7 @@ public class ConnectionFragment extends Fragment {
         mConnectionData = new ArrayList<>();
 
         //Initialize the adapter and set it ot the RecyclerView
-        mAdapter = new ConnectionItemAdapter(getActivity(), mConnectionData);
+        mAdapter = new ConnectionModelAdapter(getActivity(), mConnectionData);
         mRecyclerView.setAdapter(mAdapter);
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
 //                1);
