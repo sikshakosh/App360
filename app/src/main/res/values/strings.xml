@@ -39,7 +39,7 @@
     </string-array>
 
     <string-array name="questions">
-        <item>This is a sample question</item>
+        <item>This is a sample question. Answer the questiion in detailed explanation.</item>
         <item>This is a sample question</item>
         <item>This is a sample question</item>
         <item>This is a sample question</item>
