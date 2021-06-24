@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHolder>  {
 
     //Member variables
-    private ArrayList<HomeItem> mHomeData;
+    private ArrayList<HomeModel> mHomeData;
     private Context mContext;
 
     /**
@@ -24,7 +24,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
      * @param sportsData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public HomeItemAdapter(Context context, ArrayList<HomeItem> sportsData) {
+    public HomeItemAdapter(Context context, ArrayList<HomeModel> sportsData) {
         this.mHomeData = sportsData;
         this.mContext = context;
     }
@@ -49,7 +49,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
     @Override
     public void onBindViewHolder(HomeItemAdapter.ViewHolder holder, int position) {
         //Get current sport
-        HomeItem currentSport = mHomeData.get(position);
+        HomeModel currentSport = mHomeData.get(position);
         //Populate the textviews with data
         holder.bindTo(currentSport);
     }
@@ -92,7 +92,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.ViewHo
             mBtnAction2 = (Button)itemView.findViewById(R.id.action_button_2);
         }
 
-        void bindTo(HomeItem currentSport){
+        void bindTo(HomeModel currentSport){
             //Populate the textviews with data
             mTitleText.setText(currentSport.getTitle());
             mInfoText.setText(currentSport.getInfo());

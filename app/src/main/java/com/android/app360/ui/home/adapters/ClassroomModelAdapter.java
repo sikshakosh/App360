@@ -13,10 +13,10 @@ import com.android.app360.R;
 
 import java.util.ArrayList;
 
-public class ClassroomItemAdapter extends RecyclerView.Adapter<ClassroomItemAdapter.ViewHolder>  {
+public class ClassroomModelAdapter extends RecyclerView.Adapter<ClassroomModelAdapter.ViewHolder>  {
 
     //Member variables
-    private ArrayList<ClassroomItem> mClassroomData;
+    private ArrayList<ClassroomModel> mClassroomData;
     private Context mContext;
 
     /**
@@ -24,7 +24,7 @@ public class ClassroomItemAdapter extends RecyclerView.Adapter<ClassroomItemAdap
      * @param classroomData ArrayList containing the classroom data
      * @param context Context of the application
      */
-    public ClassroomItemAdapter(Context context, ArrayList<ClassroomItem> classroomData) {
+    public ClassroomModelAdapter(Context context, ArrayList<ClassroomModel> classroomData) {
         this.mClassroomData = classroomData;
         this.mContext = context;
     }
@@ -37,7 +37,7 @@ public class ClassroomItemAdapter extends RecyclerView.Adapter<ClassroomItemAdap
      * @return The newly create ViewHolder.
      */
     @Override
-    public ClassroomItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ClassroomModelAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.list_classroom_item, parent, false));
     }
 
@@ -47,9 +47,9 @@ public class ClassroomItemAdapter extends RecyclerView.Adapter<ClassroomItemAdap
      * @param position The adapter position.
      */
     @Override
-    public void onBindViewHolder(ClassroomItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ClassroomModelAdapter.ViewHolder holder, int position) {
         //Get current classroom
-        ClassroomItem currentClassroom = mClassroomData.get(position);
+        ClassroomModel currentClassroom = mClassroomData.get(position);
         //Populate the textviews with data
         holder.bindTo(currentClassroom);
     }
@@ -92,7 +92,7 @@ public class ClassroomItemAdapter extends RecyclerView.Adapter<ClassroomItemAdap
             mBtnAction2 = (Button)itemView.findViewById(R.id.action_button_2);
         }
 
-        void bindTo(ClassroomItem currentClassroom){
+        void bindTo(ClassroomModel currentClassroom){
             //Populate the textviews with data
             mTitleText.setText(currentClassroom.getTitle());
             mInfoText.setText(currentClassroom.getInfo());

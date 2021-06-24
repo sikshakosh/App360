@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.app360.R;
-import com.android.app360.ui.home.adapters.ClassroomItem;
-import com.android.app360.ui.home.adapters.ClassroomItemAdapter;
+import com.android.app360.ui.home.adapters.ClassroomModel;
+import com.android.app360.ui.home.adapters.ClassroomModelAdapter;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ public class ClassroomFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView mRecyclerView;
-    private ArrayList<ClassroomItem> mClassroomData;
-    private ClassroomItemAdapter mAdapter;
+    private ArrayList<ClassroomModel> mClassroomData;
+    private ClassroomModelAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -74,7 +74,7 @@ public class ClassroomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_home, container, false);
+        View view =  inflater.inflate(R.layout.fragment_classrooms, container, false);
         //TextView tv = (TextView) view.findViewById(R.id.textView);
         //tv.setText("Home Page");
         //Initialize the RecyclerView
@@ -87,7 +87,7 @@ public class ClassroomFragment extends Fragment {
         mClassroomData = new ArrayList<>();
 
         //Initialize the adapter and set it ot the RecyclerView
-        mAdapter = new ClassroomItemAdapter(getActivity(), mClassroomData);
+        mAdapter = new ClassroomModelAdapter(getActivity(), mClassroomData);
         mRecyclerView.setAdapter(mAdapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 1);
@@ -114,7 +114,7 @@ public class ClassroomFragment extends Fragment {
 
         //Create the ArrayList of Sports objects with the titles and information about each sport
         for(int i=0;i<nameList.length;i++){
-            mClassroomData.add(new ClassroomItem(nameList[i],classroomInfo[i]));
+            mClassroomData.add(new ClassroomModel(nameList[i],classroomInfo[i]));
         }
 
         //Notify the adapter of the change
