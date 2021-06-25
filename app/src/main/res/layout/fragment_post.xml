@@ -75,7 +75,6 @@
         app:layout_constraintTop_toBottomOf="@id/topBar"
         tools:context="com.example.android.materialme.MainActivity"
 
-        android:layout_marginBottom="?actionBarSize"
         >
 
         <androidx.recyclerview.widget.RecyclerView

@@ -74,8 +74,6 @@ public class ConnectionFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_connection, container, false);
-        //TextView tv = (TextView) view.findViewById(R.id.textView);
-        //tv.setText("Home Page");
         //Initialize the RecyclerView
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
@@ -91,10 +89,8 @@ public class ConnectionFragment extends Fragment {
 //        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
 //                1);
 //        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
-//        mRecyclerView.addItemDecoration(dividerItemDecoration);
-
-
-        //Get the data
+//        mRecyclerView.addItemDecoration(dividerItemDecoration)
+//        Get the data
         initializeData();
         return view;
     }
@@ -110,7 +106,7 @@ public class ConnectionFragment extends Fragment {
         //Clear the existing data (to avoid duplication)
         mConnectionData.clear();
 
-        //Create the ArrayList of Sports objects with the titles and information about each sport
+        //Create the ArrayList of Connections objects with the titles and information about each sport
         mConnectionData.add(new ConnectionModel(2,"Invitations","",""));
         for(int i=0;i<2;i++){
             mConnectionData.add(new ConnectionModel(0,nameList[i],classroomInfo[i],""));

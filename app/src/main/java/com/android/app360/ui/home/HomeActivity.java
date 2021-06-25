@@ -33,14 +33,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (AppTabLayout) findViewById(R.id.tab_host);
-
         setSupportActionBar(toolbar);
-
-
-
         setupTabLayout();
     }
 
@@ -50,15 +45,12 @@ public class HomeActivity extends AppCompatActivity {
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             // This method will be invoked when a new page becomes selected.
             @Override
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:
                         getSupportActionBar().show();
-
-
                     break;
                     default:
                         getSupportActionBar().hide();

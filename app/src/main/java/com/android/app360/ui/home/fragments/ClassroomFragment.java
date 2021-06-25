@@ -75,8 +75,7 @@ public class ClassroomFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_classrooms, container, false);
-        //TextView tv = (TextView) view.findViewById(R.id.textView);
-        //tv.setText("Home Page");
+
         //Initialize the RecyclerView
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
@@ -102,21 +101,17 @@ public class ClassroomFragment extends Fragment {
     }
 
     /**
-     * Method for initializing the sports data from resources.
+     * Method for initializing the classrooms data from resources.
      */
     private void initializeData() {
-        //Get the resources from the XML file
+
         String[] nameList = getResources().getStringArray(R.array.member_names);
         String[] classroomInfo = getResources().getStringArray(R.array.classroom_info);
 
-        //Clear the existing data (to avoid duplication)
         mClassroomData.clear();
-
-        //Create the ArrayList of Sports objects with the titles and information about each sport
         for(int i=0;i<nameList.length;i++){
             mClassroomData.add(new ClassroomModel(nameList[i],classroomInfo[i]));
         }
-
         //Notify the adapter of the change
         mAdapter.notifyDataSetChanged();
     }

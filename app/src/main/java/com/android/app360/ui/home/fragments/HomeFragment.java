@@ -75,8 +75,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home, container, false);
-        //TextView tv = (TextView) view.findViewById(R.id.textView);
-        //tv.setText("Home Page");
+
         //Initialize the RecyclerView
         mRecyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
@@ -89,11 +88,11 @@ public class HomeFragment extends Fragment {
         //Initialize the adapter and set it ot the RecyclerView
         mAdapter = new HomeItemAdapter(getActivity(), mHomeData);
         mRecyclerView.setAdapter(mAdapter);
+
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
                 1);
         dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider));
         mRecyclerView.addItemDecoration(dividerItemDecoration);
-
 
         //Get the data
         initializeData();
@@ -112,7 +111,7 @@ public class HomeFragment extends Fragment {
         //Clear the existing data (to avoid duplication)
         mHomeData.clear();
 
-        //Create the ArrayList of Sports objects with the titles and information about each sport
+        //Create the ArrayList of Home objects with the titles and information about each sport
         for(int i=0;i<nameList.length;i++){
             mHomeData.add(new HomeModel(nameList[i],classroomInfo[i]));
         }
