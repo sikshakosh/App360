@@ -21,10 +21,13 @@ Here we work with android beginners to develop common modules used in almost all
 2. Image Slider with Dot Indicator
 3. Add Skip Button in Pager
 4. Designed Upper Tab Views
-5. Home , Classroom and Member Page Designed
+5. Home , Classroom , Connection , Post and Menu Page Designed
 ## Under Development
-1. Design Post Page
-2. Design Menu Page
+1. Classroom Detail Page
+2. Connection Detail Page
+3. Invitation Detail Page
+4. Post Question Page
+5. Question Detail Page
 
 
 
