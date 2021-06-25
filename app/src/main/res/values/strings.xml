@@ -79,5 +79,13 @@
     <string name="invitations">Invitations</string>
     <string name="show_more">Show More</string>
     <string name="questions">Questions</string>
+    <string name="header_title">Mr. Wide</string>
+    <string name="header_text">Instructor</string>
+    <string name="title_1">Downloads</string>
+    <string name="title_2">Bookmarks</string>
+    <string name="title_3">Notifications</string>
+    <string name="item_4">FAQ</string>
+    <string name="item_5">App Version</string>
+    <string name="item_6">Logout</string>
 
 </resources>

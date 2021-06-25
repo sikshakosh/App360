@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer-array name="tutorial_images">
-        <item>@drawable/splash_1</item>
-        <item>@drawable/splash_2</item>
-        <item>@drawable/splash_3</item>
+        <item>@drawable/team</item>
+        <item>@drawable/team1</item>
+        <item>@drawable/team2</item>
 
     </integer-array>
 </resources>

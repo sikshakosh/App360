@@ -17,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.app360.ui.home.fragments.ClassroomFragment;
 import com.android.app360.ui.home.fragments.HomeFragment;
 import com.android.app360.ui.home.fragments.ConnectionFragment;
+import com.android.app360.ui.home.fragments.MenuFragment;
 import com.android.app360.ui.home.fragments.NotificationFragment;
 import com.android.app360.ui.home.fragments.PostFragment;
 import com.android.appcompose.layout.tabs.AppFragmentPagerAdapter;
@@ -155,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
                     selectedFragment =  PostFragment.newInstance("0", "Post Page");
                     break;
                 case 4:
-                    selectedFragment =  NotificationFragment.newInstance("0", "Notification Page");
+                    selectedFragment =  MenuFragment.newInstance("0", "Notification Page");
                     break;
                 default:
                     return null;
