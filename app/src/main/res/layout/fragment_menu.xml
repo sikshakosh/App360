@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/list_menu_nav_header"
         app:menu="@menu/list_menu_nav_drawer"
+        android:layout_marginBottom="?actionBarSize"
         >
 
     </com.google.android.material.navigation.NavigationView>

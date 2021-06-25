@@ -84,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.setViewPager(viewPager);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
