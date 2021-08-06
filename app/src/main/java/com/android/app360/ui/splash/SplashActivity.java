@@ -36,10 +36,6 @@ public class SplashActivity extends FragmentActivity {
         initSkipButton();
         layoutSubviews();
 
-//        appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
-//        appViewModel.getFeaturedClassrooms().observe(this, classrooms -> {
-//            Log.d(SplashActivity.ACTIVITY_TAG, "network response");
-//        });
 
 
     }

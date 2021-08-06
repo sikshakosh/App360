@@ -26,23 +26,23 @@ import com.android.appcompose.layout.tabs.AppFragmentPagerAdapter;
 import com.android.appcompose.layout.tabs.AppTabLayout;
 import com.android.appcompose.layout.tabs.TabType;
 import com.android.app360.R;
+import com.android.appcompose.network.Classroom;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private final String TAG = "HomeActivity";
+
     private AppTabLayout tabLayout;
     Toolbar toolbar = null;
-    HomeViewModel homeViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (AppTabLayout) findViewById(R.id.tab_host);
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.init();
-        homeViewModel.getFClassroomsRepository().observe(this, featuredClassroom -> {
-            Log.d(TAG, "Responnse received"+featuredClassroom.getData());
-        });
+
         setSupportActionBar(toolbar);
         setupTabLayout();
     }
