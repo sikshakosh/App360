@@ -1,4 +1,4 @@
-package com.android.app360.ui.home;
+package com.android.app360.ui.home.viewmodel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
