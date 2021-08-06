@@ -1,16 +1,15 @@
 package com.android.app360.ui.splash;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
@@ -21,9 +20,11 @@ import com.android.app360.ui.home.HomeActivity;
 
 
 public class SplashActivity extends FragmentActivity {
+    private static String ACTIVITY_TAG = "SplashActivity";
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
     AppButton skipButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,13 @@ public class SplashActivity extends FragmentActivity {
         initDotIndicator(Color.TRANSPARENT);
         initSkipButton();
         layoutSubviews();
+
+//        appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
+//        appViewModel.getFeaturedClassrooms().observe(this, classrooms -> {
+//            Log.d(SplashActivity.ACTIVITY_TAG, "network response");
+//        });
+
+
     }
 
     private void initSkipButton(){
