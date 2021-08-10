@@ -89,19 +89,13 @@ public class WelcomeItemAdapter extends RecyclerView.Adapter<WelcomeItemAdapter.
 
             //Initialize the views
             mTitleText = (TextView)itemView.findViewById(R.id.title);
-            mInfoText = (TextView)itemView.findViewById(R.id.subtitle);
-            mNewsText = (TextView)itemView.findViewById(R.id.supporting_text);
-            mBtnAction1 = (Button)itemView.findViewById(R.id.action_button_1);
-            mBtnAction2 = (Button)itemView.findViewById(R.id.action_button_2);
+
         }
 
         void bindTo(Classroom currentSport){
             //Populate the textviews with data
             mTitleText.setText(currentSport.getChash());
-            mInfoText.setText(currentSport.getChash());
-            mNewsText.setText("Added a new question in");
-            mBtnAction1.setText("View");
-            mBtnAction2.setText("Favourite");
+
         }
     }
 }
