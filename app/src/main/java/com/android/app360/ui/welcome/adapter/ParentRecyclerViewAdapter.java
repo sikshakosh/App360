@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,8 +56,9 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         ParentModel currentItem = parentModelArrayList.get(position);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.HORIZONTAL, false);
-        holder.childRecyclerView.setLayoutManager(layoutManager);
+        GridLayoutManager manager = new GridLayoutManager(holder.childRecyclerView.getContext(), 2, GridLayoutManager.VERTICAL, false);
+        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.HORIZONTAL, false);
+        holder.childRecyclerView.setLayoutManager(manager);
         holder.childRecyclerView.setHasFixedSize(true);
 
         holder.category.setText(currentItem.getItemCategory());

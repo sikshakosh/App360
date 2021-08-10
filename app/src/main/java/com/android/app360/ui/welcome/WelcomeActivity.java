@@ -58,6 +58,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //setupRecyclerView();
 
         parentModelArrayList.add(new ParentModel("Featured Classrooms",new ArrayList<Classroom>()));
+        parentModelArrayList.add(new ParentModel("Featured Classrooms",new ArrayList<Classroom>()));
         parentLayoutManager = new LinearLayoutManager(this);
         parentAdapter = new ParentRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
         parentRecyclerView.setLayoutManager(parentLayoutManager);
@@ -71,10 +72,15 @@ public class WelcomeActivity extends AppCompatActivity {
             List<Classroom> classroomList = featuredClassroom.getData();
             ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
             classroomParent.setChildArray(classroomList);
+
+            ParentModel classroomParent1 = (ParentModel) parentModelArrayList.get(1);
+            classroomParent1.setChildArray(classroomList);
             //classroomArrayList.addAll(classroomList);
             //classroomAdapter.notifyDataSetChanged();
             parentAdapter.notifyDataSetChanged();
         });
+
+
 
 
     }
