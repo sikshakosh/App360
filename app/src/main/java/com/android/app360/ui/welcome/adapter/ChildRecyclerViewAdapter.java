@@ -10,13 +10,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.ui.home.adapters.HomeItemAdapter;
-import com.android.app360.ui.home.adapters.HomeModel;
+import com.android.app360.ui.welcome.model.ChildModel;
 import com.android.appcompose.network.Classroom;
 
 import java.util.ArrayList;
 
-public class WelcomeItemAdapter extends RecyclerView.Adapter<WelcomeItemAdapter.ViewHolder>  {
+public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
 
     //Member variables
     private ArrayList<Classroom> mHomeData;
@@ -27,7 +26,7 @@ public class WelcomeItemAdapter extends RecyclerView.Adapter<WelcomeItemAdapter.
      * @param sportsData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public WelcomeItemAdapter(Context context, ArrayList<Classroom> sportsData) {
+    public ChildRecyclerViewAdapter(Context context, ArrayList<Classroom> sportsData) {
         this.mHomeData = sportsData;
         this.mContext = context;
     }
@@ -40,8 +39,8 @@ public class WelcomeItemAdapter extends RecyclerView.Adapter<WelcomeItemAdapter.
      * @return The newly create ViewHolder.
      */
     @Override
-    public WelcomeItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new WelcomeItemAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.grid_welcome_item, parent, false));
+    public ChildRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ChildRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.grid_welcome_item, parent, false));
     }
 
     /**
@@ -50,7 +49,7 @@ public class WelcomeItemAdapter extends RecyclerView.Adapter<WelcomeItemAdapter.
      * @param position The adapter position.
      */
     @Override
-    public void onBindViewHolder(WelcomeItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ChildRecyclerViewAdapter.ViewHolder holder, int position) {
         //Get current sport
         Classroom currentSport = mHomeData.get(position);
         //Populate the textviews with data

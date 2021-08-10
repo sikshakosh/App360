@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.ui.home.adapters.ClassroomAdapter;
-import com.android.app360.ui.home.viewmodel.HomeViewModel;
-import com.android.app360.ui.welcome.adapter.WelcomeItemAdapter;
-import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
+import com.android.app360.ui.welcome.adapter.ChildRecyclerViewAdapter;
+import com.android.app360.ui.welcome.adapter.ParentRecyclerViewAdapter;
+import com.android.app360.ui.welcome.model.ParentModel;
+import com.android.app360.ui.welcome.viewmodel.ChildViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.network.Classroom;
@@ -34,30 +34,46 @@ public class WelcomeActivity extends AppCompatActivity {
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
 
-    WelcomeViewModel homeViewModel;
+    ChildViewModel homeViewModel;
     ArrayList<Classroom> classroomArrayList = new ArrayList<>();
-    WelcomeItemAdapter classroomAdapter;
+
+    ChildRecyclerViewAdapter classroomAdapter;
 
     private RecyclerView mRecyclerView;
+    private RecyclerView parentRecyclerView;
+    private RecyclerView.Adapter parentAdapter;
+    ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
+    private RecyclerView.LayoutManager parentLayoutManager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         imageSliderView = findViewById(R.id.slider);
-        mRecyclerView = findViewById(R.id.recyclerView);
+        parentRecyclerView   = findViewById(R.id.recyclerView);
         // Instantiate DotIndicator
         initDotIndicator(Color.TRANSPARENT);
 
         layoutSubviews();
-        setupRecyclerView();
+        //setupRecyclerView();
 
-        homeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+        parentModelArrayList.add(new ParentModel("Featured Classrooms",new ArrayList<Classroom>()));
+        parentLayoutManager = new LinearLayoutManager(this);
+        parentAdapter = new ParentRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
+        parentRecyclerView.setLayoutManager(parentLayoutManager);
+        parentRecyclerView.setAdapter(parentAdapter);
+        parentAdapter.notifyDataSetChanged();
+
+        homeViewModel = new ViewModelProvider(this).get(ChildViewModel.class);
         homeViewModel.init();
         homeViewModel.getFClassroomsRepository().observe(this, featuredClassroom -> {
             Log.d(TAG, "Responnse received"+featuredClassroom.getData());
             List<Classroom> classroomList = featuredClassroom.getData();
-            classroomArrayList.addAll(classroomList);
-            classroomAdapter.notifyDataSetChanged();
+            ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
+            classroomParent.setChildArray(classroomList);
+            //classroomArrayList.addAll(classroomList);
+            //classroomAdapter.notifyDataSetChanged();
+            parentAdapter.notifyDataSetChanged();
         });
 
 
@@ -86,8 +102,9 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
+
         if (classroomAdapter == null) {
-            classroomAdapter = new WelcomeItemAdapter(this, classroomArrayList);
+            classroomAdapter = new ChildRecyclerViewAdapter(this, classroomArrayList);
             //Initialize the RecyclerView
             //Set the Layout Manager
             //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -96,7 +113,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
             //Initialize the adapter and set it ot the RecyclerView
-            classroomAdapter = new WelcomeItemAdapter(this, classroomArrayList);
+            classroomAdapter = new ChildRecyclerViewAdapter(this, classroomArrayList);
             mRecyclerView.setAdapter(classroomAdapter);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),

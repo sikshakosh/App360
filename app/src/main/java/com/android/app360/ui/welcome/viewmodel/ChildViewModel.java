@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.android.appcompose.network.AppRepository;
 import com.android.appcompose.network.ClassroomResponse;
 
-public class WelcomeViewModel extends ViewModel {
+public class ChildViewModel extends ViewModel {
     private MutableLiveData<ClassroomResponse> mutableLiveFClassrooms;
 
     private AppRepository appRepository;

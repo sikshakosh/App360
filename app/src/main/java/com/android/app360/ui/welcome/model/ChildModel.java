@@ -1,9 +1,9 @@
 package com.android.app360.ui.welcome.model;
 
-public class CategoryModel {
+public class ChildModel {
     private String category;
 
-    public CategoryModel(String movieCategory) {
+    public ChildModel(String movieCategory) {
         this.category = movieCategory;
     }
     public String itemCategory() {
