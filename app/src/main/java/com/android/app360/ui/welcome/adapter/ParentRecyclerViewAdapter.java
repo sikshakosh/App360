@@ -7,11 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.ui.welcome.model.ChildModel;
+import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.app360.ui.welcome.model.ParentModel;
 import com.android.appcompose.layout.SpacesItemDecoration;
 import com.android.appcompose.network.Classroom;
@@ -31,20 +30,19 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            category = itemView.findViewById(R.id.Movie_category);
-            childRecyclerView = itemView.findViewById(R.id.Child_RV);
+            category = itemView.findViewById(R.id.section);
+            childRecyclerView = itemView.findViewById(R.id.items);
         }
     }
 
     public ParentRecyclerViewAdapter(ArrayList<ParentModel> exampleList, Context context) {
         this.parentModelArrayList = exampleList;
         this.cxt = context;
-
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.welcome_parentrecyclerview_items, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.welcome_parent_recyclerview, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -67,7 +65,7 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
         ArrayList<Classroom> arrayList = new ArrayList<>();
 
         // added the first child row
-        if (parentModelArrayList.get(position).getItemCategory().equals("Featured Classrooms")) {
+        if (parentModelArrayList.get(position).getItemCategory().equals(WelcomeActivity.SECTION_CLASSROOMS)) {
             arrayList  = currentItem.getChildArray();
         }
 

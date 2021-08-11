@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.ui.welcome.model.ChildModel;
 import com.android.appcompose.network.Classroom;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
      */
     @Override
     public ChildRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ChildRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.grid_welcome_item, parent, false));
+        return new ChildRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.welcome_grid_item, parent, false));
     }
 
     /**
@@ -91,9 +90,9 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
 
         }
 
-        void bindTo(Classroom currentSport){
+        void bindTo(Classroom item){
             //Populate the textviews with data
-            mTitleText.setText(currentSport.getChash());
+            mTitleText.setText(item.getChash());
 
 
         }

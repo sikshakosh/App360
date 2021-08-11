@@ -29,10 +29,11 @@ import com.android.appcompose.network.Classroom;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
+    public static String SECTION_CLASSROOMS = "Featured Classrooms";
+    public static String SECTION_MEMBERS = "Featured Members";
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
 
@@ -51,7 +52,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        imageSliderView = findViewById(R.id.slider);
+        imageSliderView = findViewById(R.id.bannerList);
         parentRecyclerView   = findViewById(R.id.recyclerView);
         // Instantiate DotIndicator
         initDotIndicator(Color.TRANSPARENT);
@@ -59,18 +60,9 @@ public class WelcomeActivity extends AppCompatActivity {
         layoutSubviews();
         //setupRecyclerView();
 
-        parentModelArrayList.add(new ParentModel("Featured Classrooms",new ArrayList<Classroom>()));
-        parentModelArrayList.add(new ParentModel("Featured Classrooms",new ArrayList<Classroom>()));
-        parentLayoutManager = new LinearLayoutManager(this);
-        parentAdapter = new ParentRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
-        parentRecyclerView.setLayoutManager(parentLayoutManager);
-        parentRecyclerView.setAdapter(parentAdapter);
+        parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS,new ArrayList<Classroom>()));
+        parentModelArrayList.add(new ParentModel(SECTION_MEMBERS,new ArrayList<Classroom>()));
 
-        SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(20);
-
-       // parentRecyclerView.addItemDecoration(spacesItemDecoration);
-
-        parentAdapter.notifyDataSetChanged();
 
         homeViewModel = new ViewModelProvider(this).get(ChildViewModel.class);
         homeViewModel.init();
@@ -88,9 +80,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 classroomParent1.getChildArray().add(classroomList.get(i));
             }
 
-            //classroomArrayList.addAll(classroomList);
-            //classroomAdapter.notifyDataSetChanged();
-            parentAdapter.notifyDataSetChanged();
+            setupRecyclerView();
         });
 
 
@@ -122,27 +112,21 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
 
-        if (classroomAdapter == null) {
-            classroomAdapter = new ChildRecyclerViewAdapter(this, classroomArrayList);
-            //Initialize the RecyclerView
-            //Set the Layout Manager
-            //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-            mRecyclerView.setLayoutManager(manager);
+        if (parentAdapter == null) {
+            parentAdapter = new ParentRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
+            parentLayoutManager = new LinearLayoutManager(this);
+
+            parentRecyclerView.setLayoutManager(parentLayoutManager);
+            parentRecyclerView.setAdapter(parentAdapter);
+
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(parentRecyclerView.getContext(),
+                    1);
+            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
+            parentRecyclerView.addItemDecoration(dividerItemDecoration);
 
 
-            //Initialize the adapter and set it ot the RecyclerView
-            classroomAdapter = new ChildRecyclerViewAdapter(this, classroomArrayList);
-            mRecyclerView.setAdapter(classroomAdapter);
-            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-//            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
-//                    1);
-//            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-//            mRecyclerView.addItemDecoration(dividerItemDecoration);
         } else {
-            classroomAdapter.notifyDataSetChanged();
+            parentAdapter.notifyDataSetChanged();
         }
     }
 
