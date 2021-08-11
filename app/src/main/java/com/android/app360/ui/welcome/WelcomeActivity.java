@@ -28,6 +28,7 @@ import com.android.appcompose.network.Classroom;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
@@ -71,10 +72,16 @@ public class WelcomeActivity extends AppCompatActivity {
             Log.d(TAG, "Responnse received"+featuredClassroom.getData());
             List<Classroom> classroomList = featuredClassroom.getData();
             ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-            classroomParent.setChildArray(classroomList);
+            for(int i=0;i<4;i++){
+                classroomParent.getChildArray().add(classroomList.get(i));
+            }
+
 
             ParentModel classroomParent1 = (ParentModel) parentModelArrayList.get(1);
-            classroomParent1.setChildArray(classroomList);
+            for(int i=0;i<4;i++){
+                classroomParent1.getChildArray().add(classroomList.get(i));
+            }
+
             //classroomArrayList.addAll(classroomList);
             //classroomAdapter.notifyDataSetChanged();
             parentAdapter.notifyDataSetChanged();
