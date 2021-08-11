@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.app360.R;
 import com.android.app360.ui.welcome.model.ChildModel;
 import com.android.app360.ui.welcome.model.ParentModel;
+import com.android.appcompose.layout.SpacesItemDecoration;
 import com.android.appcompose.network.Classroom;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
 
         ParentModel currentItem = parentModelArrayList.get(position);
         GridLayoutManager manager = new GridLayoutManager(holder.childRecyclerView.getContext(), 2, GridLayoutManager.VERTICAL, false);
+
         //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(cxt, LinearLayoutManager.HORIZONTAL, false);
         holder.childRecyclerView.setLayoutManager(manager);
         holder.childRecyclerView.setHasFixedSize(true);
@@ -73,6 +75,8 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
 
         ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
         holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
+        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
+        holder.childRecyclerView.addItemDecoration(spacesDecoration);
         childRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

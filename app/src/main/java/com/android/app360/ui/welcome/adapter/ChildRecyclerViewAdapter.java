@@ -95,6 +95,7 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
             //Populate the textviews with data
             mTitleText.setText(currentSport.getChash());
 
+
         }
     }
 }

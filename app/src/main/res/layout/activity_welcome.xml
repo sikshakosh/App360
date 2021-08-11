@@ -10,7 +10,7 @@
         android:id="@+id/mainConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:layout_marginBottom="10dp"
         >
         <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
             android:id="@+id/slider"
@@ -23,6 +23,9 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
             android:background="@color/white"
             android:scrollbars="vertical"
             android:clipToPadding="false"
