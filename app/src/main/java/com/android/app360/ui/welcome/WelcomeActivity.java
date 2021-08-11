@@ -24,6 +24,7 @@ import com.android.app360.ui.welcome.model.ParentModel;
 import com.android.app360.ui.welcome.viewmodel.ChildViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
+import com.android.appcompose.layout.SpacesItemDecoration;
 import com.android.appcompose.network.Classroom;
 
 import java.util.ArrayList;
@@ -64,6 +65,11 @@ public class WelcomeActivity extends AppCompatActivity {
         parentAdapter = new ParentRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
         parentRecyclerView.setLayoutManager(parentLayoutManager);
         parentRecyclerView.setAdapter(parentAdapter);
+
+        SpacesItemDecoration spacesItemDecoration = new SpacesItemDecoration(20);
+
+       // parentRecyclerView.addItemDecoration(spacesItemDecoration);
+
         parentAdapter.notifyDataSetChanged();
 
         homeViewModel = new ViewModelProvider(this).get(ChildViewModel.class);
@@ -129,10 +135,12 @@ public class WelcomeActivity extends AppCompatActivity {
             classroomAdapter = new ChildRecyclerViewAdapter(this, classroomArrayList);
             mRecyclerView.setAdapter(classroomAdapter);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
-                    1);
-            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-            mRecyclerView.addItemDecoration(dividerItemDecoration);
+
+
+//            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
+//                    1);
+//            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
+//            mRecyclerView.addItemDecoration(dividerItemDecoration);
         } else {
             classroomAdapter.notifyDataSetChanged();
         }
