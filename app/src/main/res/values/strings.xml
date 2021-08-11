@@ -87,5 +87,7 @@
     <string name="item_4">FAQ</string>
     <string name="item_5">App Version</string>
     <string name="item_6">Logout</string>
+    <string name="category">Category</string>
+    <string name="more"><![CDATA[More >>]]></string>
 
 </resources>
