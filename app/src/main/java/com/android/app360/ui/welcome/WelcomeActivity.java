@@ -20,7 +20,7 @@ import com.android.app360.R;
 import com.android.app360.ui.welcome.adapter.ChildRecyclerViewAdapter;
 import com.android.app360.ui.welcome.adapter.ParentRecyclerViewAdapter;
 import com.android.app360.ui.welcome.model.ParentModel;
-import com.android.app360.ui.welcome.viewmodel.ChildViewModel;
+import com.android.app360.ui.welcome.viewmodel.HomeViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.network.model.Classroom;
@@ -31,19 +31,19 @@ import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
-    public static String SECTION_CLASSROOMS = "Featured Classrooms";
+    public  static String SECTION_CLASSROOMS = "Featured Classrooms";
     public static String SECTION_MENTORS = "Featured Members";
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
 
-    ChildViewModel homeViewModel;
+    HomeViewModel homeViewModel;
     ArrayList<Classroom> classroomArrayList = new ArrayList<>();
 
     ChildRecyclerViewAdapter classroomAdapter;
 
     private RecyclerView mRecyclerView;
     private RecyclerView parentRecyclerView;
-    private RecyclerView.Adapter parentAdapter;
+    private ParentRecyclerViewAdapter parentAdapter;
     ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
     private RecyclerView.LayoutManager parentLayoutManager;
 
@@ -58,12 +58,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
         layoutSubviews();
         //setupRecyclerView();
-
         parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS));
         parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
 
 
-        homeViewModel = new ViewModelProvider(this).get(ChildViewModel.class);
+
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.init();
         homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
             if(featuredClassroom!=null){
@@ -80,25 +80,21 @@ public class WelcomeActivity extends AppCompatActivity {
 
         });
 
-//        homeViewModel.getFeaturedMentorsRepository().observe(this, featuredMentors -> {
-//            if(featuredMentors!=null){
-//                Log.d(TAG, "Responnse received"+featuredMentors.getData());
-//                List<Mentor> classroomList = featuredMentors.getData();
-//                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
-//                for(int i=0;i<4;i++){
-//                    classroomParent.getMentorArray().add(classroomList.get(i));
-//                }
-//
-//
-//                setupRecyclerView();
-//            }else {
-//                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
-//            }
-//
-//        });
+        homeViewModel.getFeaturedMentorsRepository().observe(this, featuredMentors -> {
+            if(featuredMentors!=null){
+                Log.d(TAG, "Responnse received"+featuredMentors.getData());
+                List<Mentor> classroomList = featuredMentors.getData();
+                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
+                for(int i=0;i<4;i++){
+                    classroomParent.getMentorArray().add(classroomList.get(i));
+                }
 
+                setupRecyclerView();
+            }else {
+                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
+            }
 
-
+        });
 
     }
 

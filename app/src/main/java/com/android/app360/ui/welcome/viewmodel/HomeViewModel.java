@@ -8,7 +8,7 @@ import com.android.appcompose.network.AppRepository;
 import com.android.appcompose.network.model.ClassroomResponse;
 import com.android.appcompose.network.model.MentorResponse;
 
-public class ChildViewModel extends ViewModel {
+public class HomeViewModel extends ViewModel {
     private MutableLiveData<ClassroomResponse> featuredClassrooms;
     private MutableLiveData<MentorResponse> featuredMentors;
 
@@ -18,6 +18,7 @@ public class ChildViewModel extends ViewModel {
         if(featuredClassrooms !=null){
             return;
         }
+
         appRepository = new AppRepository();
         featuredClassrooms = appRepository.getFeaturedClassrooms();
         featuredMentors = appRepository.getFeaturedMentors();

@@ -1,6 +1,7 @@
 package com.android.app360.ui.welcome.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,25 +11,41 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
+import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.appcompose.network.model.Classroom;
+import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 
 public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
 
     //Member variables
-    private ArrayList<Classroom> mHomeData;
+    private ArrayList<Classroom> classroomData = new ArrayList<Classroom>();
+    private ArrayList<Mentor> mentorData  = new ArrayList<Mentor>();
     private Context mContext;
-
+    private String dataType;
     /**
      * Constructor that passes in the sports data and the context
      * @param sportsData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public ChildRecyclerViewAdapter(Context context, ArrayList<Classroom> sportsData) {
-        this.mHomeData = sportsData;
+    public ChildRecyclerViewAdapter(Context context, ArrayList<Classroom> classrooms, String type) {
+
         this.mContext = context;
+        this.dataType = type;
+        classroomData = classrooms;
+
     }
+
+    public ChildRecyclerViewAdapter(Context context, ArrayList<Mentor> mentors) {
+
+        this.mContext = context;
+        this.dataType = "Featured Members";
+
+        mentorData = mentors;
+    }
+
+
 
 
     /**
@@ -49,10 +66,23 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
      */
     @Override
     public void onBindViewHolder(ChildRecyclerViewAdapter.ViewHolder holder, int position) {
-        //Get current sport
-        Classroom currentSport = mHomeData.get(position);
-        //Populate the textviews with data
-        holder.bindTo(currentSport);
+        switch (this.dataType){
+            case "Featured Classrooms":
+                //Get current sport
+                Classroom currentSport = classroomData.get(position);
+                //Populate the textviews with data
+                holder.bindToClassroom(currentSport);
+                break;
+            case "Featured Members":
+                //Get current sport
+                Mentor mentor = mentorData.get(position);
+                //Populate the textviews with data
+                holder.bindToMentor(mentor);
+                break;
+            default:
+                Log.d("","NA");
+        }
+
     }
 
 
@@ -62,7 +92,37 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
      */
     @Override
     public int getItemCount() {
-        return mHomeData.size();
+        int totalItems = 0;
+        switch (this.dataType){
+            case "Featured Classrooms":
+                //Get current sport
+                totalItems = classroomData.size();
+                break;
+            case "Featured Members":
+                //Get current sport
+                totalItems = mentorData.size();
+                break;
+            default:
+                Log.d("","NA");
+        }
+        return totalItems;
+    }
+
+    public ArrayList<Classroom> getClassroomData() {
+        return classroomData;
+    }
+
+    public void setClassroomData(ArrayList<Classroom> classroomData) {
+        this.classroomData = classroomData;
+    }
+
+    public ArrayList<Mentor> getMentorData() {
+        return mentorData;
+    }
+
+    public void setMentorData(ArrayList<Mentor> mentorData) {
+
+        this.mentorData = mentorData;
     }
 
 
@@ -90,9 +150,15 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
 
         }
 
-        void bindTo(Classroom item){
+        void bindToClassroom(Classroom item){
             //Populate the textviews with data
             mTitleText.setText(item.getChash());
+
+
+        }
+        void bindToMentor(Mentor item){
+            //Populate the textviews with data
+            mTitleText.setText(item.getUhash());
 
 
         }

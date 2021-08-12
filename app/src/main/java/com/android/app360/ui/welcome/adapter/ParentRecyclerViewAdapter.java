@@ -69,28 +69,29 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
                 ArrayList<Classroom> arrayList = new ArrayList<>();
 
                 arrayList  = currentItem.getClassroomArray();
-
-                ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
+                ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList,WelcomeActivity.SECTION_CLASSROOMS);
                 holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
                 SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
                 holder.childRecyclerView.addItemDecoration(spacesDecoration);
                 childRecyclerViewAdapter.notifyDataSetChanged();
                 break;
             case 1: // For Array
-//                ArrayList<Mentor> mentorList = new ArrayList<>();
-//
-//                mentorList  = currentItem.getMentorArray();
-//
-//                ChildRecyclerViewAdapter mentorViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),mentorList);
-//                holder.childRecyclerView.setAdapter(mentorViewAdapter);
-//                SpacesItemDecoration decoration = new SpacesItemDecoration(8) ;
-//                holder.childRecyclerView.addItemDecoration(decoration);
-//                mentorViewAdapter.notifyDataSetChanged();
-//                break;
+                ArrayList<Mentor> mentorList = new ArrayList<>();
+
+                mentorList  = currentItem.getMentorArray();
+                ChildRecyclerViewAdapter childRecyclerViewAdapter1 = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),mentorList);
+
+
+                holder.childRecyclerView.setAdapter(childRecyclerViewAdapter1);
+                SpacesItemDecoration decoration = new SpacesItemDecoration(8) ;
+                holder.childRecyclerView.addItemDecoration(decoration);
+                childRecyclerViewAdapter1.notifyDataSetChanged();
+                break;
 
             default:
                 Log.d("","NA");
         }
+
 
 
     }
