@@ -3,7 +3,6 @@ package com.android.app360.ui.home;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -26,10 +24,6 @@ import com.android.appcompose.layout.tabs.AppFragmentPagerAdapter;
 import com.android.appcompose.layout.tabs.AppTabLayout;
 import com.android.appcompose.layout.tabs.TabType;
 import com.android.app360.R;
-import com.android.appcompose.network.Classroom;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 

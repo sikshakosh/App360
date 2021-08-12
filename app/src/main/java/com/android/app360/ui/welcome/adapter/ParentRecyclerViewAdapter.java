@@ -1,6 +1,7 @@
 package com.android.app360.ui.welcome.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,8 @@ import com.android.app360.R;
 import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.app360.ui.welcome.model.ParentModel;
 import com.android.appcompose.layout.SpacesItemDecoration;
-import com.android.appcompose.network.Classroom;
+import com.android.appcompose.network.model.Classroom;
+import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 
@@ -62,19 +64,34 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
         holder.childRecyclerView.setHasFixedSize(true);
 
         holder.category.setText(currentItem.getItemCategory());
-        ArrayList<Classroom> arrayList = new ArrayList<>();
+        switch (position){
+            case 0:  // For Classrooms
+                ArrayList<Classroom> arrayList = new ArrayList<>();
 
-        // added the first child row
-        if (parentModelArrayList.get(position).getItemCategory().equals(WelcomeActivity.SECTION_CLASSROOMS)) {
-            arrayList  = currentItem.getChildArray();
+                arrayList  = currentItem.getClassroomArray();
+
+                ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
+                holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
+                SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
+                holder.childRecyclerView.addItemDecoration(spacesDecoration);
+                childRecyclerViewAdapter.notifyDataSetChanged();
+                break;
+            case 1: // For Array
+//                ArrayList<Mentor> mentorList = new ArrayList<>();
+//
+//                mentorList  = currentItem.getMentorArray();
+//
+//                ChildRecyclerViewAdapter mentorViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),mentorList);
+//                holder.childRecyclerView.setAdapter(mentorViewAdapter);
+//                SpacesItemDecoration decoration = new SpacesItemDecoration(8) ;
+//                holder.childRecyclerView.addItemDecoration(decoration);
+//                mentorViewAdapter.notifyDataSetChanged();
+//                break;
+
+            default:
+                Log.d("","NA");
         }
 
 
-
-        ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
-        holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
-        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
-        holder.childRecyclerView.addItemDecoration(spacesDecoration);
-        childRecyclerViewAdapter.notifyDataSetChanged();
     }
 }

@@ -1,17 +1,20 @@
 package com.android.app360.ui.welcome.model;
 
-import com.android.appcompose.network.Classroom;
+import com.android.appcompose.network.model.Classroom;
+import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParentModel {
     private String itemCategory;
-    private ArrayList<Classroom> childArray;
+    private ArrayList<Classroom> classroomArray;
+    private ArrayList<Mentor> mentorArray;
 
-    public ParentModel(String category, ArrayList<Classroom> childArray) {
+    public ParentModel(String category) {
         this.itemCategory = category;
-        this.childArray =  childArray;
+        classroomArray = new ArrayList<Classroom>();
+        mentorArray = new ArrayList<Mentor>();
     }
 
 
@@ -23,11 +26,19 @@ public class ParentModel {
         this.itemCategory = itemCategory;
     }
 
-    public ArrayList<Classroom> getChildArray() {
-        return childArray;
+    public ArrayList<Classroom> getClassroomArray() {
+        return classroomArray;
     }
 
-    public void setChildArray(List<Classroom> childArray) {
-        this.childArray.addAll(childArray);
+    public void setClassroomArray(ArrayList<Classroom> classroomArray) {
+        this.classroomArray = classroomArray;
+    }
+
+    public ArrayList<Mentor> getMentorArray() {
+        return mentorArray;
+    }
+
+    public void setMentorArray(ArrayList<Mentor> mentorArray) {
+        this.mentorArray = mentorArray;
     }
 }

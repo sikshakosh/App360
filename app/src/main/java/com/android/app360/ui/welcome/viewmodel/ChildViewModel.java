@@ -5,24 +5,35 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.android.appcompose.network.AppRepository;
-import com.android.appcompose.network.ClassroomResponse;
+import com.android.appcompose.network.model.ClassroomResponse;
+import com.android.appcompose.network.model.MentorResponse;
 
 public class ChildViewModel extends ViewModel {
-    private MutableLiveData<ClassroomResponse> mutableLiveFClassrooms;
+    private MutableLiveData<ClassroomResponse> featuredClassrooms;
+    private MutableLiveData<MentorResponse> featuredMentors;
 
     private AppRepository appRepository;
 
     public void init(){
-        if(mutableLiveFClassrooms!=null){
+        if(featuredClassrooms !=null){
             return;
         }
         appRepository = new AppRepository();
-        mutableLiveFClassrooms = appRepository.getFeaturedClassrooms();
+        featuredClassrooms = appRepository.getFeaturedClassrooms();
+        featuredMentors = appRepository.getFeaturedMentors();
     }
 
-    public LiveData<ClassroomResponse> getFClassroomsRepository(){
-        return mutableLiveFClassrooms;
+    public LiveData<ClassroomResponse> getFeaturedClassroomsRepository(){
+        return featuredClassrooms;
     }
+
+    public LiveData<MentorResponse> getFeaturedMentorsRepository(){
+        return featuredMentors;
+    }
+
+
+
+
 
 
 }

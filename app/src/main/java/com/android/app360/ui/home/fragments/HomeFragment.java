@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.android.app360.R;
 import com.android.app360.ui.home.viewmodel.HomeViewModel;
 import com.android.app360.ui.home.adapters.ClassroomAdapter;
-import com.android.appcompose.network.Classroom;
+import com.android.appcompose.network.model.Classroom;
 
 import java.util.ArrayList;
 import java.util.List;

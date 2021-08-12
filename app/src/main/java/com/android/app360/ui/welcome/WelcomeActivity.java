@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,8 +23,8 @@ import com.android.app360.ui.welcome.model.ParentModel;
 import com.android.app360.ui.welcome.viewmodel.ChildViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
-import com.android.appcompose.layout.SpacesItemDecoration;
-import com.android.appcompose.network.Classroom;
+import com.android.appcompose.network.model.Classroom;
+import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ import java.util.List;
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
     public static String SECTION_CLASSROOMS = "Featured Classrooms";
-    public static String SECTION_MEMBERS = "Featured Members";
+    public static String SECTION_MENTORS = "Featured Members";
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
 
@@ -60,28 +59,43 @@ public class WelcomeActivity extends AppCompatActivity {
         layoutSubviews();
         //setupRecyclerView();
 
-        parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS,new ArrayList<Classroom>()));
-        parentModelArrayList.add(new ParentModel(SECTION_MEMBERS,new ArrayList<Classroom>()));
+        parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS));
+        parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
 
 
         homeViewModel = new ViewModelProvider(this).get(ChildViewModel.class);
         homeViewModel.init();
-        homeViewModel.getFClassroomsRepository().observe(this, featuredClassroom -> {
-            Log.d(TAG, "Responnse received"+featuredClassroom.getData());
-            List<Classroom> classroomList = featuredClassroom.getData();
-            ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-            for(int i=0;i<4;i++){
-                classroomParent.getChildArray().add(classroomList.get(i));
+        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
+            if(featuredClassroom!=null){
+                Log.d(TAG, "Responnse received"+featuredClassroom.getData());
+                List<Classroom> classroomList = featuredClassroom.getData();
+                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
+                for(int i=0;i<4;i++){
+                    classroomParent.getClassroomArray().add(classroomList.get(i));
+                }
+                setupRecyclerView();
+            }else {
+                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
             }
 
-
-            ParentModel classroomParent1 = (ParentModel) parentModelArrayList.get(1);
-            for(int i=0;i<4;i++){
-                classroomParent1.getChildArray().add(classroomList.get(i));
-            }
-
-            setupRecyclerView();
         });
+
+//        homeViewModel.getFeaturedMentorsRepository().observe(this, featuredMentors -> {
+//            if(featuredMentors!=null){
+//                Log.d(TAG, "Responnse received"+featuredMentors.getData());
+//                List<Mentor> classroomList = featuredMentors.getData();
+//                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
+//                for(int i=0;i<4;i++){
+//                    classroomParent.getMentorArray().add(classroomList.get(i));
+//                }
+//
+//
+//                setupRecyclerView();
+//            }else {
+//                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
+//            }
+//
+//        });
 
 
 

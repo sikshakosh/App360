@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.appcompose.network.Classroom;
+import com.android.appcompose.network.model.Classroom;
 
 import java.util.ArrayList;
 
