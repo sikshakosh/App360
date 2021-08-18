@@ -1,11 +1,15 @@
 package com.android.app360.ui.welcome.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -133,10 +137,8 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
 
         //Member Variables for the TextViews
         private TextView mTitleText;
-        private TextView mInfoText;
-        private TextView mNewsText;
-        private Button mBtnAction1;
-        private Button mBtnAction2;
+        private TextView mSubtitleText;
+        private ImageView mImageView;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -147,20 +149,27 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
 
             //Initialize the views
             mTitleText = (TextView)itemView.findViewById(R.id.title);
+            mSubtitleText = (TextView)itemView.findViewById(R.id.subtitle);
+            mImageView = (ImageView) itemView.findViewById(R.id.image);
 
         }
 
         void bindToClassroom(Classroom item){
             //Populate the textviews with data
             mTitleText.setText(item.getChash());
+            mSubtitleText.setText(item.getChash());
 
 
         }
         void bindToMentor(Mentor item){
             //Populate the textviews with data
             mTitleText.setText(item.getUhash());
+            mSubtitleText.setText(item.getUhash());
 
-
+            String base64EncodedString = item.getImage();
+            byte[] imageBytes = Base64.decode(base64EncodedString,Base64.DEFAULT);
+            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
+            mImageView.setImageBitmap(decodedImage);
         }
     }
 }
