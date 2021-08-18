@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
         }
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.init();
+        homeViewModel.init(this.getActivity());
         homeViewModel.getFClassroomsRepository().observe(this, featuredClassroom -> {
             Log.d(TAG, "Responnse received"+featuredClassroom.getData());
             List<Classroom> classroomList = featuredClassroom.getData();

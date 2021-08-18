@@ -64,7 +64,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.init();
+        homeViewModel.init(this);
         homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
             if(featuredClassroom!=null){
                 Log.d(TAG, "Responnse received"+featuredClassroom.getData());
