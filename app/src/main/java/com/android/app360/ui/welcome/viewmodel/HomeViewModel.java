@@ -29,7 +29,7 @@ public class HomeViewModel extends AndroidViewModel {
         }
 
         appRepository = new AppRepository(application);
-        featuredClassrooms = appRepository.getAllClassrooms();
+        featuredClassrooms = appRepository.getLocalClassrooms();
        // featuredMentors = appRepository.getFeaturedMentors();
     }
 
@@ -37,8 +37,8 @@ public class HomeViewModel extends AndroidViewModel {
         return featuredClassrooms;
     }
 
-    public LiveData<List<UserClassroom>> getFeaturedClassroomsRepository(){
-        return featuredClassrooms;
+    public void getRemoteClassrooms(){
+        appRepository.getRemoteClassrooms();
     }
 
     public LiveData<MentorResponse> getFeaturedMentorsRepository(){

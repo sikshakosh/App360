@@ -72,6 +72,13 @@ public class WelcomeActivity extends AppCompatActivity {
             Log.d(TAG, "data received from db");
         });
 
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                homeViewModel.getRemoteClassrooms();
+            }
+        });
+
 //        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
 //            if(featuredClassroom!=null){
 //                Log.d(TAG, "Responnse received"+featuredClassroom.getData());
