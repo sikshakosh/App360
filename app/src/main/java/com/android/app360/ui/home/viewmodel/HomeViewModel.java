@@ -1,9 +1,12 @@
 package com.android.app360.ui.home.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.appcompose.database.UserClassroom;
 import com.android.appcompose.network.AppRepository;
 import com.android.appcompose.network.model.ClassroomResponse;
 
@@ -12,12 +15,13 @@ public class HomeViewModel extends ViewModel {
 
     private AppRepository appRepository;
 
-    public void init(){
+    public void init(Context context){
         if(mutableLiveFClassrooms!=null){
             return;
         }
-        appRepository = new AppRepository();
-        mutableLiveFClassrooms = appRepository.getFeaturedClassrooms();
+        //appRepository = new AppRepository(context);
+       // mutableLiveFClassrooms = appRepository.getFeaturedClassrooms();
+
     }
 
     public LiveData<ClassroomResponse> getFClassroomsRepository(){
