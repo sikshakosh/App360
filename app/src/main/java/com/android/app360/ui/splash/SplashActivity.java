@@ -3,20 +3,18 @@ package com.android.app360.ui.splash;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.ui.AppButton;
 import com.android.app360.R;
-import com.android.app360.ui.home.HomeActivity;
 
 
 public class SplashActivity extends FragmentActivity {
@@ -29,17 +27,13 @@ public class SplashActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        imageSliderView = findViewById(R.id.slider);
+        imageSliderView = findViewById(R.id.bannerList);
 
         // Instantiate DotIndicator
         initDotIndicator(Color.TRANSPARENT);
         initSkipButton();
         layoutSubviews();
 
-//        appViewModel = new ViewModelProvider(this).get(AppViewModel.class);
-//        appViewModel.getFeaturedClassrooms().observe(this, classrooms -> {
-//            Log.d(SplashActivity.ACTIVITY_TAG, "network response");
-//        });
 
 
     }
@@ -57,7 +51,8 @@ public class SplashActivity extends FragmentActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                //Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                Intent intent = new Intent(view.getContext(), WelcomeActivity.class);
                 view.getContext().startActivity(intent);
             }
         });

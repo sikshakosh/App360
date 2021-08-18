@@ -3,7 +3,6 @@ package com.android.app360.ui.home;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
 
 import androidx.viewpager.widget.ViewPager;
 
@@ -28,21 +26,17 @@ import com.android.appcompose.layout.tabs.TabType;
 import com.android.app360.R;
 
 public class HomeActivity extends AppCompatActivity {
-    private final String TAG = "HomeActivity";
+
     private AppTabLayout tabLayout;
     Toolbar toolbar = null;
-    HomeViewModel homeViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabLayout = (AppTabLayout) findViewById(R.id.tab_host);
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.init();
-        homeViewModel.getFClassroomsRepository().observe(this, featuredClassroom -> {
-            Log.d(TAG, "Responnse received"+featuredClassroom.getData());
-        });
+
         setSupportActionBar(toolbar);
         setupTabLayout();
     }
