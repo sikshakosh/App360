@@ -19,8 +19,8 @@ public class HomeViewModel extends ViewModel {
         if(mutableLiveFClassrooms!=null){
             return;
         }
-        appRepository = new AppRepository(context);
-        mutableLiveFClassrooms = appRepository.getFeaturedClassrooms();
+        //appRepository = new AppRepository(context);
+       // mutableLiveFClassrooms = appRepository.getFeaturedClassrooms();
 
     }
 

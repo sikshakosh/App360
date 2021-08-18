@@ -1,6 +1,8 @@
 package com.android.app360.ui.welcome;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -50,6 +53,7 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_welcome);
         imageSliderView = findViewById(R.id.bannerList);
         parentRecyclerView   = findViewById(R.id.recyclerView);
@@ -64,37 +68,40 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.init(this);
-        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
-            if(featuredClassroom!=null){
-                Log.d(TAG, "Responnse received"+featuredClassroom.getData());
-                List<Classroom> classroomList = featuredClassroom.getData();
-                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-                for(int i=0;i<4;i++){
-                    classroomParent.getClassroomArray().add(classroomList.get(i));
-                }
-                setupRecyclerView();
-            }else {
-                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
-            }
-
+        homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
+            Log.d(TAG, "data received from db");
         });
 
-        homeViewModel.getFeaturedMentorsRepository().observe(this, featuredMentors -> {
-            if(featuredMentors!=null){
-                Log.d(TAG, "Responnse received"+featuredMentors.getData());
-                List<Mentor> classroomList = featuredMentors.getData();
-                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
-                for(int i=0;i<4;i++){
-                    classroomParent.getMentorArray().add(classroomList.get(i));
-                }
+//        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
+//            if(featuredClassroom!=null){
+//                Log.d(TAG, "Responnse received"+featuredClassroom.getData());
+//                List<Classroom> classroomList = featuredClassroom.getData();
+//                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
+//                for(int i=0;i<4;i++){
+//                    classroomParent.getClassroomArray().add(classroomList.get(i));
+//                }
+//                setupRecyclerView();
+//            }else {
+//                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
+//            }
+//
+//        });
 
-                setupRecyclerView();
-            }else {
-                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
-            }
-
-        });
+//        homeViewModel.getFeaturedMentorsRepository().observe(this, featuredMentors -> {
+//            if(featuredMentors!=null){
+//                Log.d(TAG, "Responnse received"+featuredMentors.getData());
+//                List<Mentor> classroomList = featuredMentors.getData();
+//                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
+//                for(int i=0;i<4;i++){
+//                    classroomParent.getMentorArray().add(classroomList.get(i));
+//                }
+//
+//                setupRecyclerView();
+//            }else {
+//                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
+//            }
+//
+//        });
 
     }
 
