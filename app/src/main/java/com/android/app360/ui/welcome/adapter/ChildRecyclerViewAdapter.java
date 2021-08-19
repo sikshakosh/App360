@@ -25,8 +25,8 @@ import static com.android.app360.common.constants.DataType.FEATURED_CLASSROOMS;
 public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
 
     //Member variables
-    private ArrayList<UserClassroom> classroomData = new ArrayList<UserClassroom>();
-    private ArrayList<Mentor> mentorData  = new ArrayList<Mentor>();
+    private ArrayList<Object> data = new ArrayList<Object>();
+
     private Context mContext;
 
     private DataType type;
@@ -38,19 +38,18 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
     public ChildRecyclerViewAdapter(Context context, ArrayList<T> array) {
 
         this.mContext = context;
+        this.setData((ArrayList<Object>) array);
         for (Object obj: array){
 
             if (obj instanceof UserClassroom){
-                this.setClassroomData((ArrayList<UserClassroom>) array);
 
                 this.type = FEATURED_CLASSROOMS;
             }else if (obj instanceof  Mentor){
-                this.setMentorData((ArrayList<Mentor>) array);
-
                 this.type = DataType.FEATURED_MENTORS;
             }else{
 
             }
+           break;
         }
 
     }
@@ -81,13 +80,13 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
         switch (this.type){
             case FEATURED_CLASSROOMS:
                 //Get current sport
-                UserClassroom currentSport = classroomData.get(position);
+                UserClassroom currentSport = (UserClassroom) data.get(position);
                 //Populate the textviews with data
                 holder.bindToClassroom(currentSport);
                 break;
             case FEATURED_MENTORS:
                 //Get current sport
-                Mentor mentor = mentorData.get(position);
+                Mentor mentor = (Mentor) data.get(position);
                 //Populate the textviews with data
                 holder.bindToMentor(mentor);
                 break;
@@ -104,37 +103,18 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
      */
     @Override
     public int getItemCount() {
-        int totalItems = 0;
-        switch (this.type){
-            case FEATURED_CLASSROOMS:
-                //Get current sport
-                totalItems = classroomData.size();
-                break;
-            case FEATURED_MENTORS:
-                //Get current sport
-                totalItems = mentorData.size();
-                break;
-            default:
-                Log.d("","NA");
-        }
+        int totalItems = this.data.size();
+
         return totalItems;
     }
 
-    public ArrayList<UserClassroom> getClassroomData() {
-        return classroomData;
+
+    public ArrayList<Object> getData() {
+        return data;
     }
 
-    public void setClassroomData(ArrayList<UserClassroom> classroomData) {
-        this.classroomData = classroomData;
-    }
-
-    public ArrayList<Mentor> getMentorData() {
-        return mentorData;
-    }
-
-    public void setMentorData(ArrayList<Mentor> mentorData) {
-
-        this.mentorData = mentorData;
+    public void setData(ArrayList<Object> data) {
+        this.data = data;
     }
 
 

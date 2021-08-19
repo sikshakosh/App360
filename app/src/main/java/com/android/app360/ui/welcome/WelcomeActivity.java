@@ -80,7 +80,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
             ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
                 for(int i=0;i<4;i++){
-                    classroomParent.getClassroomArray().add(classrooms.get(i));
+                    classroomParent.getData().add(classrooms.get(i));
                 }
                 setupRecyclerView();
 

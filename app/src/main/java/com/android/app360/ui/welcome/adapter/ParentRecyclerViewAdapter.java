@@ -65,33 +65,14 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
         holder.childRecyclerView.setHasFixedSize(true);
 
         holder.category.setText(currentItem.getItemCategory());
-        switch (position){
-            case 0:  // For Classrooms
-                ArrayList<UserClassroom> arrayList = new ArrayList<>();
-
-                arrayList  = currentItem.getClassroomArray();
-                ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
-                holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
-                SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
-                holder.childRecyclerView.addItemDecoration(spacesDecoration);
-                childRecyclerViewAdapter.notifyDataSetChanged();
-                break;
-            case 1: // For Array
-                ArrayList<Mentor> mentorList = new ArrayList<>();
-
-                mentorList  = currentItem.getMentorArray();
-                ChildRecyclerViewAdapter childRecyclerViewAdapter1 = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),mentorList);
 
 
-                holder.childRecyclerView.setAdapter(childRecyclerViewAdapter1);
-                SpacesItemDecoration decoration = new SpacesItemDecoration(8) ;
-                holder.childRecyclerView.addItemDecoration(decoration);
-                childRecyclerViewAdapter1.notifyDataSetChanged();
-                break;
-
-            default:
-                Log.d("","NA");
-        }
+        ArrayList<Object>  arrayList  = currentItem.getData();
+        ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
+        holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
+        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
+        holder.childRecyclerView.addItemDecoration(spacesDecoration);
+        childRecyclerViewAdapter.notifyDataSetChanged();
 
 
 

@@ -9,14 +9,14 @@ import java.util.List;
 
 public class ParentModel {
     private String itemCategory;
-    private ArrayList<UserClassroom> classroomArray;
-    private ArrayList<Mentor> mentorArray;
+    private ArrayList<Object> data;
+
 
 
     public ParentModel(String category) {
         this.itemCategory = category;
-        classroomArray = new ArrayList<UserClassroom>();
-        mentorArray = new ArrayList<Mentor>();
+        data = new ArrayList<Object>();
+
     }
 
 
@@ -28,19 +28,11 @@ public class ParentModel {
         this.itemCategory = itemCategory;
     }
 
-    public ArrayList<UserClassroom> getClassroomArray() {
-        return classroomArray;
+    public ArrayList<Object> getData() {
+        return data;
     }
 
-    public void setClassroomArray(ArrayList<UserClassroom> classroomArray) {
-        this.classroomArray = classroomArray;
-    }
-
-    public ArrayList<Mentor> getMentorArray() {
-        return mentorArray;
-    }
-
-    public void setMentorArray(ArrayList<Mentor> mentorArray) {
-        this.mentorArray = mentorArray;
+    public void setData(ArrayList<Object> data) {
+        this.data = data;
     }
 }
