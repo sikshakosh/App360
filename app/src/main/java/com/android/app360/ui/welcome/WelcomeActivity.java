@@ -26,6 +26,8 @@ import com.android.app360.ui.welcome.model.ParentModel;
 import com.android.app360.ui.welcome.viewmodel.HomeViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
+import com.android.appcompose.database.model.ClassroomModel;
+import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.network.model.Classroom;
 import com.android.appcompose.network.model.Mentor;
 
@@ -64,9 +66,6 @@ public class WelcomeActivity extends AppCompatActivity {
         //setupRecyclerView();
         parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS));
        // parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
-
-
-
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
@@ -74,19 +73,54 @@ public class WelcomeActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         homeViewModel.getRemoteClassrooms();
+
                     }
                 });
             }
 
             ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-                for(int i=0;i<4;i++){
-                    classroomParent.getData().add(classrooms.get(i));
+                int LIMIT = 4;
+                int counter = 1;
+                for(ClassroomModel cm: classrooms){
+                    if(counter<LIMIT){
+                        classroomParent.getData().add(classrooms.get(counter-1));
+                        counter +=1;
+                    }else{
+                        break;
+                    }
+
                 }
+
                 setupRecyclerView();
 
         });
 
-
+//        homeViewModel.getLocalMentors().observe(this, mentors -> {
+//            if(mentors.isEmpty()){
+//                AsyncTask.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        homeViewModel.getRemoteMentors();
+//
+//                    }
+//                });
+//            }
+//
+//            ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
+//            int LIMIT = 4;
+//            int counter = 1;
+//            for(MentorModel cm: mentors){
+//                if(counter<LIMIT){
+//                    classroomParent.getData().add(mentors.get(counter-1));
+//                    counter +=1;
+//                }else{
+//                    break;
+//                }
+//
+//            }
+//            setupRecyclerView();
+//
+//        });
 
 //        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
 //            if(featuredClassroom!=null){

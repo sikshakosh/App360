@@ -1,11 +1,6 @@
 package com.android.app360.ui.welcome.model;
 
-import com.android.appcompose.database.UserClassroom;
-import com.android.appcompose.network.model.Classroom;
-import com.android.appcompose.network.model.Mentor;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParentModel {
     private String itemCategory;

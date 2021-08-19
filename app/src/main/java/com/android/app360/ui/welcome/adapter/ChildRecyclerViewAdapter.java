@@ -15,12 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
 import com.android.app360.common.constants.DataType;
-import com.android.appcompose.database.UserClassroom;
+import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 
-import static com.android.app360.common.constants.DataType.FEATURED_CLASSROOMS;
 
 public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
 
@@ -32,20 +31,20 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
     private DataType type;
     /**
      * Constructor that passes in the sports data and the context
-     * @param sportsData ArrayList containing the sports data
+     * @param childData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public ChildRecyclerViewAdapter(Context context, ArrayList<T> array) {
+    public ChildRecyclerViewAdapter(Context context, ArrayList<T> childData) {
 
         this.mContext = context;
-        this.setData((ArrayList<Object>) array);
-        for (Object obj: array){
+        this.setData((ArrayList<Object>) childData);
+        for (Object obj: childData){
 
-            if (obj instanceof UserClassroom){
+            if (obj instanceof ClassroomModel){
 
-                this.type = FEATURED_CLASSROOMS;
+                this.type = DataType.FEATURED_CLASSROOMS;
             }else if (obj instanceof  Mentor){
-                this.type = DataType.FEATURED_MENTORS;
+                this.type =  DataType.FEATURED_MENTORS;
             }else{
 
             }
@@ -80,7 +79,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
         switch (this.type){
             case FEATURED_CLASSROOMS:
                 //Get current sport
-                UserClassroom currentSport = (UserClassroom) data.get(position);
+                ClassroomModel currentSport = (ClassroomModel) data.get(position);
                 //Populate the textviews with data
                 holder.bindToClassroom(currentSport);
                 break;
@@ -142,7 +141,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
 
         }
 
-        void bindToClassroom(UserClassroom item){
+        void bindToClassroom(ClassroomModel item){
             //Populate the textviews with data
             mTitleText.setText(item.getChash());
             mSubtitleText.setText(item.getChash());

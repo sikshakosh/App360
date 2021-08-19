@@ -1,50 +1,70 @@
 package com.android.app360.ui.welcome.viewmodel;
 
 import android.app.Application;
-import android.content.Context;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.android.appcompose.database.UserClassroom;
+import com.android.appcompose.database.model.ClassroomModel;
+import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.network.AppRepository;
-import com.android.appcompose.network.model.ClassroomResponse;
 import com.android.appcompose.network.model.MentorResponse;
 
 import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
-    private LiveData<List<UserClassroom>> featuredClassrooms;
+    private LiveData<List<ClassroomModel>> localClassrooms;
 
-    private MutableLiveData<MentorResponse> featuredMentors;
+    private LiveData<List<MentorModel>> localMentors;
 
     private AppRepository appRepository;
 
+
+
+
     public HomeViewModel(Application application){
         super(application);
-        if(featuredClassrooms !=null){
+        if(localClassrooms !=null){
             return;
         }
 
         appRepository = new AppRepository(application);
-        featuredClassrooms = appRepository.getLocalClassrooms();
-       // featuredMentors = appRepository.getFeaturedMentors();
+        localClassrooms = appRepository.getLocalClassrooms();
+        localMentors = appRepository.getLocalMentors();
     }
 
-    public LiveData<List<UserClassroom>> getLocalClassrooms(){
-        return featuredClassrooms;
+
+    public void setLocalMentors(LiveData<List<MentorModel>> localMentors) {
+        this.localMentors = localMentors;
     }
+
+
+    public void setLocalClassrooms(LiveData<List<ClassroomModel>> localClassrooms) {
+        this.localClassrooms = localClassrooms;
+    }
+
+    // Database Calls
+
+    public LiveData<List<MentorModel>> getLocalMentors() {
+        return localMentors;
+    }
+
+    public LiveData<List<ClassroomModel>> getLocalClassrooms() {
+        return localClassrooms;
+    }
+
+    // Remote Calls
 
     public void getRemoteClassrooms(){
         appRepository.getRemoteClassrooms();
     }
 
-    public LiveData<MentorResponse> getFeaturedMentorsRepository(){
-        return featuredMentors;
+    public void getRemoteMentors(){
+        appRepository.getRemoteMentors();
     }
+
+
 
 
 

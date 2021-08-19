@@ -1,7 +1,6 @@
 package com.android.app360.ui.welcome.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.app360.ui.welcome.model.ParentModel;
-import com.android.appcompose.database.UserClassroom;
 import com.android.appcompose.layout.SpacesItemDecoration;
-import com.android.appcompose.network.model.Classroom;
-import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 
