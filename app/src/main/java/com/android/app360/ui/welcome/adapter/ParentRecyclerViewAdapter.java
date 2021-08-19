@@ -70,7 +70,7 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
                 ArrayList<UserClassroom> arrayList = new ArrayList<>();
 
                 arrayList  = currentItem.getClassroomArray();
-                ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList,WelcomeActivity.SECTION_CLASSROOMS);
+                ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
                 holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
                 SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
                 holder.childRecyclerView.addItemDecoration(spacesDecoration);

@@ -18,6 +18,7 @@ import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
     private LiveData<List<UserClassroom>> featuredClassrooms;
+
     private MutableLiveData<MentorResponse> featuredMentors;
 
     private AppRepository appRepository;

@@ -8,47 +8,54 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.ui.welcome.WelcomeActivity;
+import com.android.app360.common.constants.DataType;
 import com.android.appcompose.database.UserClassroom;
-import com.android.appcompose.network.model.Classroom;
 import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
 
-public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
+import static com.android.app360.common.constants.DataType.FEATURED_CLASSROOMS;
+
+public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
 
     //Member variables
     private ArrayList<UserClassroom> classroomData = new ArrayList<UserClassroom>();
     private ArrayList<Mentor> mentorData  = new ArrayList<Mentor>();
     private Context mContext;
-    private String dataType;
+
+    private DataType type;
     /**
      * Constructor that passes in the sports data and the context
      * @param sportsData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public ChildRecyclerViewAdapter(Context context, ArrayList<UserClassroom> classrooms, String type) {
+    public ChildRecyclerViewAdapter(Context context, ArrayList<T> array) {
 
         this.mContext = context;
-        this.dataType = type;
-        classroomData = classrooms;
+        for (Object obj: array){
+
+            if (obj instanceof UserClassroom){
+                this.setClassroomData((ArrayList<UserClassroom>) array);
+
+                this.type = FEATURED_CLASSROOMS;
+            }else if (obj instanceof  Mentor){
+                this.setMentorData((ArrayList<Mentor>) array);
+
+                this.type = DataType.FEATURED_MENTORS;
+            }else{
+
+            }
+        }
 
     }
 
-    public ChildRecyclerViewAdapter(Context context, ArrayList<Mentor> mentors) {
 
-        this.mContext = context;
-        this.dataType = "Featured Members";
-
-        mentorData = mentors;
-    }
 
 
 
@@ -71,14 +78,14 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
      */
     @Override
     public void onBindViewHolder(ChildRecyclerViewAdapter.ViewHolder holder, int position) {
-        switch (this.dataType){
-            case "Featured Classrooms":
+        switch (this.type){
+            case FEATURED_CLASSROOMS:
                 //Get current sport
                 UserClassroom currentSport = classroomData.get(position);
                 //Populate the textviews with data
                 holder.bindToClassroom(currentSport);
                 break;
-            case "Featured Members":
+            case FEATURED_MENTORS:
                 //Get current sport
                 Mentor mentor = mentorData.get(position);
                 //Populate the textviews with data
@@ -98,12 +105,12 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
     @Override
     public int getItemCount() {
         int totalItems = 0;
-        switch (this.dataType){
-            case "Featured Classrooms":
+        switch (this.type){
+            case FEATURED_CLASSROOMS:
                 //Get current sport
                 totalItems = classroomData.size();
                 break;
-            case "Featured Members":
+            case FEATURED_MENTORS:
                 //Get current sport
                 totalItems = mentorData.size();
                 break;

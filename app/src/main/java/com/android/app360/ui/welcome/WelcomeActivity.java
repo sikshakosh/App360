@@ -63,7 +63,7 @@ public class WelcomeActivity extends AppCompatActivity {
         layoutSubviews();
         //setupRecyclerView();
         parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS));
-        parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
+       // parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
 
 
 
