@@ -1,5 +1,6 @@
 package com.android.app360.ui.welcome.model;
 
+import com.android.appcompose.database.UserClassroom;
 import com.android.appcompose.network.model.Classroom;
 import com.android.appcompose.network.model.Mentor;
 
@@ -8,13 +9,13 @@ import java.util.List;
 
 public class ParentModel {
     private String itemCategory;
-    private ArrayList<Classroom> classroomArray;
+    private ArrayList<UserClassroom> classroomArray;
     private ArrayList<Mentor> mentorArray;
 
 
     public ParentModel(String category) {
         this.itemCategory = category;
-        classroomArray = new ArrayList<Classroom>();
+        classroomArray = new ArrayList<UserClassroom>();
         mentorArray = new ArrayList<Mentor>();
     }
 
@@ -27,11 +28,11 @@ public class ParentModel {
         this.itemCategory = itemCategory;
     }
 
-    public ArrayList<Classroom> getClassroomArray() {
+    public ArrayList<UserClassroom> getClassroomArray() {
         return classroomArray;
     }
 
-    public void setClassroomArray(ArrayList<Classroom> classroomArray) {
+    public void setClassroomArray(ArrayList<UserClassroom> classroomArray) {
         this.classroomArray = classroomArray;
     }
 

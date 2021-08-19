@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
 import com.android.app360.ui.welcome.WelcomeActivity;
+import com.android.appcompose.database.UserClassroom;
 import com.android.appcompose.network.model.Classroom;
 import com.android.appcompose.network.model.Mentor;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecyclerViewAdapter.ViewHolder>  {
 
     //Member variables
-    private ArrayList<Classroom> classroomData = new ArrayList<Classroom>();
+    private ArrayList<UserClassroom> classroomData = new ArrayList<UserClassroom>();
     private ArrayList<Mentor> mentorData  = new ArrayList<Mentor>();
     private Context mContext;
     private String dataType;
@@ -33,7 +34,7 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
      * @param sportsData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public ChildRecyclerViewAdapter(Context context, ArrayList<Classroom> classrooms, String type) {
+    public ChildRecyclerViewAdapter(Context context, ArrayList<UserClassroom> classrooms, String type) {
 
         this.mContext = context;
         this.dataType = type;
@@ -73,7 +74,7 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
         switch (this.dataType){
             case "Featured Classrooms":
                 //Get current sport
-                Classroom currentSport = classroomData.get(position);
+                UserClassroom currentSport = classroomData.get(position);
                 //Populate the textviews with data
                 holder.bindToClassroom(currentSport);
                 break;
@@ -112,11 +113,11 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
         return totalItems;
     }
 
-    public ArrayList<Classroom> getClassroomData() {
+    public ArrayList<UserClassroom> getClassroomData() {
         return classroomData;
     }
 
-    public void setClassroomData(ArrayList<Classroom> classroomData) {
+    public void setClassroomData(ArrayList<UserClassroom> classroomData) {
         this.classroomData = classroomData;
     }
 
@@ -154,7 +155,7 @@ public class ChildRecyclerViewAdapter extends RecyclerView.Adapter<ChildRecycler
 
         }
 
-        void bindToClassroom(Classroom item){
+        void bindToClassroom(UserClassroom item){
             //Populate the textviews with data
             mTitleText.setText(item.getChash());
             mSubtitleText.setText(item.getChash());

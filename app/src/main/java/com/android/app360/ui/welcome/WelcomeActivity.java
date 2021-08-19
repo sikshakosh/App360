@@ -69,15 +69,24 @@ public class WelcomeActivity extends AppCompatActivity {
 
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
-            Log.d(TAG, "data received from db");
+            if(classrooms.isEmpty()){
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        homeViewModel.getRemoteClassrooms();
+                    }
+                });
+            }
+
+            ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
+                for(int i=0;i<4;i++){
+                    classroomParent.getClassroomArray().add(classrooms.get(i));
+                }
+                setupRecyclerView();
+
         });
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                homeViewModel.getRemoteClassrooms();
-            }
-        });
+
 
 //        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
 //            if(featuredClassroom!=null){

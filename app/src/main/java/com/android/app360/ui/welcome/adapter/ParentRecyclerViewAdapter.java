@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.app360.R;
 import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.app360.ui.welcome.model.ParentModel;
+import com.android.appcompose.database.UserClassroom;
 import com.android.appcompose.layout.SpacesItemDecoration;
 import com.android.appcompose.network.model.Classroom;
 import com.android.appcompose.network.model.Mentor;
@@ -66,7 +67,7 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
         holder.category.setText(currentItem.getItemCategory());
         switch (position){
             case 0:  // For Classrooms
-                ArrayList<Classroom> arrayList = new ArrayList<>();
+                ArrayList<UserClassroom> arrayList = new ArrayList<>();
 
                 arrayList  = currentItem.getClassroomArray();
                 ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList,WelcomeActivity.SECTION_CLASSROOMS);
