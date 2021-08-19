@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.app360.R;
 import com.android.app360.common.constants.DataType;
 import com.android.appcompose.database.model.ClassroomModel;
+import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
             if (obj instanceof ClassroomModel){
 
                 this.type = DataType.FEATURED_CLASSROOMS;
-            }else if (obj instanceof  Mentor){
+            }else if (obj instanceof MentorModel){
                 this.type =  DataType.FEATURED_MENTORS;
             }else{
 
@@ -85,7 +86,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
                 break;
             case FEATURED_MENTORS:
                 //Get current sport
-                Mentor mentor = (Mentor) data.get(position);
+                MentorModel mentor = (MentorModel) data.get(position);
                 //Populate the textviews with data
                 holder.bindToMentor(mentor);
                 break;
@@ -148,7 +149,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
 
 
         }
-        void bindToMentor(Mentor item){
+        void bindToMentor(MentorModel item){
             //Populate the textviews with data
             mTitleText.setText(item.getUhash());
             mSubtitleText.setText(item.getUhash());

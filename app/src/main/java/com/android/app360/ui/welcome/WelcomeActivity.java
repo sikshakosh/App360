@@ -52,6 +52,10 @@ public class WelcomeActivity extends AppCompatActivity {
     ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
     private RecyclerView.LayoutManager parentLayoutManager;
 
+    private static int DISPLAYED_CLASSROOM_COUNT = 0;
+    private static int DISPLAYED_MENTOR_COUNT = 0;
+
+    private final int GRID_ITEM_COUNT = 4;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +67,9 @@ public class WelcomeActivity extends AppCompatActivity {
         initDotIndicator(Color.TRANSPARENT);
 
         layoutSubviews();
-        //setupRecyclerView();
+        setupRecyclerView();
         parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS));
-       // parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
+        parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
@@ -77,81 +81,60 @@ public class WelcomeActivity extends AppCompatActivity {
                     }
                 });
             }
+            if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
+                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
 
-            ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-                int LIMIT = 4;
-                int counter = 1;
+                int counter = 0;
+
                 for(ClassroomModel cm: classrooms){
-                    if(counter<LIMIT){
-                        classroomParent.getData().add(classrooms.get(counter-1));
+                    if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
+                        classroomParent.getData().add(classrooms.get(counter));
+                        DISPLAYED_CLASSROOM_COUNT +=1;
+                        counter+=1;
+                    }else{
+                        break;
+                    }
+
+                }
+                setupRecyclerView();
+            }
+
+
+
+
+        });
+
+        homeViewModel.getLocalMentors().observe(this, mentors -> {
+            if(mentors.isEmpty()){
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        homeViewModel.getRemoteMentors();
+
+                    }
+                });
+            }
+
+            if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
+                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
+
+                int counter = 0;
+                for(MentorModel cm: mentors){
+                    if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
+                        classroomParent.getData().add(mentors.get(counter));
+                        DISPLAYED_MENTOR_COUNT+=1;
                         counter +=1;
                     }else{
                         break;
                     }
 
                 }
-
                 setupRecyclerView();
+            }
+
 
         });
 
-//        homeViewModel.getLocalMentors().observe(this, mentors -> {
-//            if(mentors.isEmpty()){
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        homeViewModel.getRemoteMentors();
-//
-//                    }
-//                });
-//            }
-//
-//            ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
-//            int LIMIT = 4;
-//            int counter = 1;
-//            for(MentorModel cm: mentors){
-//                if(counter<LIMIT){
-//                    classroomParent.getData().add(mentors.get(counter-1));
-//                    counter +=1;
-//                }else{
-//                    break;
-//                }
-//
-//            }
-//            setupRecyclerView();
-//
-//        });
-
-//        homeViewModel.getFeaturedClassroomsRepository().observe(this, featuredClassroom -> {
-//            if(featuredClassroom!=null){
-//                Log.d(TAG, "Responnse received"+featuredClassroom.getData());
-//                List<Classroom> classroomList = featuredClassroom.getData();
-//                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-//                for(int i=0;i<4;i++){
-//                    classroomParent.getClassroomArray().add(classroomList.get(i));
-//                }
-//                setupRecyclerView();
-//            }else {
-//                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
-//            }
-//
-//        });
-
-//        homeViewModel.getFeaturedMentorsRepository().observe(this, featuredMentors -> {
-//            if(featuredMentors!=null){
-//                Log.d(TAG, "Responnse received"+featuredMentors.getData());
-//                List<Mentor> classroomList = featuredMentors.getData();
-//                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
-//                for(int i=0;i<4;i++){
-//                    classroomParent.getMentorArray().add(classroomList.get(i));
-//                }
-//
-//                setupRecyclerView();
-//            }else {
-//                Toast.makeText(this,"Something went wrong", Integer.parseInt("3000"));
-//            }
-//
-//        });
 
     }
 
