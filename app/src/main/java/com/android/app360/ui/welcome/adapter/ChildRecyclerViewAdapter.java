@@ -144,15 +144,15 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
 
         void bindToClassroom(ClassroomModel item){
             //Populate the textviews with data
-            mTitleText.setText(item.getChash());
-            mSubtitleText.setText(item.getChash());
+            mTitleText.setText(item.getName());
+            mSubtitleText.setText(item.getAdmin());
 
 
         }
         void bindToMentor(MentorModel item){
             //Populate the textviews with data
-            mTitleText.setText(item.getUhash());
-            mSubtitleText.setText(item.getUhash());
+            mTitleText.setText(item.getName());
+            mSubtitleText.setText("Teacher");
 
             String base64EncodedString = item.getImage();
             byte[] imageBytes = Base64.decode(base64EncodedString,Base64.DEFAULT);
