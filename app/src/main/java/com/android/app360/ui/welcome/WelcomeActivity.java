@@ -1,39 +1,33 @@
 package com.android.app360.ui.welcome;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.common.constants.DataType;
-import com.android.app360.ui.welcome.adapter.ChildRecyclerViewAdapter;
-import com.android.app360.ui.welcome.adapter.ParentRecyclerViewAdapter;
-import com.android.app360.ui.welcome.model.ParentModel;
+import com.android.appcompose.utils.DataType;
+import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
+import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
+import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.app360.ui.welcome.viewmodel.HomeViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.network.model.Classroom;
-import com.android.appcompose.network.model.Mentor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
@@ -45,11 +39,11 @@ public class WelcomeActivity extends AppCompatActivity {
     HomeViewModel homeViewModel;
     ArrayList<Classroom> classroomArrayList = new ArrayList<>();
 
-    ChildRecyclerViewAdapter classroomAdapter;
+    CardRecyclerViewAdapter classroomAdapter;
 
     private RecyclerView mRecyclerView;
     private RecyclerView parentRecyclerView;
-    private ParentRecyclerViewAdapter parentAdapter;
+    private CardGridRecyclerViewAdapter parentAdapter;
     ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
     private RecyclerView.LayoutManager parentLayoutManager;
 
@@ -164,7 +158,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void setupRecyclerView() {
 
         if (parentAdapter == null) {
-            parentAdapter = new ParentRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
+            parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
             parentLayoutManager = new LinearLayoutManager(this);
 
             parentRecyclerView.setLayoutManager(parentLayoutManager);
