@@ -35,22 +35,11 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
      * @param childData ArrayList containing the sports data
      * @param context Context of the application
      */
-    public ChildRecyclerViewAdapter(Context context, ArrayList<T> childData) {
+    public ChildRecyclerViewAdapter(Context context, ArrayList<T> childData, DataType type) {
 
         this.mContext = context;
         this.setData((ArrayList<Object>) childData);
-        for (Object obj: childData){
-
-            if (obj instanceof ClassroomModel){
-
-                this.type = DataType.FEATURED_CLASSROOMS;
-            }else if (obj instanceof MentorModel){
-                this.type =  DataType.FEATURED_MENTORS;
-            }else{
-
-            }
-           break;
-        }
+        this.type = type;
 
     }
 
@@ -67,7 +56,9 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
      */
     @Override
     public ChildRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ChildRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.welcome_grid_item, parent, false));
+        ViewHolder viewHolder = new ChildRecyclerViewAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.welcome_grid_item, parent, false));
+        viewHolder.type = this.type;
+        return viewHolder;
     }
 
     /**
@@ -77,23 +68,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
      */
     @Override
     public void onBindViewHolder(ChildRecyclerViewAdapter.ViewHolder holder, int position) {
-        switch (this.type){
-            case FEATURED_CLASSROOMS:
-                //Get current sport
-                ClassroomModel currentSport = (ClassroomModel) data.get(position);
-                //Populate the textviews with data
-                holder.bindToClassroom(currentSport);
-                break;
-            case FEATURED_MENTORS:
-                //Get current sport
-                MentorModel mentor = (MentorModel) data.get(position);
-                //Populate the textviews with data
-                holder.bindToMentor(mentor);
-                break;
-            default:
-                Log.d("","NA");
-        }
-
+        holder.bindToObject(data.get(position));
     }
 
 
@@ -127,7 +102,7 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
         private TextView mTitleText;
         private TextView mSubtitleText;
         private ImageView mImageView;
-
+        private DataType type;
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
          * @param itemView The rootview of the list_item.xml layout file
@@ -142,22 +117,36 @@ public class ChildRecyclerViewAdapter<T> extends RecyclerView.Adapter<ChildRecyc
 
         }
 
-        void bindToClassroom(ClassroomModel item){
+        void bindToObject(Object item){
             //Populate the textviews with data
-            mTitleText.setText(item.getName());
-            mSubtitleText.setText(item.getAdmin());
+            switch (this.type){
+                case FEATURED_CLASSROOMS:
+                    //Get current sport
+                    ClassroomModel currentSport = (ClassroomModel) item;
+                    //Populate the textviews with data
+                    mTitleText.setText(currentSport.getName());
+                    mSubtitleText.setText(currentSport.getAdmin());
+                    break;
+                case FEATURED_MENTORS:
+                    //Get current sport
+                    MentorModel mentor = (MentorModel)item;
+                    //Populate the textviews with data
+                    mTitleText.setText(mentor.getName());
+                    mSubtitleText.setText("Teacher");
+
+                    String base64EncodedString = mentor.getImage();
+                    byte[] imageBytes = Base64.decode(base64EncodedString,Base64.DEFAULT);
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
+                    mImageView.setImageBitmap(decodedImage);
+                    break;
+                default:
+                    Log.d("","NA");
+            }
+
+
 
 
         }
-        void bindToMentor(MentorModel item){
-            //Populate the textviews with data
-            mTitleText.setText(item.getName());
-            mSubtitleText.setText("Teacher");
 
-            String base64EncodedString = item.getImage();
-            byte[] imageBytes = Base64.decode(base64EncodedString,Base64.DEFAULT);
-            Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
-            mImageView.setImageBitmap(decodedImage);
-        }
     }
 }

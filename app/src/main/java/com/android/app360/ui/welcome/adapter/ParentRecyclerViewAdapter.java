@@ -63,10 +63,10 @@ public class ParentRecyclerViewAdapter extends RecyclerView.Adapter<ParentRecycl
 
 
         ArrayList<Object>  arrayList  = currentItem.getData();
-        ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList);
+        ChildRecyclerViewAdapter childRecyclerViewAdapter = new ChildRecyclerViewAdapter(holder.childRecyclerView.getContext(),arrayList,currentItem.getType());
         holder.childRecyclerView.setAdapter(childRecyclerViewAdapter);
-        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
-        holder.childRecyclerView.addItemDecoration(spacesDecoration);
+//        SpacesItemDecoration spacesDecoration = new SpacesItemDecoration(8) ;
+//        holder.childRecyclerView.addItemDecoration(spacesDecoration);
         childRecyclerViewAdapter.notifyDataSetChanged();
 
 

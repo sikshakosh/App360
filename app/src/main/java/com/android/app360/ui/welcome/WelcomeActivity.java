@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
+import com.android.app360.common.constants.DataType;
 import com.android.app360.ui.welcome.adapter.ChildRecyclerViewAdapter;
 import com.android.app360.ui.welcome.adapter.ParentRecyclerViewAdapter;
 import com.android.app360.ui.welcome.model.ParentModel;
@@ -68,8 +69,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         layoutSubviews();
         setupRecyclerView();
-        parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS));
-        parentModelArrayList.add(new ParentModel(SECTION_MENTORS));
+        parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS, DataType.FEATURED_CLASSROOMS));
+        parentModelArrayList.add(new ParentModel(SECTION_MENTORS,DataType.FEATURED_MENTORS));
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
