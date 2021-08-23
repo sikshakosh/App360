@@ -63,8 +63,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         layoutSubviews();
         setupRecyclerView();
-        parentModelArrayList.add(new ParentModel(SECTION_CLASSROOMS, DataType.FEATURED_CLASSROOMS));
-        parentModelArrayList.add(new ParentModel(SECTION_MENTORS,DataType.FEATURED_MENTORS));
+        parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
+        parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
