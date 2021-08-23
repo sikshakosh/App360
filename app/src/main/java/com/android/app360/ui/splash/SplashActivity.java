@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import com.android.app360.ui.home.HomeActivity;
 import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
@@ -51,7 +52,7 @@ public class SplashActivity extends FragmentActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(view.getContext(), HomeActivity.class);
+               // Intent intent = new Intent(view.getContext(), HomeActivity.class);
                 Intent intent = new Intent(view.getContext(), WelcomeActivity.class);
                 view.getContext().startActivity(intent);
             }

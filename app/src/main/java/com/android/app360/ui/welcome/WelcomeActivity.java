@@ -20,7 +20,7 @@ import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
-import com.android.app360.ui.welcome.viewmodel.HomeViewModel;
+import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.database.model.ClassroomModel;
@@ -31,12 +31,11 @@ import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
-    public  static String SECTION_CLASSROOMS = "Featured Classrooms";
-    public static String SECTION_MENTORS = "Featured Members";
+
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
 
-    HomeViewModel homeViewModel;
+    WelcomeViewModel welcomeViewModel;
     ArrayList<Classroom> classroomArrayList = new ArrayList<>();
 
     CardRecyclerViewAdapter classroomAdapter;
@@ -65,13 +64,13 @@ public class WelcomeActivity extends AppCompatActivity {
         setupRecyclerView();
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
+        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+        welcomeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        homeViewModel.getRemoteClassrooms();
+                        welcomeViewModel.getRemoteClassrooms();
 
                     }
                 });
@@ -99,12 +98,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
         });
 
-        homeViewModel.getLocalMentors().observe(this, mentors -> {
+        welcomeViewModel.getLocalMentors().observe(this, mentors -> {
             if(mentors.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        homeViewModel.getRemoteMentors();
+                        welcomeViewModel.getRemoteMentors();
 
                     }
                 });
