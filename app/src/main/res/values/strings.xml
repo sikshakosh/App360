@@ -101,4 +101,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
 
+    <string name="login_title">Login to your account</string>
+    <string name="e_mail_address">E-Mail Address</string>
+    <string name="password">Password</string>
+    <string name="click_to_login">Click to Login</string>
+    <string name="signup_title">Easy SignUp</string>
+    <string name="create_account">Create Account</string>
+
 </resources>

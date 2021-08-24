@@ -1,10 +1,14 @@
 package com.android.app360.ui.welcome;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,6 +24,8 @@ import com.android.app360.R;
 
 import com.android.app360.databinding.ActivityWelcomeBinding;
 
+import com.android.app360.ui.login.LoginActivity;
+import com.android.app360.ui.signup.SignupActivity;
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
@@ -60,6 +66,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         binding.setWelcomeViewModel(welcomeViewModel);
 
+        setSupportActionBar(binding.toolbar);
         imageSliderView = binding.bannerList;
 
         // Instantiate DotIndicator
@@ -179,5 +186,29 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        binding.toolbar.inflateMenu(R.menu.welcome_menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
+        switch (item.getItemId()){
+            case R.id.signUp:
+                intent = new Intent(this, SignupActivity.class);
+                this.startActivity(intent);
+                return true;
+
+            case R.id.login:
+                intent = new Intent(this,LoginActivity.class);
+                this.startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        //return super.onOptionsItemSelected(item);
+    }
 }

@@ -55,10 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.txtPassword.setError("Enter at least 6 Digit password");
                     binding.txtPassword.requestFocus();
                 }
-                else {
-                    binding.lblEmailAnswer.setText(loginUser.getStrEmailAddress());
-                    binding.lblPasswordAnswer.setText(loginUser.getStrPassword());
-                }
+                
 
             }
         });
