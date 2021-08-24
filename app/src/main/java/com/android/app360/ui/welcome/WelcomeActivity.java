@@ -10,12 +10,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
+import com.android.app360.databinding.ActivityLoginBinding;
+import com.android.app360.databinding.ActivityWelcomeBinding;
+import com.android.app360.ui.login.LoginActivity;
+import com.android.app360.ui.login.viewmodel.LoginViewModel;
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
@@ -34,7 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
-
+    private ActivityWelcomeBinding binding;
     WelcomeViewModel welcomeViewModel;
     ArrayList<Classroom> classroomArrayList = new ArrayList<>();
 
@@ -53,10 +58,16 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
 
-        setContentView(R.layout.activity_welcome);
-        imageSliderView = findViewById(R.id.bannerList);
-        parentRecyclerView   = findViewById(R.id.recyclerView);
+        binding = DataBindingUtil.setContentView(WelcomeActivity.this, R.layout.activity_welcome );
+
+        binding.setLifecycleOwner(this);
+
+        binding.setWelcomeViewModel(welcomeViewModel);
+
+        imageSliderView = binding.bannerList;
+        parentRecyclerView   = binding.recyclerView;
         // Instantiate DotIndicator
         initDotIndicator(Color.TRANSPARENT);
 
@@ -64,7 +75,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setupRecyclerView();
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
-        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+
         welcomeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
                 AsyncTask.execute(new Runnable() {

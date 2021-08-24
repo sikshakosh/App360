@@ -1,65 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.home.HomeActivity"
-    xmlns:libProj="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true">
-
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    xmlns:libProj="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="WelcomeViewModel"
+            type="com.android.app360.ui.welcome.viewmodel.WelcomeViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:title='WideClassrooms'
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:menu="@menu/welcome_menu"/>
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeActivity"
+        android:fitsSystemWindows="true">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mainConstraint"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp"
-            android:background="@color/gray"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:title='WideClassrooms'
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:menu="@menu/welcome_menu"/>
 
-            >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-
-            <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
-                android:id="@+id/bannerList"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/white"
-                app:layout_constraintTop_toTopOf="@id/mainConstraint"
-                libProj:images="@array/tutorial_images"
-                libProj:transformer="zoomout" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/gray"
 
-                android:clipToPadding="false"
-                android:scrollbars="vertical"
-                app:layout_constraintStart_toStartOf="@id/mainConstraint"
-                app:layout_constraintTop_toBottomOf="@id/bannerList" />
+                >
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
+                    android:id="@+id/bannerList"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toTopOf="@id/mainConstraint"
+                    libProj:images="@array/tutorial_images"
+                    libProj:transformer="zoomout" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    app:layout_constraintStart_toStartOf="@id/mainConstraint"
+                    app:layout_constraintTop_toBottomOf="@id/bannerList" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
 
 
