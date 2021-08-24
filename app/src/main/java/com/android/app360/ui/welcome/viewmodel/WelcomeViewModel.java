@@ -13,7 +13,7 @@ import com.android.appcompose.network.model.MentorResponse;
 
 import java.util.List;
 
-public class HomeViewModel extends AndroidViewModel {
+public class WelcomeViewModel extends AndroidViewModel {
     private LiveData<List<ClassroomModel>> localClassrooms;
 
     private LiveData<List<MentorModel>> localMentors;
@@ -23,7 +23,7 @@ public class HomeViewModel extends AndroidViewModel {
 
 
 
-    public HomeViewModel(Application application){
+    public WelcomeViewModel(Application application){
         super(application);
         if(localClassrooms !=null){
             return;

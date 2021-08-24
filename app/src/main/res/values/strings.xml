@@ -89,5 +89,23 @@
     <string name="item_6">Logout</string>
     <string name="category">Category</string>
     <string name="more"><![CDATA[More >>]]></string>
+    <string name="signup">SignUp</string>
+    <string name="login">Login</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="login_title">Login to your account</string>
+    <string name="e_mail_address">E-Mail Address</string>
+    <string name="password">Password</string>
+    <string name="click_to_login">Click to Login</string>
+    <string name="signup_title">Easy SignUp</string>
+    <string name="create_account">Create Account</string>
 
 </resources>

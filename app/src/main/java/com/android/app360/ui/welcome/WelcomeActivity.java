@@ -1,48 +1,52 @@
 package com.android.app360.ui.welcome;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
+
+import com.android.app360.databinding.ActivityWelcomeBinding;
+
+import com.android.app360.ui.login.LoginActivity;
+import com.android.app360.ui.signup.SignupActivity;
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
-import com.android.app360.ui.welcome.viewmodel.HomeViewModel;
+import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
-import com.android.appcompose.network.model.Classroom;
+
 
 import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity {
     private static String TAG = "WelcomeActivity";
-    public  static String SECTION_CLASSROOMS = "Featured Classrooms";
-    public static String SECTION_MENTORS = "Featured Members";
+
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
+    private ActivityWelcomeBinding binding;
+    WelcomeViewModel welcomeViewModel;
 
-    HomeViewModel homeViewModel;
-    ArrayList<Classroom> classroomArrayList = new ArrayList<>();
-
-    CardRecyclerViewAdapter classroomAdapter;
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView parentRecyclerView;
     private CardGridRecyclerViewAdapter parentAdapter;
     ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
     private RecyclerView.LayoutManager parentLayoutManager;
@@ -54,10 +58,17 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
 
-        setContentView(R.layout.activity_welcome);
-        imageSliderView = findViewById(R.id.bannerList);
-        parentRecyclerView   = findViewById(R.id.recyclerView);
+        binding = DataBindingUtil.setContentView(WelcomeActivity.this, R.layout.activity_welcome );
+
+        binding.setLifecycleOwner(this);
+
+        binding.setWelcomeViewModel(welcomeViewModel);
+
+        setSupportActionBar(binding.toolbar);
+        imageSliderView = binding.bannerList;
+
         // Instantiate DotIndicator
         initDotIndicator(Color.TRANSPARENT);
 
@@ -65,13 +76,13 @@ public class WelcomeActivity extends AppCompatActivity {
         setupRecyclerView();
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.getLocalClassrooms().observe(this, classrooms -> {
+
+        welcomeViewModel.getLocalClassrooms().observe(this, classrooms -> {
             if(classrooms.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        homeViewModel.getRemoteClassrooms();
+                        welcomeViewModel.getRemoteClassrooms();
 
                     }
                 });
@@ -99,12 +110,12 @@ public class WelcomeActivity extends AppCompatActivity {
 
         });
 
-        homeViewModel.getLocalMentors().observe(this, mentors -> {
+        welcomeViewModel.getLocalMentors().observe(this, mentors -> {
             if(mentors.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        homeViewModel.getRemoteMentors();
+                        welcomeViewModel.getRemoteMentors();
 
                     }
                 });
@@ -161,13 +172,13 @@ public class WelcomeActivity extends AppCompatActivity {
             parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
             parentLayoutManager = new LinearLayoutManager(this);
 
-            parentRecyclerView.setLayoutManager(parentLayoutManager);
-            parentRecyclerView.setAdapter(parentAdapter);
+            binding.recyclerView.setLayoutManager(parentLayoutManager);
+            binding.recyclerView.setAdapter(parentAdapter);
 
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(parentRecyclerView.getContext(),
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
                     1);
             dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-            parentRecyclerView.addItemDecoration(dividerItemDecoration);
+            binding.recyclerView.addItemDecoration(dividerItemDecoration);
 
 
         } else {
@@ -175,5 +186,29 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        binding.toolbar.inflateMenu(R.menu.welcome_menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = null;
+        switch (item.getItemId()){
+            case R.id.signUp:
+                intent = new Intent(this, SignupActivity.class);
+                this.startActivity(intent);
+                return true;
+
+            case R.id.login:
+                intent = new Intent(this,LoginActivity.class);
+                this.startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        //return super.onOptionsItemSelected(item);
+    }
 }
