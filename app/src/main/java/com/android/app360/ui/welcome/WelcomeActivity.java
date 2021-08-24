@@ -17,10 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
-import com.android.app360.databinding.ActivityLoginBinding;
+
 import com.android.app360.databinding.ActivityWelcomeBinding;
-import com.android.app360.ui.login.LoginActivity;
-import com.android.app360.ui.login.viewmodel.LoginViewModel;
+
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
@@ -30,7 +29,7 @@ import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
-import com.android.appcompose.network.model.Classroom;
+
 
 import java.util.ArrayList;
 
@@ -41,12 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
     ImageSliderView imageSliderView;
     private ActivityWelcomeBinding binding;
     WelcomeViewModel welcomeViewModel;
-    ArrayList<Classroom> classroomArrayList = new ArrayList<>();
 
-    CardRecyclerViewAdapter classroomAdapter;
-
-    private RecyclerView mRecyclerView;
-    private RecyclerView parentRecyclerView;
     private CardGridRecyclerViewAdapter parentAdapter;
     ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
     private RecyclerView.LayoutManager parentLayoutManager;
@@ -67,7 +61,7 @@ public class WelcomeActivity extends AppCompatActivity {
         binding.setWelcomeViewModel(welcomeViewModel);
 
         imageSliderView = binding.bannerList;
-        parentRecyclerView   = binding.recyclerView;
+
         // Instantiate DotIndicator
         initDotIndicator(Color.TRANSPARENT);
 
@@ -171,13 +165,13 @@ public class WelcomeActivity extends AppCompatActivity {
             parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
             parentLayoutManager = new LinearLayoutManager(this);
 
-            parentRecyclerView.setLayoutManager(parentLayoutManager);
-            parentRecyclerView.setAdapter(parentAdapter);
+            binding.recyclerView.setLayoutManager(parentLayoutManager);
+            binding.recyclerView.setAdapter(parentAdapter);
 
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(parentRecyclerView.getContext(),
+            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
                     1);
             dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-            parentRecyclerView.addItemDecoration(dividerItemDecoration);
+            binding.recyclerView.addItemDecoration(dividerItemDecoration);
 
 
         } else {
