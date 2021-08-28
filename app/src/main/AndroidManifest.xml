@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App360">
-        <activity android:name=".ui.signup.SignupActivity"></activity>
+        <activity android:name=".ui.more.MoreActivity"></activity>
+        <activity android:name=".ui.signup.SignupActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
