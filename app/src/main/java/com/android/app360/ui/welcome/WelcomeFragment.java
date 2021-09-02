@@ -74,14 +74,16 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        welcomeViewModel = new ViewModelProvider(getActivity()).get(WelcomeViewModel.class);
+        parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
+        parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false);
-        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+
         binding.setWelcomeViewModel(welcomeViewModel);
         binding.setLifecycleOwner(getActivity());
         imageSliderView = binding.bannerList;
@@ -89,8 +91,7 @@ public class WelcomeFragment extends Fragment {
         layoutSubviews();
         setupRecyclerView();
 
-        parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
-        parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
+
 
         welcomeViewModel.getLocalClassrooms().observe(getActivity(), classrooms -> {
             if(classrooms.isEmpty()){
