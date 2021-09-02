@@ -27,45 +27,17 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/mainConstraint"
+            <androidx.fragment.app.FragmentContainerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:background="@color/gray"
+                android:layout_height="0dp"
+                android:id="@+id/nav_host_fragment_container"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/welcome_nav_graph"
+                ></androidx.fragment.app.FragmentContainerView>
 
-                >
-
-
-                <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
-                    android:id="@+id/bannerList"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@color/white"
-                    app:layout_constraintTop_toTopOf="@id/mainConstraint"
-                    libProj:images="@array/tutorial_images"
-                    libProj:transformer="zoomout" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-
-                    android:clipToPadding="false"
-                    android:scrollbars="vertical"
-                    app:layout_constraintStart_toStartOf="@id/mainConstraint"
-                    app:layout_constraintTop_toBottomOf="@id/bannerList" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

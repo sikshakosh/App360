@@ -40,175 +40,60 @@ import com.android.appcompose.database.model.MentorModel;
 import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private static String TAG = "WelcomeActivity";
 
-    DotIndicator dotIndicator;
-    ImageSliderView imageSliderView;
-    private ActivityWelcomeBinding binding;
-    WelcomeViewModel welcomeViewModel;
 
-    private CardGridRecyclerViewAdapter parentAdapter;
-    ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
-    private RecyclerView.LayoutManager parentLayoutManager;
-
-    private static int DISPLAYED_CLASSROOM_COUNT = 0;
-    private static int DISPLAYED_MENTOR_COUNT = 0;
-
-    private final int GRID_ITEM_COUNT = 4;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
-
-        binding = DataBindingUtil.setContentView(WelcomeActivity.this, R.layout.activity_welcome );
-
-        binding.setLifecycleOwner(this);
-
-        binding.setWelcomeViewModel(welcomeViewModel);
-
-        setSupportActionBar(binding.toolbar);
-        imageSliderView = binding.bannerList;
-
-        // Instantiate DotIndicator
-        initDotIndicator(Color.TRANSPARENT);
-
-        layoutSubviews();
-        setupRecyclerView();
-        parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
-        parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
-
-        welcomeViewModel.getLocalClassrooms().observe(this, classrooms -> {
-            if(classrooms.isEmpty()){
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        welcomeViewModel.getRemoteClassrooms();
-
-                    }
-                });
-            }
-            if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
-
-                int counter = 0;
-
-                for(ClassroomModel cm: classrooms){
-                    if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                        classroomParent.getData().add(classrooms.get(counter));
-                        DISPLAYED_CLASSROOM_COUNT +=1;
-                        counter+=1;
-                    }else{
-                        break;
-                    }
-
-                }
-                setupRecyclerView();
-            }
-
-
-
-
-        });
-
-        welcomeViewModel.getLocalMentors().observe(this, mentors -> {
-            if(mentors.isEmpty()){
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        welcomeViewModel.getRemoteMentors();
-
-                    }
-                });
-            }
-
-            if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
-                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
-
-                int counter = 0;
-                for(MentorModel cm: mentors){
-                    if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
-                        classroomParent.getData().add(mentors.get(counter));
-                        DISPLAYED_MENTOR_COUNT+=1;
-                        counter +=1;
-                    }else{
-                        break;
-                    }
-
-                }
-                setupRecyclerView();
-            }
-
-
-        });
+        setContentView(R.layout.activity_welcome);
+//        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+//
+//
+//
+//        binding.setLifecycleOwner(this);
+//
+//        binding.setWelcomeViewModel(welcomeViewModel);
+//
+//        setSupportActionBar(binding.toolbar);
+//
+//
+//
+//        layoutSubviews();
+//        setupRecyclerView();
+//
 
 
     }
 
-    void initDotIndicator(int bgColor){
-        dotIndicator = new DotIndicator(this,imageSliderView.viewPager,bgColor);
-        dotIndicator.setId(View.generateViewId());
-
-    }
-
-    void layoutSubviews(){
-        ConstraintLayout parentLayout = (ConstraintLayout)findViewById(R.id.mainConstraint);
-        ConstraintLayout.LayoutParams diParams = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
-        dotIndicator.setLayoutParams(diParams);
-        parentLayout.addView(dotIndicator);
-
-        ConstraintSet constraintSet = new ConstraintSet();
-        constraintSet.clone(parentLayout);
-        constraintSet.connect(dotIndicator.getId(), ConstraintSet.BOTTOM, imageSliderView.getId(), ConstraintSet.BOTTOM, 0);
-        constraintSet.connect(dotIndicator.getId(), ConstraintSet.LEFT, imageSliderView.getId(), ConstraintSet.LEFT, 0);
-        constraintSet.connect(dotIndicator.getId(), ConstraintSet.RIGHT, imageSliderView.getId(), ConstraintSet.RIGHT, 0);
-
-        constraintSet.applyTo(parentLayout);
-    }
-
-    private void setupRecyclerView() {
-
-        if (parentAdapter == null) {
-            parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, WelcomeActivity.this);
-            parentLayoutManager = new LinearLayoutManager(this);
-
-            binding.recyclerView.setLayoutManager(parentLayoutManager);
-            binding.recyclerView.setAdapter(parentAdapter);
-
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
-                    1);
-            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-            binding.recyclerView.addItemDecoration(dividerItemDecoration);
 
 
-        } else {
-            parentAdapter.notifyDataSetChanged();
-        }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        binding.toolbar.inflateMenu(R.menu.welcome_menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = null;
-        switch (item.getItemId()){
-            case R.id.signUp:
-                intent = new Intent(this, SignupActivity.class);
-                this.startActivity(intent);
-                return true;
 
-            case R.id.login:
-                intent = new Intent(this,LoginActivity.class);
-                this.startActivity(intent);
-                return true;
 
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-        //return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        binding.toolbar.inflateMenu(R.menu.welcome_menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        Intent intent = null;
+//        switch (item.getItemId()){
+//            case R.id.signUp:
+//                intent = new Intent(this, SignupActivity.class);
+//                this.startActivity(intent);
+//                return true;
+//
+//            case R.id.login:
+//                intent = new Intent(this,LoginActivity.class);
+//                this.startActivity(intent);
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//        //return super.onOptionsItemSelected(item);
+//    }
 }
