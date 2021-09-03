@@ -46,7 +46,7 @@ import java.util.ArrayList;
  */
 public class WelcomeFragment extends Fragment {
 
-    private static String TAG = "WelcomeActivity";
+    private static String TAG = "WelcomeFragment";
 
     DotIndicator dotIndicator;
     ImageSliderView imageSliderView;
@@ -206,7 +206,7 @@ public class WelcomeFragment extends Fragment {
     private void setupRecyclerView() {
 
         if (parentAdapter == null) {
-            parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, getActivity());
+            parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, getActivity(),welcomeViewModel);
             parentLayoutManager = new LinearLayoutManager(getActivity());
 
             binding.recyclerView.setLayoutManager(parentLayoutManager);

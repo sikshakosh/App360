@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import com.android.app360.databinding.ActivityWelcomeBinding;
 
 import com.android.app360.ui.login.LoginActivity;
 import com.android.app360.ui.signup.SignupActivity;
+import com.android.appcompose.composable.utility.cardgrid.OnCardGridItemClickListener;
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
@@ -45,8 +47,8 @@ import com.android.appcompose.database.model.MentorModel;
 
 import java.util.ArrayList;
 
-public class WelcomeActivity extends AppCompatActivity {
-
+public class WelcomeActivity extends AppCompatActivity  {
+    private static String TAG = "WelcomeFragment";
    private WelcomeViewModel welcomeViewModel;
    private NavController navCtrl;
 
@@ -63,21 +65,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
-//
-//
-//
-//        binding.setLifecycleOwner(this);
-//
-//        binding.setWelcomeViewModel(welcomeViewModel);
-//
-//        setSupportActionBar(binding.toolbar);
-//
-//
-//
-//        layoutSubviews();
-//        setupRecyclerView();
-//
 
 
     }
@@ -103,8 +90,7 @@ public class WelcomeActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.signUp:
                 navCtrl.navigate(R.id.action_welcomeFragment_to_moreListFragment);
-//                intent = new Intent(this, SignupActivity.class);
-//                this.startActivity(intent);
+
                 return true;
 
             case R.id.login:
@@ -115,6 +101,8 @@ public class WelcomeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-        //return super.onOptionsItemSelected(item);
+
     }
+
+
 }

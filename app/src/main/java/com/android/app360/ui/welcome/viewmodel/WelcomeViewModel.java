@@ -1,19 +1,23 @@
 package com.android.app360.ui.welcome.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.appcompose.composable.utility.cardgrid.OnCardGridItemClickListener;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.network.AppRepository;
 import com.android.appcompose.network.model.MentorResponse;
+import com.android.appcompose.utils.DataType;
 
 import java.util.List;
 
-public class WelcomeViewModel extends AndroidViewModel {
+public class WelcomeViewModel extends AndroidViewModel implements OnCardGridItemClickListener {
+    private static String TAG = "WelcomeViewModel";
     private LiveData<List<ClassroomModel>> localClassrooms;
 
     private LiveData<List<MentorModel>> localMentors;
@@ -65,7 +69,15 @@ public class WelcomeViewModel extends AndroidViewModel {
     }
 
 
+    @Override
+    public void onCategoryClicked(DataType category) {
+        Log.d(TAG,"Categoryy CLicked");
+    }
 
+    @Override
+    public void onItemClicked(Object item) {
+        Log.d(TAG,"Item CLicked");
+    }
 
 
 
