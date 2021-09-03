@@ -9,11 +9,7 @@
         android:id="@+id/moreListFragment"
         android:name="com.android.app360.ui.more.MoreListFragment"
         android:label="more_list_fragment"
-        tools:layout="@layout/more_list_fragment" >
-        <action
-            android:id="@+id/action_moreListFragment_to_moreDetailFragment"
-            app:destination="@id/moreDetailFragment" />
-    </fragment>
+        tools:layout="@layout/more_list_fragment" />
     <fragment
         android:id="@+id/moreDetailFragment"
         android:name="com.android.app360.ui.more.MoreDetailFragment"
@@ -30,5 +26,8 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_moreDetailFragment"
+            app:destination="@id/moreDetailFragment" />
     </fragment>
 </navigation>

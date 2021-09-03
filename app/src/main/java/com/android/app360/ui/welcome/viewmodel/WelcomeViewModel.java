@@ -22,6 +22,9 @@ public class WelcomeViewModel extends AndroidViewModel implements OnCardGridItem
 
     private LiveData<List<MentorModel>> localMentors;
 
+    private LiveData<Object> selectedCategoryItem;
+    private DataType selectedCategory;
+
     private AppRepository appRepository;
 
 
@@ -69,14 +72,16 @@ public class WelcomeViewModel extends AndroidViewModel implements OnCardGridItem
     }
 
 
+    //UI Click Hanndler
+
     @Override
     public void onCategoryClicked(DataType category) {
-        Log.d(TAG,"Categoryy CLicked");
+        this.selectedCategory = category;
     }
 
     @Override
     public void onItemClicked(Object item) {
-        Log.d(TAG,"Item CLicked");
+        this.selectedCategoryItem = (LiveData<Object>) item;
     }
 
 
