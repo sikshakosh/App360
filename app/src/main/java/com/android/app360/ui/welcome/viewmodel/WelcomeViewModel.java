@@ -7,7 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.appcompose.composable.utility.cardgrid.CardGridListener;
 import com.android.appcompose.composable.utility.cardgrid.OnCardGridItemClickListener;
+import com.android.appcompose.composable.utility.cardgrid.model.CardDataModel;
+import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.network.AppRepository;
@@ -16,7 +19,7 @@ import com.android.appcompose.utils.DataType;
 
 import java.util.List;
 
-public class WelcomeViewModel extends AndroidViewModel implements OnCardGridItemClickListener {
+public class WelcomeViewModel extends AndroidViewModel implements CardGridListener {
     private static String TAG = "WelcomeViewModel";
     private LiveData<List<ClassroomModel>> localClassrooms;
 
@@ -72,19 +75,13 @@ public class WelcomeViewModel extends AndroidViewModel implements OnCardGridItem
     }
 
 
-    //UI Click Hanndler
-
     @Override
-    public void onCategoryClicked(DataType category) {
-        this.selectedCategory = category;
+    public void onCardClicked(CardDataModel card) {
+        Log.d("","Catergory Clicked");
     }
 
     @Override
-    public void onItemClicked(Object item) {
-        this.selectedCategoryItem = (LiveData<Object>) item;
+    public void onMoreClicked(ParentModel category) {
+        Log.d("","Catergory Clicked");
     }
-
-
-
-
 }
