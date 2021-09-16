@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -102,7 +103,16 @@ public class WelcomeFragment extends Fragment {
         layoutSubviews();
 
 
+        welcomeViewModel.getSelCategory().observe(getActivity(), item -> {
+            Log.d("","Changed");
+            ((WelcomeActivity)getActivity()).navigateTo(item.getType(),item);
+        });
 
+        welcomeViewModel.getSelCategoryItem().observe(getActivity(), item -> {
+            Log.d("","Changed");
+
+            ((WelcomeActivity)getActivity()).navigateTo(item.type,item);
+        });
 
         welcomeViewModel.getLocalClassrooms().observe(getActivity(), classrooms -> {
             if(classrooms.isEmpty()){

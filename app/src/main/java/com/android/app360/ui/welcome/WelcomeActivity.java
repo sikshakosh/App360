@@ -74,6 +74,25 @@ public class WelcomeActivity extends AppCompatActivity  {
    }
 
 
+   public void navigateTo(DataType type, Object data){
+        switch (type){
+            case FEATURED_MENTORS:
+                if(data instanceof ParentModel){
+                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreListFragment);
+                 }else{
+                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreDetailFragment);
+                    }
+
+                break;
+            case FEATURED_CLASSROOMS:
+                if(data instanceof ParentModel){
+                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreListFragment);
+                }else{
+                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreDetailFragment);
+                }
+                break;
+        }
+   }
 
 
 

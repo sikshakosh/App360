@@ -25,7 +25,9 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
 
     private LiveData<List<MentorModel>> localMentors;
 
-    private LiveData<Object> selectedCategoryItem;
+
+    private MutableLiveData<ParentModel> selCategory = new MutableLiveData<ParentModel>();;
+    private MutableLiveData<CardDataModel> selCategoryItem = new MutableLiveData<CardDataModel>();;
     private DataType selectedCategory;
 
     private AppRepository appRepository;
@@ -75,13 +77,27 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
     }
 
 
+    // Click Handlers
+    public MutableLiveData<ParentModel> getSelCategory() {
+
+        return selCategory;
+    }
+
+    public MutableLiveData<CardDataModel> getSelCategoryItem() {
+
+        return selCategoryItem;
+    }
     @Override
     public void onCardClicked(CardDataModel card) {
         Log.d("","Catergory Clicked");
+
+        this.getSelCategoryItem().setValue(card);
     }
 
     @Override
     public void onMoreClicked(ParentModel category) {
         Log.d("","Catergory Clicked");
+
+        this.getSelCategory().setValue(category);
     }
 }
