@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:libProj="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="WelcomeViewModel"
+            type="com.android.app360.ui.welcome.viewmodel.WelcomeViewModel" />
+    </data>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.welcome.WelcomeFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.home.HomeActivity"
+            android:fitsSystemWindows="true">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mainConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/gray"
+
+                    >
+
+
+                    <com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView
+                        android:id="@+id/bannerList"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@color/white"
+                        app:layout_constraintTop_toTopOf="@id/mainConstraint"
+                        libProj:images="@array/tutorial_images"
+                        libProj:transformer="zoomout" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+
+                        android:clipToPadding="false"
+                        android:scrollbars="vertical"
+                        app:layout_constraintStart_toStartOf="@id/mainConstraint"
+                        app:layout_constraintTop_toBottomOf="@id/bannerList" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
+</layout>

@@ -62,7 +62,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.navigation:navigation-fragment:$rootProject.navigationUIVersion"
     implementation "androidx.navigation:navigation-ui:$rootProject.navigationUIVersion"
-
+    implementation "androidx.fragment:fragment:$rootProject.fragment_version"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.legacySupport"
 
     // Testing
