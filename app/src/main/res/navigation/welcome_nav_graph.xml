@@ -9,12 +9,23 @@
         android:id="@+id/moreListFragment"
         android:name="com.android.app360.ui.more.MoreListFragment"
         android:label="more_list_fragment"
-        tools:layout="@layout/more_list_fragment" />
+        tools:layout="@layout/more_list_fragment" >
+        <action
+            android:id="@+id/action_moreListFragment_to_moreDetailFragment"
+            app:destination="@id/moreDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/moreDetailFragment"
         android:name="com.android.app360.ui.more.MoreDetailFragment"
         android:label="more_detail_fragment"
-        tools:layout="@layout/more_detail_fragment" />
+        tools:layout="@layout/more_detail_fragment" >
+        <action
+            android:id="@+id/action_moreDetailFragment_to_welcomeFragment2"
+            app:popUpTo="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_moreDetailFragment_to_moreListFragment"
+            app:popUpTo="@id/moreListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.android.app360.ui.welcome.WelcomeFragment"

@@ -47,11 +47,11 @@ import com.android.appcompose.database.model.MentorModel;
 
 import java.util.ArrayList;
 
-public class WelcomeActivity extends AppCompatActivity  {
+public class    WelcomeActivity extends AppCompatActivity  {
     private static String TAG = "WelcomeFragment";
    private WelcomeViewModel welcomeViewModel;
    private NavController navCtrl;
-
+   private AppBarConfiguration appBarConfiguration;
    private Toolbar toolbar=null;
 
     @Override
@@ -59,12 +59,13 @@ public class WelcomeActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
-        NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
+            NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
         navCtrl = host.getNavController();
-        AppBarConfiguration appBarConfiguration =
+        appBarConfiguration =
                 new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 
     }
@@ -124,5 +125,11 @@ public class WelcomeActivity extends AppCompatActivity  {
     }
 
 
-
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        if(!navCtrl.popBackStack()){
+//            finish();
+//        }
+//    }
 }
