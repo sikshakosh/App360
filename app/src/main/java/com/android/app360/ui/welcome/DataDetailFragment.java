@@ -1,4 +1,4 @@
-package com.android.app360.ui.more;
+package com.android.app360.ui.welcome;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -13,26 +13,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.app360.R;
-import com.android.app360.ui.more.viewmodel.MoreListViewModel;
 
-public class MoreListFragment extends Fragment {
+import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 
-    private MoreListViewModel mViewModel;
+public class DataDetailFragment extends Fragment {
 
-    public static MoreListFragment newInstance() {
-        return new MoreListFragment();
+    private WelcomeViewModel mViewModel;
+
+    public static DataDetailFragment newInstance() {
+        return new DataDetailFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.more_list_fragment, container, false);
+        return inflater.inflate(R.layout.data_detail_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MoreListViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
         // TODO: Use the ViewModel
     }
 

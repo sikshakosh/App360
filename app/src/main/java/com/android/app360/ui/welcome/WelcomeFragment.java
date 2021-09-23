@@ -12,7 +12,10 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -95,7 +98,17 @@ public class WelcomeFragment extends Fragment {
         DISPLAYED_CLASSROOM_COUNT = 0;
         DISPLAYED_MENTOR_COUNT = 0;
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false);
+
+        return binding.getRoot();
+        // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_welcome, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         welcomeViewModel = ((WelcomeActivity)getActivity()).getViewModel();
+       // welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
         parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
         binding.setWelcomeViewModel(welcomeViewModel);
@@ -103,20 +116,36 @@ public class WelcomeFragment extends Fragment {
         imageSliderView = binding.bannerList;
         initDotIndicator(Color.TRANSPARENT);
         layoutSubviews();
+        setupRecyclerView();
+        bindEventToViewModel();
+
+    }
 
 
-        welcomeViewModel.getSelCategory().observe(getActivity(), item -> {
-            Log.d("","Changed");
-            ((WelcomeActivity)getActivity()).navigateTo(item.getType(),item);
+
+    void bindEventToViewModel(){
+        Log.d(TAG, "observer added");
+
+        LifecycleOwner owner = getViewLifecycleOwner();
+
+
+        welcomeViewModel.getSelCategory().observe(owner, new Observer<ParentModel>() {
+            @Override
+            public void onChanged(ParentModel model) {
+                if(!welcomeViewModel.isBackPressed){
+                    ((WelcomeActivity)getActivity()).navigateTo(model.getType(),model);
+                }
+
+            }
         });
 
-        welcomeViewModel.getSelCategoryItem().observe(getActivity(), item -> {
+        welcomeViewModel.getSelCategoryItem().observe(owner  , item -> {
             Log.d("","Changed");
 
             ((WelcomeActivity)getActivity()).navigateTo(item.type,item);
         });
 
-        welcomeViewModel.getLocalClassrooms().observe(getActivity(), classrooms -> {
+        welcomeViewModel.getLocalClassrooms().observe(owner, classrooms -> {
             if(classrooms.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -149,7 +178,7 @@ public class WelcomeFragment extends Fragment {
 
         });
 
-        welcomeViewModel.getLocalMentors().observe(getActivity(), mentors -> {
+        welcomeViewModel.getLocalMentors().observe(owner, mentors -> {
             if(mentors.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -179,21 +208,7 @@ public class WelcomeFragment extends Fragment {
 
 
         });
-
-
-
-
-        return binding.getRoot();
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_welcome, container, false);
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setupRecyclerView();
-    }
-
     void initDotIndicator(int bgColor){
         dotIndicator = new DotIndicator(getActivity(),imageSliderView.viewPager,bgColor);
         dotIndicator.setId(View.generateViewId());

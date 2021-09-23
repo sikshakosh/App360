@@ -20,9 +20,14 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,14 +63,34 @@ public class    WelcomeActivity extends AppCompatActivity  {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+
         welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
             NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
         navCtrl = host.getNavController();
+        NavBackStackEntry backStackEntry = navCtrl.getBackStackEntry(R.id.main_nav_graph);
+
         appBarConfiguration =
                 new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        NavigationUI.setupActionBarWithNavController(this, navCtrl, appBarConfiguration);
+       // NavigationUI.setupWithNavController(toolbar, navCtrl, appBarConfiguration);
+        //
 
+        navCtrl.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller,
+                                             @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                if(destination.getId() == R.id.dataListFragment) {
+                    //toolbar.setVisibility(View.GONE);
+                    //bottomNavigationView.setVisibility(View.GONE);
+                } else {
+                    toolbar.setVisibility(View.VISIBLE);
+                    //bottomNavigationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
     }
@@ -79,17 +104,17 @@ public class    WelcomeActivity extends AppCompatActivity  {
         switch (type){
             case FEATURED_MENTORS:
                 if(data instanceof ParentModel){
-                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreListFragment);
+                    navCtrl.navigate(R.id.action_welcomeFragment_to_dataListFragment);
                  }else{
-                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreDetailFragment);
+                   // navCtrl.navigate(R.id.action_welcomeFragment_to_moreDetailFragment);
                     }
 
                 break;
             case FEATURED_CLASSROOMS:
                 if(data instanceof ParentModel){
-                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreListFragment);
+                    navCtrl.navigate(R.id.action_welcomeFragment_to_dataListFragment);
                 }else{
-                    navCtrl.navigate(R.id.action_welcomeFragment_to_moreDetailFragment);
+                    //navCtrl.navigate(R.id.action_welcomeFragment_to_moreDetailFragment);
                 }
                 break;
         }
@@ -109,7 +134,7 @@ public class    WelcomeActivity extends AppCompatActivity  {
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.signUp:
-                navCtrl.navigate(R.id.action_welcomeFragment_to_moreListFragment);
+                navCtrl.navigate(R.id.action_welcomeFragment_to_dataListFragment);
 
                 return true;
 
@@ -124,12 +149,11 @@ public class    WelcomeActivity extends AppCompatActivity  {
 
     }
 
-
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        if(!navCtrl.popBackStack()){
-//            finish();
-//        }
-//    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        welcomeViewModel.isBackPressed = true;
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_container);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
 }

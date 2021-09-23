@@ -32,6 +32,8 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
 
     private AppRepository appRepository;
 
+    public boolean isBackPressed = false;
+
 
 
 
