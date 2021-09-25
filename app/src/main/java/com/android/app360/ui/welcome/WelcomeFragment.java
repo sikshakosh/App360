@@ -101,6 +101,14 @@ public class WelcomeFragment extends Fragment {
         DISPLAYED_CLASSROOM_COUNT = 0;
         DISPLAYED_MENTOR_COUNT = 0;
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_welcome,container,false);
+        parentLayoutManager = new LinearLayoutManager(getActivity());
+
+        binding.recyclerView.setLayoutManager(parentLayoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
+                1);
+        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
+        binding.recyclerView.addItemDecoration(dividerItemDecoration);
 
         return binding.getRoot();
         // Inflate the layout for this fragment
@@ -117,7 +125,7 @@ public class WelcomeFragment extends Fragment {
 
 
         initDotIndicator(Color.TRANSPARENT);
-        setupRecyclerView();
+
 
 
     }
@@ -137,6 +145,8 @@ public class WelcomeFragment extends Fragment {
 
                     }
                     binding.recyclerView.setAdapter(parentAdapter);
+
+
 
                 }
 
@@ -263,30 +273,8 @@ public class WelcomeFragment extends Fragment {
         constraintSet.applyTo(parentLayout);
     }
     private void setupRecyclerView() {
-//        if(welcomeViewModel!=null && parentAdapter!=null){
-//            if(parentAdapter.parentModelArrayList.size() == 0){
-//                parentAdapter.parentModelArrayList = (ArrayList<ParentModel>) welcomeViewModel.getParentModelData().getValue();
-//            }
-//
-//        }
 
-        if(binding.recyclerView.getLayoutManager()==null){
-            parentLayoutManager = new LinearLayoutManager(getActivity());
-
-            binding.recyclerView.setLayoutManager(parentLayoutManager);
-        }
-
-        if(binding.recyclerView.getItemDecorationCount()==0){
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
-                    1);
-            dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
-            binding.recyclerView.addItemDecoration(dividerItemDecoration);
-
-        }
-        if (parentAdapter != null) {
-            parentAdapter.notifyDataSetChanged();
-
-        }
+        parentAdapter.notifyDataSetChanged();
     }
 
 
