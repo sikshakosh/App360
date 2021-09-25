@@ -151,9 +151,6 @@ public class    WelcomeActivity extends AppCompatActivity  {
 
     @Override
     public boolean onSupportNavigateUp() {
-        welcomeViewModel.isBackPressed = true;
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_container);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        return navCtrl.navigateUp();
     }
 }

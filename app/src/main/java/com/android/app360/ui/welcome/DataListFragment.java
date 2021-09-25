@@ -39,13 +39,13 @@ public class DataListFragment extends Fragment {
         LifecycleOwner owner = getViewLifecycleOwner();
         welcomeViewModel = ((WelcomeActivity)getActivity()).getViewModel();
         //welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
-        welcomeViewModel.isBackPressed = false;
+
 
         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                welcomeViewModel.isBackPressed = true;
+
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(owner, callback);

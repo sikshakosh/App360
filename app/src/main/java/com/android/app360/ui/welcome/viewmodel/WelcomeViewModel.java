@@ -17,6 +17,7 @@ import com.android.appcompose.network.AppRepository;
 import com.android.appcompose.network.model.MentorResponse;
 import com.android.appcompose.utils.DataType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WelcomeViewModel extends AndroidViewModel implements CardGridListener {
@@ -31,8 +32,12 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
     private DataType selectedCategory;
 
     private AppRepository appRepository;
-
-    public boolean isBackPressed = false;
+    private MutableLiveData<ArrayList<ParentModel>> mParentModelData;
+    public MutableLiveData<ArrayList<ParentModel>> getParentModelData() {
+        mParentModelData = new MutableLiveData<>();
+        loadAllParentModel();
+        return mParentModelData;
+    }
 
 
 
@@ -48,7 +53,12 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
         localMentors = appRepository.getLocalMentors();
     }
 
-
+    private void loadAllParentModel() {
+        ArrayList<ParentModel> arrayList = new ArrayList<>();
+        arrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
+        arrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
+        mParentModelData.postValue(arrayList);
+    }
     public void setLocalMentors(LiveData<List<MentorModel>> localMentors) {
         this.localMentors = localMentors;
     }

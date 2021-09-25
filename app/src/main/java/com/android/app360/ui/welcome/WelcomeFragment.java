@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,6 +34,7 @@ import com.android.app360.ui.login.LoginActivity;
 import com.android.app360.ui.signup.SignupActivity;
 import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
+import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
@@ -41,6 +43,7 @@ import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.utils.DataType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,7 +61,7 @@ public class WelcomeFragment extends Fragment {
     WelcomeViewModel welcomeViewModel;
 
     private CardGridRecyclerViewAdapter parentAdapter;
-    ArrayList<ParentModel> parentModelArrayList = new ArrayList<>();
+
     private RecyclerView.LayoutManager parentLayoutManager;
 
     private static int DISPLAYED_CLASSROOM_COUNT = 0;
@@ -104,20 +107,18 @@ public class WelcomeFragment extends Fragment {
         //return inflater.inflate(R.layout.fragment_welcome, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        welcomeViewModel = ((WelcomeActivity)getActivity()).getViewModel();
-       // welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
-        parentModelArrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
-        parentModelArrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
         binding.setWelcomeViewModel(welcomeViewModel);
         binding.setLifecycleOwner(getActivity());
-        imageSliderView = binding.bannerList;
-        initDotIndicator(Color.TRANSPARENT);
-        layoutSubviews();
-        setupRecyclerView();
         bindEventToViewModel();
+
+
+        initDotIndicator(Color.TRANSPARENT);
+        setupRecyclerView();
+
 
     }
 
@@ -125,27 +126,44 @@ public class WelcomeFragment extends Fragment {
 
     void bindEventToViewModel(){
         Log.d(TAG, "observer added");
+        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
 
-        LifecycleOwner owner = getViewLifecycleOwner();
+        welcomeViewModel.getParentModelData().observe(getViewLifecycleOwner(), new Observer<ArrayList<ParentModel>>() {
+            @Override
+            public void onChanged(ArrayList<ParentModel> parentModels) {
+                if(getViewLifecycleOwner().getLifecycle().getCurrentState()== Lifecycle.State.RESUMED){
+                    if(parentAdapter==null){
+                        parentAdapter = new CardGridRecyclerViewAdapter(parentModels, getActivity(),welcomeViewModel);
+
+                    }
+                    binding.recyclerView.setAdapter(parentAdapter);
+
+                }
 
 
-        welcomeViewModel.getSelCategory().observe(owner, new Observer<ParentModel>() {
+            }
+
+
+        });
+
+
+        welcomeViewModel.getSelCategory().observe(getViewLifecycleOwner(), new Observer<ParentModel>() {
             @Override
             public void onChanged(ParentModel model) {
-                if(!welcomeViewModel.isBackPressed){
+                if(getViewLifecycleOwner().getLifecycle().getCurrentState()== Lifecycle.State.RESUMED){
                     ((WelcomeActivity)getActivity()).navigateTo(model.getType(),model);
                 }
 
             }
         });
 
-        welcomeViewModel.getSelCategoryItem().observe(owner  , item -> {
+        welcomeViewModel.getSelCategoryItem().observe(getViewLifecycleOwner()  , item -> {
             Log.d("","Changed");
 
             ((WelcomeActivity)getActivity()).navigateTo(item.type,item);
         });
 
-        welcomeViewModel.getLocalClassrooms().observe(owner, classrooms -> {
+        welcomeViewModel.getLocalClassrooms().observe(getViewLifecycleOwner(), classrooms -> {
             if(classrooms.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -156,20 +174,26 @@ public class WelcomeFragment extends Fragment {
                 });
             }
             if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(0);
+                CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
+                //if(adapter !=null){
+                    ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(0);
 
-                int counter = 0;
+                    int counter = 0;
+                    if(classroomParent.getData().size()==0){
+                        for(ClassroomModel cm: classrooms){
+                            if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
+                                classroomParent.getData().add(classrooms.get(counter));
+                                DISPLAYED_CLASSROOM_COUNT +=1;
+                                counter+=1;
+                            }else{
+                                break;
+                            }
 
-                for(ClassroomModel cm: classrooms){
-                    if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                        classroomParent.getData().add(classrooms.get(counter));
-                        DISPLAYED_CLASSROOM_COUNT +=1;
-                        counter+=1;
-                    }else{
-                        break;
+                        }
                     }
 
-                }
+               // }
+
                 setupRecyclerView();
             }
 
@@ -178,7 +202,7 @@ public class WelcomeFragment extends Fragment {
 
         });
 
-        welcomeViewModel.getLocalMentors().observe(owner, mentors -> {
+        welcomeViewModel.getLocalMentors().observe(getViewLifecycleOwner(), mentors -> {
             if(mentors.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -190,29 +214,37 @@ public class WelcomeFragment extends Fragment {
             }
 
             if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
-                ParentModel classroomParent = (ParentModel) parentModelArrayList.get(1);
+                CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
+               // if(adapter !=null){
+                    ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(1);
 
-                int counter = 0;
-                for(MentorModel cm: mentors){
-                    if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
-                        classroomParent.getData().add(mentors.get(counter));
-                        DISPLAYED_MENTOR_COUNT+=1;
-                        counter +=1;
-                    }else{
-                        break;
+                    int counter = 0;
+                if(classroomParent.getData().size()==0){
+                    for(MentorModel cm: mentors){
+                        if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
+                            classroomParent.getData().add(mentors.get(counter));
+                            DISPLAYED_MENTOR_COUNT+=1;
+                            counter +=1;
+                        }else{
+                            break;
+                        }
+
                     }
-
                 }
-                setupRecyclerView();
+
+                    setupRecyclerView();
+               // }
+
             }
 
 
         });
     }
     void initDotIndicator(int bgColor){
+        imageSliderView = binding.bannerList;
         dotIndicator = new DotIndicator(getActivity(),imageSliderView.viewPager,bgColor);
         dotIndicator.setId(View.generateViewId());
-
+        layoutSubviews();
     }
 
     void layoutSubviews(){
@@ -231,22 +263,29 @@ public class WelcomeFragment extends Fragment {
         constraintSet.applyTo(parentLayout);
     }
     private void setupRecyclerView() {
+//        if(welcomeViewModel!=null && parentAdapter!=null){
+//            if(parentAdapter.parentModelArrayList.size() == 0){
+//                parentAdapter.parentModelArrayList = (ArrayList<ParentModel>) welcomeViewModel.getParentModelData().getValue();
+//            }
+//
+//        }
 
-        if (parentAdapter == null) {
-            parentAdapter = new CardGridRecyclerViewAdapter(parentModelArrayList, getActivity(),welcomeViewModel);
+        if(binding.recyclerView.getLayoutManager()==null){
             parentLayoutManager = new LinearLayoutManager(getActivity());
 
             binding.recyclerView.setLayoutManager(parentLayoutManager);
-            binding.recyclerView.setAdapter(parentAdapter);
+        }
 
+        if(binding.recyclerView.getItemDecorationCount()==0){
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerView.getContext(),
                     1);
             dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.divider));
             binding.recyclerView.addItemDecoration(dividerItemDecoration);
 
-
-        } else {
+        }
+        if (parentAdapter != null) {
             parentAdapter.notifyDataSetChanged();
+
         }
     }
 
