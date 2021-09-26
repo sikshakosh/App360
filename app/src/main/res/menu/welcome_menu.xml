@@ -2,6 +2,7 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/signup" android:id="@+id/signUp" />
-    <item android:title="@string/login" android:id="@+id/login"/>
+    <item android:title="@string/search" android:id="@+id/search" />
+    <item android:title="@string/home" android:id="@+id/home" />
+    <item android:title="@string/account" android:id="@+id/account"/>
 </menu>

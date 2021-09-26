@@ -122,23 +122,18 @@ public class    WelcomeActivity extends AppCompatActivity  {
 
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.welcome_menu,menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = null;
         switch (item.getItemId()){
-            case R.id.signUp:
+            case R.id.search:
                 navCtrl.navigate(R.id.action_welcomeFragment_to_dataListFragment);
 
                 return true;
 
-            case R.id.login:
+            case R.id.account:
                 intent = new Intent(this,LoginActivity.class);
                 this.startActivity(intent);
                 return true;
