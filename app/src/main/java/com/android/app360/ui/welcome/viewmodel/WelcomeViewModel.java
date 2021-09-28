@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.android.appcompose.composable.utility.cardgrid.CardGridListener;
+import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.OnCardGridItemClickListener;
 import com.android.appcompose.composable.utility.cardgrid.model.CardDataModel;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
@@ -25,10 +26,11 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
     private LiveData<List<ClassroomModel>> localClassrooms;
 
     private LiveData<List<MentorModel>> localMentors;
+    private MutableLiveData<CardGridRecyclerViewAdapter> gridAdapter = new MutableLiveData<CardGridRecyclerViewAdapter>();;
 
+    private MutableLiveData<ParentModel> selCategory = new MutableLiveData<ParentModel>();
+    private MutableLiveData<CardDataModel> selCategoryItem = new MutableLiveData<CardDataModel>();
 
-    private MutableLiveData<ParentModel> selCategory = new MutableLiveData<ParentModel>();;
-    private MutableLiveData<CardDataModel> selCategoryItem = new MutableLiveData<CardDataModel>();;
     private DataType selectedCategory;
 
     private AppRepository appRepository;
@@ -68,6 +70,10 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
         this.localClassrooms = localClassrooms;
     }
 
+    public void setGridAdapter(CardGridRecyclerViewAdapter adapter){
+         this.getGridAdapter().setValue(adapter);
+    }
+
     // Database Calls
 
     public LiveData<List<MentorModel>> getLocalMentors() {
@@ -76,6 +82,10 @@ public class WelcomeViewModel extends AndroidViewModel implements CardGridListen
 
     public LiveData<List<ClassroomModel>> getLocalClassrooms() {
         return localClassrooms;
+    }
+
+    public MutableLiveData<CardGridRecyclerViewAdapter> getGridAdapter(){
+        return  gridAdapter;
     }
 
     // Remote Calls

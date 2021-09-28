@@ -53,7 +53,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
 
 
         setSupportActionBar(binding.toolbar);
-       // NavigationUI.setupWithNavController(binding.toolbar, navCtrl, appBarConfiguration);
+        //NavigationUI.setupWithNavController(binding.toolbar, navCtrl, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNav, navCtrl);
 
         navCtrl.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
