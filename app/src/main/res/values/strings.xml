@@ -118,7 +118,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_data_detail">DataDetailActivity</string>
     <string name="home">Home</string>
-    <string name="search">Search</string>
     <string name="account">Account</string>
+    <string name="find">Find</string>
 
 </resources>

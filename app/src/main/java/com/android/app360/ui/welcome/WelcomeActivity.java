@@ -1,12 +1,7 @@
 package com.android.app360.ui.welcome;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -15,44 +10,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.app360.R;
 
 import com.android.app360.databinding.ActivityWelcomeBinding;
 
-import com.android.app360.ui.login.LoginActivity;
-import com.android.app360.ui.signup.SignupActivity;
-import com.android.appcompose.composable.utility.cardgrid.OnCardGridItemClickListener;
+
 import com.android.appcompose.utils.DataType;
-import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
-import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
-import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
-import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
-import com.android.appcompose.database.model.ClassroomModel;
-import com.android.appcompose.database.model.MentorModel;
 
-
-import java.util.ArrayList;
-
-public class    WelcomeActivity extends AppCompatActivity  {
+public class  WelcomeActivity extends AppCompatActivity  {
     private static String TAG = "WelcomeFragment";
    private WelcomeViewModel welcomeViewModel;
    private NavController navCtrl;
@@ -62,21 +38,23 @@ public class    WelcomeActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
 
+        ActivityWelcomeBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome);
 
         welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+        binding.setWelcomeViewModel(welcomeViewModel);
             NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_container);
         navCtrl = host.getNavController();
-        NavBackStackEntry backStackEntry = navCtrl.getBackStackEntry(R.id.main_nav_graph);
+       // NavBackStackEntry backStackEntry = navCtrl.getBackStackEntry(R.id.home);
 
-        appBarConfiguration =
-                new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        NavigationUI.setupActionBarWithNavController(this, navCtrl, appBarConfiguration);
-       // NavigationUI.setupWithNavController(toolbar, navCtrl, appBarConfiguration);
-        //
+        //appBarConfiguration = new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.find,R.id.account).build();
+
+
+
+        setSupportActionBar(binding.toolbar);
+       // NavigationUI.setupWithNavController(binding.toolbar, navCtrl, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.bottomNav, navCtrl);
 
         navCtrl.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -86,12 +64,13 @@ public class    WelcomeActivity extends AppCompatActivity  {
                     //toolbar.setVisibility(View.GONE);
                     //bottomNavigationView.setVisibility(View.GONE);
                 } else {
-                    toolbar.setVisibility(View.VISIBLE);
+                    binding.toolbar.setVisibility(View.VISIBLE);
                     //bottomNavigationView.setVisibility(View.VISIBLE);
                 }
             }
         });
 
+        
 
     }
 
@@ -134,8 +113,8 @@ public class    WelcomeActivity extends AppCompatActivity  {
                 return true;
 
             case R.id.account:
-                intent = new Intent(this,LoginActivity.class);
-                this.startActivity(intent);
+//                intent = new Intent(this,LoginActivity.class);
+//                this.startActivity(intent);
                 return true;
 
             default:
