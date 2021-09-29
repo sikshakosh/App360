@@ -33,7 +33,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
    private WelcomeViewModel welcomeViewModel;
    private NavController navCtrl;
    private AppBarConfiguration appBarConfiguration;
-   private Toolbar toolbar=null;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,8 +60,8 @@ public class  WelcomeActivity extends AppCompatActivity  {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if(destination.getId() == R.id.dataListFragment) {
-                    //toolbar.setVisibility(View.GONE);
+                if(destination.getId() == R.id.accountFragment) {
+                    //binding.toolbar.setVisibility(View.GONE);
                     //bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     binding.toolbar.setVisibility(View.VISIBLE);
