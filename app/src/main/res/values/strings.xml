@@ -104,7 +104,7 @@
     <string name="login_title">Login to your account</string>
     <string name="e_mail_address">E-Mail Address</string>
     <string name="password">Password</string>
-    <string name="click_to_login">Click to Login</string>
+    <string name="click_to_login">Submit</string>
     <string name="signup_title">Easy SignUp</string>
     <string name="create_account">Create Account</string>
     <string name="title_activity_more">MoreActivity</string>
