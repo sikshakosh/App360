@@ -6,7 +6,7 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.android.app360.ui.welcome.fragments.WelcomeFragment"
+        android:name="com.android.app360.ui.welcome.home.WelcomeFragment"
         android:label="WelcomeFragment" >
         <action
             android:id="@+id/action_welcomeFragment_to_dataListFragment"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataListFragment"
-        android:name="com.android.app360.ui.welcome.DataListFragment"
+        android:name="com.android.app360.ui.welcome.viewall.DataListFragment"
         android:label="data_list_fragment"
         tools:layout="@layout/data_list_fragment" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/dataDetailFragment"
-        android:name="com.android.app360.ui.welcome.DataDetailFragment"
+        android:name="com.android.app360.ui.welcome.detail.DataDetailFragment"
         android:label="data_detail_fragment"
         tools:layout="@layout/data_detail_fragment" />
 </navigation>

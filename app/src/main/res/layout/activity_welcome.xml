@@ -6,7 +6,7 @@
     <data>
         <variable
             name="WelcomeViewModel"
-            type="com.android.app360.ui.welcome.viewmodel.WelcomeViewModel" />
+            type="com.android.app360.ui.welcome.home.WelcomeViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.android.app360.ui.welcome;
+package com.android.app360.ui.welcome.detail;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.android.app360.R;
 
-import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
+import com.android.app360.ui.welcome.home.WelcomeViewModel;
 
 public class DataDetailFragment extends Fragment {
 

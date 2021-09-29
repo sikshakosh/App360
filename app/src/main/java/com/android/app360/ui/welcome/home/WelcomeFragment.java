@@ -1,4 +1,4 @@
-package com.android.app360.ui.welcome.fragments;
+package com.android.app360.ui.welcome.home;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -28,14 +28,12 @@ import android.view.ViewGroup;
 import com.android.app360.R;
 import com.android.app360.databinding.FragmentWelcomeBinding;
 import com.android.app360.ui.welcome.WelcomeActivity;
-import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
 import com.android.appcompose.database.model.ClassroomModel;
 import com.android.appcompose.database.model.MentorModel;
-import com.android.appcompose.utils.DataType;
 
 import java.util.ArrayList;
 

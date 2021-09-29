@@ -1,4 +1,4 @@
-package com.android.app360.ui.welcome.fragments;
+package com.android.app360.ui.welcome.find;
 
 import android.os.Bundle;
 

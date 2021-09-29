@@ -9,10 +9,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
@@ -26,7 +24,7 @@ import com.android.app360.databinding.ActivityWelcomeBinding;
 
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
-import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
+import com.android.app360.ui.welcome.home.WelcomeViewModel;
 
 public class  WelcomeActivity extends AppCompatActivity  {
     private static String TAG = "WelcomeFragment";
@@ -61,7 +59,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if(destination.getId() == R.id.accountFragment) {
-                    binding.toolbar.setVisibility(View.GONE);
+                    //binding.toolbar.setVisibility(View.GONE);
                     //bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     binding.toolbar.setVisibility(View.VISIBLE);

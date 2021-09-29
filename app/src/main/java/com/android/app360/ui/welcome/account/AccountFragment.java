@@ -1,6 +1,5 @@
-package com.android.app360.ui.welcome.fragments;
+package com.android.app360.ui.welcome.account;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,10 +21,6 @@ import android.view.ViewGroup;
 
 import com.android.app360.R;
 import com.android.app360.databinding.FragmentAccountBinding;
-import com.android.app360.databinding.FragmentWelcomeBinding;
-import com.android.app360.ui.welcome.model.LoginUser;
-import com.android.app360.ui.welcome.viewmodel.AccountViewModel;
-import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 
 import java.util.Objects;
 

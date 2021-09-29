@@ -1,4 +1,4 @@
-package com.android.app360.ui.welcome.viewmodel;
+package com.android.app360.ui.welcome.account;
 
 import android.app.Application;
 import android.view.View;
@@ -6,8 +6,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-
-import com.android.app360.ui.welcome.model.LoginUser;
 
 public class AccountViewModel extends AndroidViewModel {
     public AccountViewModel(@NonNull Application application) {

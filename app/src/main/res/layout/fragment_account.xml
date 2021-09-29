@@ -6,33 +6,33 @@
     <data>
         <variable
             name="AccountViewModel"
-            type="com.android.app360.ui.welcome.viewmodel.AccountViewModel" />
+            type="com.android.app360.ui.welcome.account.AccountViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.welcome.fragments.AccountFragment">
+        tools:context=".ui.welcome.account.AccountFragment">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             >
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize"
-                app:title="@string/login"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+<!--            <com.google.android.material.appbar.MaterialToolbar-->
+<!--                android:id="@+id/toolbar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:background="?attr/colorPrimary"-->
+<!--                android:minHeight="?attr/actionBarSize"-->
+<!--                app:title="@string/login"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
 
-                />
+<!--                />-->
 
 
             <TextView
@@ -49,7 +49,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/txtEmailAddress"

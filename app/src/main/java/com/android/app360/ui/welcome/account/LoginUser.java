@@ -1,4 +1,4 @@
-package com.android.app360.ui.welcome.model;
+package com.android.app360.ui.welcome.account;
 
 import android.util.Patterns;
 

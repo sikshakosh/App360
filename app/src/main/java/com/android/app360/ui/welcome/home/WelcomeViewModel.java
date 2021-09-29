@@ -1,4 +1,4 @@
-package com.android.app360.ui.welcome.viewmodel;
+package com.android.app360.ui.welcome.home;
 
 import android.app.Application;
 import android.util.Log;
