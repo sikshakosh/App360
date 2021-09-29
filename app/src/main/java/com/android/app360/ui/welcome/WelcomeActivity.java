@@ -61,7 +61,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if(destination.getId() == R.id.accountFragment) {
-                    //binding.toolbar.setVisibility(View.GONE);
+                    binding.toolbar.setVisibility(View.GONE);
                     //bottomNavigationView.setVisibility(View.GONE);
                 } else {
                     binding.toolbar.setVisibility(View.VISIBLE);
