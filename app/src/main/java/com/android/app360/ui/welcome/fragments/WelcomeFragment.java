@@ -1,6 +1,5 @@
-package com.android.app360.ui.welcome;
+package com.android.app360.ui.welcome.fragments;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,28 +12,24 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.app360.R;
-import com.android.app360.databinding.ActivityWelcomeBinding;
 import com.android.app360.databinding.FragmentWelcomeBinding;
-import com.android.app360.ui.login.LoginActivity;
-import com.android.app360.ui.signup.SignupActivity;
+import com.android.app360.ui.welcome.WelcomeActivity;
 import com.android.app360.ui.welcome.viewmodel.WelcomeViewModel;
 import com.android.appcompose.composable.utility.cardgrid.CardGridRecyclerViewAdapter;
-import com.android.appcompose.composable.utility.cardgrid.CardRecyclerViewAdapter;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
 import com.android.appcompose.composable.utility.slider.indicator.DotIndicator;
 import com.android.appcompose.composable.utility.slider.viewpager2.ImageSliderView;
@@ -43,7 +38,6 @@ import com.android.appcompose.database.model.MentorModel;
 import com.android.appcompose.utils.DataType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -134,7 +128,9 @@ public class WelcomeFragment extends Fragment {
 
     void bindEventToViewModel(){
         Log.d(TAG, "observer added");
-        welcomeViewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
+        NavController navController = NavHostFragment.findNavController(this);
+        NavBackStackEntry backStackEntry = navController.getBackStackEntry(R.id.home);
+        welcomeViewModel = new ViewModelProvider(backStackEntry).get(WelcomeViewModel.class);
 
         welcomeViewModel.getParentModelData().observe(getViewLifecycleOwner(), new Observer<ArrayList<ParentModel>>() {
             @Override
@@ -144,9 +140,8 @@ public class WelcomeFragment extends Fragment {
                         parentAdapter = new CardGridRecyclerViewAdapter(parentModels, getActivity(),welcomeViewModel);
 
                     }
+                    welcomeViewModel.setGridAdapter(parentAdapter);
                     binding.recyclerView.setAdapter(parentAdapter);
-
-
 
                 }
 
@@ -184,25 +179,23 @@ public class WelcomeFragment extends Fragment {
                 });
             }
             if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
+                setAdapter();
                 CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
-                //if(adapter !=null){
-                    ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(0);
+                ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(0);
 
-                    int counter = 0;
-                    if(classroomParent.getData().size()==0){
-                        for(ClassroomModel cm: classrooms){
-                            if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                                classroomParent.getData().add(classrooms.get(counter));
-                                DISPLAYED_CLASSROOM_COUNT +=1;
-                                counter+=1;
-                            }else{
-                                break;
-                            }
-
+                int counter = 0;
+                if(classroomParent.getData().size()==0){
+                    for(ClassroomModel cm: classrooms){
+                        if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
+                            classroomParent.getData().add(classrooms.get(counter));
+                            DISPLAYED_CLASSROOM_COUNT +=1;
+                            counter+=1;
+                        }else{
+                            break;
                         }
-                    }
 
-               // }
+                    }
+                }
 
                 setupRecyclerView();
             }
@@ -225,10 +218,10 @@ public class WelcomeFragment extends Fragment {
 
             if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
                 CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
-               // if(adapter !=null){
-                    ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(1);
+                setAdapter();
+                ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(1);
 
-                    int counter = 0;
+                int counter = 0;
                 if(classroomParent.getData().size()==0){
                     for(MentorModel cm: mentors){
                         if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
@@ -242,13 +235,18 @@ public class WelcomeFragment extends Fragment {
                     }
                 }
 
-                    setupRecyclerView();
-               // }
+                setupRecyclerView();
 
             }
 
 
         });
+    }
+    void setAdapter(){
+        if(parentAdapter == null){
+            parentAdapter = welcomeViewModel.getGridAdapter().getValue();
+            binding.recyclerView.setAdapter(parentAdapter);
+        }
     }
     void initDotIndicator(int bgColor){
         imageSliderView = binding.bannerList;

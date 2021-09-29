@@ -2,6 +2,19 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/signup" android:id="@+id/signUp" />
-    <item android:title="@string/login" android:id="@+id/login"/>
+    <item
+        android:id="@+id/find"
+        android:icon="@android:drawable/ic_search_category_default"
+        android:title="@string/find"
+        android:contentDescription="@string/find"/>
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_action_home"
+        android:title="@string/home"
+        android:contentDescription="@string/home"/>
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/ic_action_user"
+        android:title="@string/account"
+        android:contentDescription="@string/account"/>
 </menu>
