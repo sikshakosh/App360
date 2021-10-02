@@ -1,7 +1,10 @@
 package com.android.app360.ui.welcome;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -9,6 +12,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -20,7 +24,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.android.app360.R;
 
 import com.android.app360.databinding.ActivityWelcomeBinding;
-
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.android.appcompose.utils.DataType;
 import com.android.appcompose.composable.utility.cardgrid.model.ParentModel;
@@ -46,7 +50,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
        // NavBackStackEntry backStackEntry = navCtrl.getBackStackEntry(R.id.home);
 
         //appBarConfiguration = new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.find,R.id.account).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.find,R.id.video).build();
 
 
 
@@ -58,13 +62,30 @@ public class  WelcomeActivity extends AppCompatActivity  {
             @Override
             public void onDestinationChanged(@NonNull NavController controller,
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                if(destination.getId() == R.id.accountFragment) {
-                    //binding.toolbar.setVisibility(View.GONE);
-                    //bottomNavigationView.setVisibility(View.GONE);
-                } else {
-                    binding.toolbar.setVisibility(View.VISIBLE);
-                    //bottomNavigationView.setVisibility(View.VISIBLE);
+                switch (destination.getId()){
+                    case R.id.videoFragment:
+                        binding.toolbar.setTitle(R.string.video);
+                        binding.toolbar.removeAllViews();
+                        break;
+                    case R.id.findFragment:
+                        binding.toolbar.setTitle(R.string.find);
+                        binding.toolbar.removeAllViews();
+                        break;
+                    case R.id.welcomeFragment:
+                        AppCompatButton b1=new AppCompatButton(WelcomeActivity.this,null,R.style.TextAppearance_AppCompat_Title);
+                        b1.setText(R.string.my_account);
+                        b1.setTextColor(Color.WHITE);
+
+                        Toolbar.LayoutParams l3=new Toolbar.LayoutParams(Toolbar.LayoutParams.WRAP_CONTENT, Toolbar.LayoutParams.WRAP_CONTENT);
+                        l3.gravity= Gravity.END;
+                        b1.setLayoutParams(l3);
+                        binding.toolbar.addView(b1);
+                        binding.toolbar.setTitle(R.string.wideclassrooms);
+                        break;
+                    default:
+                        Log.d(TAG,"NA");
                 }
+
             }
         });
 

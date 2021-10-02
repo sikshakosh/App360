@@ -13,8 +13,8 @@
         android:title="@string/home"
         android:contentDescription="@string/home"/>
     <item
-        android:id="@+id/account"
-        android:icon="@drawable/ic_action_user"
-        android:title="@string/account"
-        android:contentDescription="@string/account"/>
+        android:id="@+id/video"
+        android:contentDescription="@string/play"
+        android:icon="@android:drawable/ic_media_play"
+        android:title="@string/play" />
 </menu>

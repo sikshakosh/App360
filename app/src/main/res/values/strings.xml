@@ -120,5 +120,8 @@
     <string name="home">Home</string>
     <string name="account">Account</string>
     <string name="find">Find</string>
-
+    <string name="play">Play</string>
+    <string name="wideclassrooms">WideClassrooms</string>
+    <string name="video">Play</string>
+    <string name="my_account">My Account</string>
 </resources>

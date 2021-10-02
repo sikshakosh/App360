@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
@@ -83,7 +84,7 @@ public class AccountFragment extends Fragment {
     void bindEventToViewModel() {
         Log.d(TAG, "observer added");
         NavController navController = NavHostFragment.findNavController(this);
-        NavBackStackEntry backStackEntry = navController.getBackStackEntry(R.id.home);
+        NavBackStackEntry backStackEntry = navController.getBackStackEntry(R.id.welcome_nav_graph);
         accountViewModel = new ViewModelProvider(backStackEntry).get(AccountViewModel.class);
         binding.setAccountViewModel(accountViewModel);
         binding.setLifecycleOwner(getActivity());
@@ -104,6 +105,9 @@ public class AccountFragment extends Fragment {
                         binding.txtPassword.setError("Enter at least 6 Digit password");
                         binding.txtPassword.requestFocus();
                     }
+                    navController.navigate(
+                            R.id.action_accountFragment_to_signUpFragment
+                    );
                 }
 
             }
