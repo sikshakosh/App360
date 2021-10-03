@@ -50,7 +50,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
        // NavBackStackEntry backStackEntry = navCtrl.getBackStackEntry(R.id.home);
 
         //appBarConfiguration = new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.find,R.id.video).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.bookmark,R.id.video).build();
 
 
 
@@ -65,12 +65,12 @@ public class  WelcomeActivity extends AppCompatActivity  {
                 switch (destination.getId()){
                     case R.id.videoFragment:
                         binding.toolbar.removeAllViews();
-                        binding.toolbar.setTitle(R.string.video);
+                        binding.toolbar.setTitle(R.string.videos);
 
                         break;
-                    case R.id.findFragment:
+                    case R.id.bookmarkFragment:
                         binding.toolbar.removeAllViews();
-                        binding.toolbar.setTitle(R.string.find);
+                        binding.toolbar.setTitle(R.string.bookmark);
 
                         break;
                     case R.id.welcomeFragment:
