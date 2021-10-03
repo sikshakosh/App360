@@ -135,11 +135,14 @@ public class WelcomeFragment extends Fragment {
             public void onChanged(ArrayList<ParentModel> parentModels) {
                 if(getViewLifecycleOwner().getLifecycle().getCurrentState()== Lifecycle.State.RESUMED){
                     if(parentAdapter==null){
-                        parentAdapter = new CardGridRecyclerViewAdapter(parentModels, getActivity(),welcomeViewModel);
+                        parentAdapter = new CardGridRecyclerViewAdapter(parentModels, 2);
+                        parentAdapter.setClickListener(welcomeViewModel);
+                        parentAdapter.setOrientation(RecyclerView.VERTICAL);
 
                     }
                     welcomeViewModel.setGridAdapter(parentAdapter);
                     binding.recyclerView.setAdapter(parentAdapter);
+
 
                 }
 
