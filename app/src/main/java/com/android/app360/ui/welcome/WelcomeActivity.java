@@ -50,7 +50,7 @@ public class  WelcomeActivity extends AppCompatActivity  {
        // NavBackStackEntry backStackEntry = navCtrl.getBackStackEntry(R.id.home);
 
         //appBarConfiguration = new AppBarConfiguration.Builder(navCtrl.getGraph()).build();
-        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.find,R.id.video).build();
+        appBarConfiguration = new AppBarConfiguration.Builder(R.id.home,R.id.bookmark,R.id.video).build();
 
 
 
@@ -64,14 +64,17 @@ public class  WelcomeActivity extends AppCompatActivity  {
                                              @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 switch (destination.getId()){
                     case R.id.videoFragment:
-                        binding.toolbar.setTitle(R.string.video);
                         binding.toolbar.removeAllViews();
+                        binding.toolbar.setTitle(R.string.videos);
+
                         break;
-                    case R.id.findFragment:
-                        binding.toolbar.setTitle(R.string.find);
+                    case R.id.bookmarkFragment:
                         binding.toolbar.removeAllViews();
+                        binding.toolbar.setTitle(R.string.bookmark);
+
                         break;
                     case R.id.welcomeFragment:
+                        binding.toolbar.removeAllViews();
                         AppCompatButton b1=new AppCompatButton(WelcomeActivity.this,null,R.style.TextAppearance_AppCompat_Title);
                         b1.setText(R.string.my_account);
                         b1.setTextColor(Color.WHITE);

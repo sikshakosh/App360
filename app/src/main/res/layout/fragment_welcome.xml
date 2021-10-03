@@ -17,7 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.home.HomeActivity"
+            tools:context=".ui.welcome.WelcomeActivity"
             android:fitsSystemWindows="true">
 
             <ScrollView
@@ -29,7 +29,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mainConstraint"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:background="@color/gray"
 

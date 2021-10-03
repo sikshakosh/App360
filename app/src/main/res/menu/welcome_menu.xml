@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/find"
+        android:id="@+id/bookmark"
         android:icon="@android:drawable/ic_search_category_default"
-        android:title="@string/find"
-        android:contentDescription="@string/find"/>
+        android:title="@string/bookmark"
+        android:contentDescription="@string/bookmark"/>
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_action_home"
@@ -14,7 +14,7 @@
         android:contentDescription="@string/home"/>
     <item
         android:id="@+id/video"
-        android:contentDescription="@string/play"
+        android:contentDescription="@string/videos"
         android:icon="@android:drawable/ic_media_play"
-        android:title="@string/play" />
+        android:title="@string/videos" />
 </menu>

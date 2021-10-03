@@ -119,9 +119,11 @@
     <string name="title_activity_data_detail">DataDetailActivity</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
-    <string name="find">Find</string>
-    <string name="play">Play</string>
+
+
     <string name="wideclassrooms">WideClassrooms</string>
     <string name="video">Play</string>
     <string name="my_account">My Account</string>
+    <string name="videos">Videos</string>
+    <string name="bookmark">Bookmarks</string>
 </resources>
