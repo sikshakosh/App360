@@ -135,6 +135,8 @@ public class VideoFragment extends Fragment {
                     parentAdapter = new CardGridRecyclerViewAdapter(parentModels, 1);
                     parentAdapter.setClickListener(videoViewModel);
                     parentAdapter.setOrientation(RecyclerView.HORIZONTAL);
+                    parentAdapter.setFooterVisibility(View.GONE);
+                    parentAdapter.setHeaderVisibility(View.GONE);
                     videoViewModel.setGridAdapter(parentAdapter);
 
                 }
