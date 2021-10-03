@@ -132,9 +132,9 @@ public class VideoFragment extends Fragment {
             @Override
             public void onChanged(ArrayList<ParentModel> parentModels) {
                 if(videoViewModel.getGridAdapter().getValue()==null){
-                    parentAdapter = new CardGridRecyclerViewAdapter(parentModels, 2);
+                    parentAdapter = new CardGridRecyclerViewAdapter(parentModels, 1);
                     parentAdapter.setClickListener(videoViewModel);
-                    parentAdapter.setOrientation(RecyclerView.VERTICAL);
+                    parentAdapter.setOrientation(RecyclerView.HORIZONTAL);
                     videoViewModel.setGridAdapter(parentAdapter);
 
                 }
@@ -163,44 +163,7 @@ public class VideoFragment extends Fragment {
             ((WelcomeActivity)getActivity()).navigateTo(item.type,item);
         });
 
-        videoViewModel.getLocalClassrooms().observe(getViewLifecycleOwner(), classrooms -> {
-            if(classrooms.isEmpty()){
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        videoViewModel.getRemoteClassrooms();
-
-                    }
-                });
-            }
-            if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                setAdapter();
-                CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
-                ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(0);
-
-                int counter = 0;
-                if(classroomParent.getData().size()==0){
-                    for(ClassroomModel cm: classrooms){
-                        if(DISPLAYED_CLASSROOM_COUNT<GRID_ITEM_COUNT){
-                            classroomParent.getData().add(classrooms.get(counter));
-                            DISPLAYED_CLASSROOM_COUNT +=1;
-                            counter+=1;
-                        }else{
-                            break;
-                        }
-
-                    }
-                }
-
-                setupRecyclerView();
-            }
-
-
-
-
-        });
-
-        videoViewModel.getLocalMentors().observe(getViewLifecycleOwner(), mentors -> {
+       videoViewModel.getLocalMentors().observe(getViewLifecycleOwner(), mentors -> {
             if(mentors.isEmpty()){
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -211,29 +174,21 @@ public class VideoFragment extends Fragment {
                 });
             }
 
-            if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
-                CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
-                setAdapter();
-                ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(1);
+           CardGridRecyclerViewAdapter adapter = (CardGridRecyclerViewAdapter)binding.recyclerView.getAdapter();
+           setAdapter();
+           ParentModel classroomParent = (ParentModel) parentAdapter.parentModelArrayList.get(0);
 
-                int counter = 0;
-                if(classroomParent.getData().size()==0){
-                    for(MentorModel cm: mentors){
-                        if(DISPLAYED_MENTOR_COUNT<GRID_ITEM_COUNT){
-                            classroomParent.getData().add(mentors.get(counter));
-                            DISPLAYED_MENTOR_COUNT+=1;
-                            counter +=1;
-                        }else{
-                            break;
-                        }
+           int counter = 0;
+           if(classroomParent.getData().size()==0){
+               for(MentorModel cm: mentors){
+                   classroomParent.getData().add(mentors.get(counter));
+                   DISPLAYED_MENTOR_COUNT+=1;
+                   counter +=1;
 
-                    }
-                }
+               }
+           }
 
-                setupRecyclerView();
-
-            }
-
+           setupRecyclerView();
 
         });
     }

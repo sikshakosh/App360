@@ -55,7 +55,6 @@ public class VideoViewModel extends AndroidViewModel implements CardGridListener
 
     private void loadAllParentModel() {
         ArrayList<ParentModel> arrayList = new ArrayList<>();
-        arrayList.add(new ParentModel(DataType.FEATURED_CLASSROOMS));
         arrayList.add(new ParentModel(DataType.FEATURED_MENTORS));
         mParentModelData.postValue(arrayList);
     }
